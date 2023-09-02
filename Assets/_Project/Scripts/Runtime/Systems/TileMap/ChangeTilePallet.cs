@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class ChangeTilePallet : MonoBehaviour
 {
+    public TileBase[] placeholder;
     public TileBase[] dream;
     public TileBase[] nightmare;
 
