@@ -10,8 +10,8 @@ public class InputReader : ScriptableObject, IGameplayActions
 {
     public Vector2 Movement { get; private set; }
     
-    public event Action OnJumpUp;
-    public event Action OnJumpDown;
+    public event Action OnButtonSouthUp;
+    public event Action OnButtonSouthDown;
 
     public event Action OnPauseUp;
     public event Action OnPauseDown;
@@ -48,9 +48,9 @@ public class InputReader : ScriptableObject, IGameplayActions
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started)
-            OnJumpDown?.Invoke();
+            OnButtonSouthDown?.Invoke();
         else if (context.canceled)
-            OnJumpUp?.Invoke();
+            OnButtonSouthUp?.Invoke();
     }
 
     public void OnButtonNorth(InputAction.CallbackContext context)
