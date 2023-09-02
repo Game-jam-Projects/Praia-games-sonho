@@ -4,27 +4,27 @@ using UnityEngine.EventSystems;
 
 namespace DreamTeam.Runtime.System.UI
 {
-    public class ButtonFeedback : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler
+    public class ButtonFeedback : ButtonFeedbackBase
     {
         [SerializeField] private TextMeshProUGUI textMeshProUGUI;
         [SerializeField] private ButtonFeedbackData textMeshColor;
 
-        public void OnSelect(BaseEventData eventData)
+        public override void OnSelect(BaseEventData eventData)
         {
             textMeshProUGUI.color = textMeshColor.OnMouseEnterColor;
         }
 
-        public void OnDeselect(BaseEventData eventData)
+        public override void OnDeselect(BaseEventData eventData)
         {
             textMeshProUGUI.color = textMeshColor.OnMouseExitColor;
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
+        public override void OnPointerEnter(PointerEventData eventData)
         {
             textMeshProUGUI.color = textMeshColor.OnMouseEnterColor;
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        public override void OnPointerExit(PointerEventData eventData)
         {
             textMeshProUGUI.color = textMeshColor.OnMouseExitColor;
         }

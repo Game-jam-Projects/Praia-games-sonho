@@ -406,6 +406,7 @@ GameObject:
   - component: {fileID: 6205248785092295557}
   - component: {fileID: 5466785731714486858}
   - component: {fileID: 6826004003209568067}
+  - component: {fileID: 8192600397441276419}
   m_Layer: 5
   m_Name: MusicSlider
   m_TagString: Untagged
@@ -500,6 +501,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VCAName: Music
+--- !u!114 &8192600397441276419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8617401548668353422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665dea8f7e5bcc642bc3c5d90356f7a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  feedbackData: {fileID: 11400000, guid: 25003c17d016aa245a4f9d785e0fb934, type: 2}
+  handleImage: {fileID: 8509861941398974962}
 --- !u!1 &8716071646268568285
 GameObject:
   m_ObjectHideFlags: 0

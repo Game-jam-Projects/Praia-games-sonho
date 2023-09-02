@@ -627,7 +627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 685404945}
-  duration: 1
+  duration: 2
 --- !u!1001 &6528383768529807471
 PrefabInstance:
   m_ObjectHideFlags: 0
