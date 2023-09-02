@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{9fe9ba9c-eb3e-4f04-97b7-e5f670d6e6fc}">
+		<property name="name">
+			<value>SFX</value>
+		</property>
+		<relationship name="masters">
+			<destination>{75584c5e-c7db-4434-a37b-e5b5900058d0}</destination>
+		</relationship>
+		<relationship name="effectChain">
+			<destination>{85d7cdc6-5686-4a25-b335-fa2bd98949fb}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{64716e54-66a5-4e5b-aeca-1a5d66cbf5ad}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{7ce1ee59-07a7-45a3-8f84-bb618b3b1436}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{85d7cdc6-5686-4a25-b335-fa2bd98949fb}">
+		<relationship name="effects">
+			<destination>{8f459c72-7a0d-499f-9a25-fadf8ff515b4}</destination>
+			<destination>{8c4abf84-8e4a-406c-a709-fe4afd99eb1f}</destination>
+			<destination>{7726408a-515b-497b-be87-7ec73d6276f8}</destination>
+			<destination>{1abf93cb-44d9-4408-9066-8ab5e4d9a713}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{64716e54-66a5-4e5b-aeca-1a5d66cbf5ad}" />
+	<object class="MixerBusFader" id="{8f459c72-7a0d-499f-9a25-fadf8ff515b4}" />
+	<object class="CompressorEffect" id="{8c4abf84-8e4a-406c-a709-fe4afd99eb1f}">
+		<property name="threshold">
+			<value>-15</value>
+		</property>
+		<property name="ratio">
+			<value>1.14999998</value>
+		</property>
+		<property name="attackTime">
+			<value>0.100000001</value>
+		</property>
+		<property name="releaseTime">
+			<value>50</value>
+		</property>
+	</object>
+	<object class="MultibandEqEffect" id="{7726408a-515b-497b-be87-7ec73d6276f8}">
+		<property name="filterTypeB">
+			<value>4</value>
+		</property>
+		<property name="frequencyA">
+			<value>21999.9902</value>
+		</property>
+		<property name="frequencyB">
+			<value>20.0000019</value>
+		</property>
+	</object>
+	<object class="Sidechain" id="{1abf93cb-44d9-4408-9066-8ab5e4d9a713}" />
+</objects>
