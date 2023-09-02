@@ -1,31 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace patrick
+namespace DreamTeam.Runtime.Systems.Core
 {
     public enum StageType
     {
         Dream, Nightmare
     }
-    public class GameManager : MonoBehaviour
+    public class GameStateManager : MonoBehaviour
     {
         [SerializeField] private StageType stageType;
 
         public delegate void ChangeType(StageType stageType);
         public event ChangeType ChagedStageType;
 
-        
-        public GameObject nightmarePostProcessing;
-
         public void ChangeStageType(StageType stageType)
         {
             this.stageType = stageType;
-           
-            if(ChagedStageType != null)
-            {
-                ChagedStageType(this.stageType);
-            }
+
+            ChagedStageType?.Invoke(this.stageType);
         }
 
         public StageType GetStageType()
@@ -35,7 +27,7 @@ namespace patrick
 
         public void ChangeStageType()
         {
-            switch(stageType)
+            switch (stageType)
             {
                 case StageType.Dream:
                     ChangeStageType(StageType.Nightmare);

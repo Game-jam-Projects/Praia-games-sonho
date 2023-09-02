@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using DreamTeam.Runtime.Systems.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,8 +6,7 @@ namespace patrick
 {
     public class PlayerController : MonoBehaviour
     {
-        private PlayerInputMap controls;
-        private InputAction axis;
+        [SerializeField] private InputReader inputReader;
 
         private Rigidbody2D m_Rigidbody;
         private Animator animator;
@@ -19,6 +17,8 @@ namespace patrick
         [SerializeField] private float moveSpeed;
         [SerializeField] private float jumpForce;
 
+        private Vector2 axis;
+
         private bool isLookLeft;
         private bool isGrounded;
         private bool isWalk;
@@ -27,41 +27,33 @@ namespace patrick
 
         private void Awake()
         {
-            controls = new PlayerInputMap();
-            axis = controls.Gameplay.Movement;
+            m_Rigidbody = GetComponent<Rigidbody2D>();
+            animator = GetComponent<Animator>();
+        }
 
-            controls.Gameplay.Jump.started += OnButtonSouth;
-            controls.Gameplay.Jump.canceled += OnButtonSouth;
+        private void Start()
+        {   
+            axis = inputReader.Movement;
 
-            controls.Gameplay.ButtonNorth.started += OnButtonNorth;
-            controls.Gameplay.ButtonNorth.canceled += OnButtonNorth;
+            inputReader.OnButtonNorthDown += OnButtonSouth;
+            inputReader.OnButtonSouthUp += OnButtonSouth;
 
-            controls.Enable();
+            inputReader.OnButtonNorthDown += OnButtonNorth;
+
+            CoreSingleton.Instance.gameStateManager.ChagedStageType += EChangeStageType;
         }
 
         private void OnDisable()
         {
-            controls.Gameplay.Jump.started -= OnButtonSouth;
-            controls.Gameplay.Jump.canceled -= OnButtonSouth;
+            inputReader.OnButtonNorthDown -= OnButtonSouth;
+            inputReader.OnButtonSouthUp -= OnButtonSouth;
 
-            controls.Gameplay.ButtonNorth.started -= OnButtonNorth;
-            controls.Gameplay.ButtonNorth.canceled -= OnButtonNorth;
+            inputReader.OnButtonNorthDown -= OnButtonNorth;
 
-            Core.Instance.gameManager.ChagedStageType -= EChangeStageType;
+            CoreSingleton.Instance.gameStateManager.ChagedStageType -= EChangeStageType;
         }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            m_Rigidbody = GetComponent<Rigidbody2D>();
-            animator = GetComponent<Animator>();
-
-            Core.Instance.gameManager.ChagedStageType += EChangeStageType;
-        }
-
-
-        // Update is called once per frame
-        void Update()
+        private void Update()
         {
             MovePlayer();
             animator.SetFloat("speedY", m_Rigidbody.velocity.y);
@@ -76,15 +68,15 @@ namespace patrick
 
         private void MovePlayer()
         {
-            m_Rigidbody.velocity = new Vector2(axis.ReadValue<Vector2>().x * moveSpeed, m_Rigidbody.velocity.y);
+            m_Rigidbody.velocity = new Vector2(axis.x * moveSpeed, m_Rigidbody.velocity.y);
 
-            isWalk = axis.ReadValue<Vector2>().x != 0;
+            isWalk = axis.x != 0;
 
-            if (axis.ReadValue<Vector2>().x > 0 && isLookLeft == true)
+            if (axis.x > 0 && isLookLeft == true)
             {
                 Flip();
             }
-            else if (axis.ReadValue<Vector2>().x < 0 && isLookLeft == false)
+            else if (axis.x < 0 && isLookLeft == false)
             {
                 Flip();
             }
@@ -108,7 +100,7 @@ namespace patrick
 
         public void EChangeStageType(StageType stageType)
         {
-            switch(stageType)
+            switch (stageType)
             {
                 case StageType.Dream:
                     animator.runtimeAnimatorController = dreamController;
@@ -127,20 +119,14 @@ namespace patrick
         }
 
         #region INPUT
-        private void OnButtonSouth(InputAction.CallbackContext value)
+        private void OnButtonSouth()
         {
-            if (value.started)
-            {
-                Jump();
-            }
+            Jump();
         }
 
-        private void OnButtonNorth(InputAction.CallbackContext value)
+        private void OnButtonNorth()
         {
-            if (value.started)
-            {
-                Core.Instance.gameManager.ChangeStageType();
-            }
+            CoreSingleton.Instance.gameStateManager.ChangeStageType();
         }
 
         #endregion

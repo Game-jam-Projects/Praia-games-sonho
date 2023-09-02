@@ -1,70 +1,73 @@
 using System;
 using UnityEngine;
 
-public class HealthSystem : MonoBehaviour, IDamageable
+namespace DreamTeam.Runtime.Systems.Health
 {
-    [field: SerializeField] public float MaxHealth { get; set; }
-
-    public float CurrentHealth { get; set; }
-    public bool IsDie { get ; set ; }
-
-    public event Action<HealthArgs> OnChangeHealth;
-    public event Action<IDamageable> OnDie;
-    public event Action<Vector3> OnTakeDamage;
-    public event Action OnHeal;
-
-    [SerializeField] private bool destroyOnDie;
-    [SerializeField] private bool disableOnDie;
-
-    private void Start()
+    public class HealthSystem : MonoBehaviour, IDamageable
     {
-        CurrentHealth = MaxHealth;
-        OnChangeHealth?.Invoke(new() { current = CurrentHealth, max = MaxHealth });
-    }
+        [field: SerializeField] public float MaxHealth { get; set; }
 
-    public void TakeDamage(Vector3 direction, float damage)
-    {
-        if (damage <= 0)
-            return;
+        public float CurrentHealth { get; set; }
+        public bool IsDie { get; set; }
 
-        CurrentHealth -= damage;
+        public event Action<HealthArgs> OnChangeHealth;
+        public event Action<IDamageable> OnDie;
+        public event Action<Vector3> OnTakeDamage;
+        public event Action OnHeal;
 
-        if (CurrentHealth < 0)
+        [SerializeField] private bool destroyOnDie;
+        [SerializeField] private bool disableOnDie;
+
+        private void Start()
         {
-            Die();
-            return;
+            CurrentHealth = MaxHealth;
+            OnChangeHealth?.Invoke(new() { current = CurrentHealth, max = MaxHealth });
         }
 
-        OnChangeHealth?.Invoke(new() { current = CurrentHealth, max = MaxHealth });
-        OnTakeDamage?.Invoke(direction);
-    }
+        public void TakeDamage(Vector3 direction, float damage)
+        {
+            if (damage <= 0)
+                return;
 
-    public void Die()
-    {
-        if (IsDie)
-            return;
-        IsDie = true;
-        OnDie?.Invoke(this);
+            CurrentHealth -= damage;
+
+            if (CurrentHealth < 0)
+            {
+                Die();
+                return;
+            }
+
+            OnChangeHealth?.Invoke(new() { current = CurrentHealth, max = MaxHealth });
+            OnTakeDamage?.Invoke(direction);
+        }
+
+        public void Die()
+        {
+            if (IsDie)
+                return;
+            IsDie = true;
+            OnDie?.Invoke(this);
 
 
-        if (destroyOnDie)
-            Destroy(gameObject);
+            if (destroyOnDie)
+                Destroy(gameObject);
 
-        else if(disableOnDie)
-            gameObject.SetActive(false);
-    }
+            else if (disableOnDie)
+                gameObject.SetActive(false);
+        }
 
-    public void Heal(float amount)
-    {
-        if (amount <= 0)
-            return;
+        public void Heal(float amount)
+        {
+            if (amount <= 0)
+                return;
 
-        CurrentHealth += amount;
+            CurrentHealth += amount;
 
-        if (CurrentHealth > MaxHealth)
-            CurrentHealth = MaxHealth;
+            if (CurrentHealth > MaxHealth)
+                CurrentHealth = MaxHealth;
 
-        OnChangeHealth?.Invoke(new() { current = CurrentHealth, max = MaxHealth });
-        OnHeal?.Invoke();
+            OnChangeHealth?.Invoke(new() { current = CurrentHealth, max = MaxHealth });
+            OnHeal?.Invoke();
+        }
     }
 }

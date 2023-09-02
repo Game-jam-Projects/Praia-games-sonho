@@ -8,7 +8,7 @@ using static PlayerInputMap;
 [CreateAssetMenu(fileName = "New Input Reader", menuName = "Scriptables/Input Reader")]
 public class InputReader : ScriptableObject, IGameplayActions
 {
-    public Vector2 movement { get; private set; }
+    public Vector2 Movement { get; private set; }
     
     public event Action OnJumpUp;
     public event Action OnJumpDown;
@@ -34,7 +34,7 @@ public class InputReader : ScriptableObject, IGameplayActions
 
     public void OnMovement(InputAction.CallbackContext context)
     {
-        movement = context.ReadValue<Vector2>();
+        Movement = context.ReadValue<Vector2>();
     }
 
     public void OnPause(InputAction.CallbackContext context)

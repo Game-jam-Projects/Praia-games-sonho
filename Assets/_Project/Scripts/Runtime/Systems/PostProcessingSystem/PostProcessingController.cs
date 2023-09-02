@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using DreamTeam.Runtime.Systems.Core;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-namespace patrick
+namespace DreamTeam.Runtime.Systems.PostProcessing
 {
     public class PostProcessingController : MonoBehaviour
     {
@@ -54,27 +53,27 @@ namespace patrick
         void Start()
         {
             volume = GetComponent<Volume>();
-            if (volume.profile.TryGet<PaniniProjection>(out paniniProjection))
+            if (volume.profile.TryGet(out paniniProjection))
             {
                 // Obtido com sucesso
             }
 
-            if (volume.profile.TryGet<ChromaticAberration>(out chromaticAberration))
+            if (volume.profile.TryGet(out chromaticAberration))
             {
                 // Obtido com sucesso
             }
 
-            if (volume.profile.TryGet<LensDistortion>(out lensDistortion))
+            if (volume.profile.TryGet(out lensDistortion))
             {
                 // Obtido com sucesso
             }
 
-            if (volume.profile.TryGet<FilmGrain>(out filmGrain))
+            if (volume.profile.TryGet(out filmGrain))
             {
                 // Obtido com sucesso
             }
 
-            if (volume.profile.TryGet<ColorAdjustments>(out colorAdjustments))
+            if (volume.profile.TryGet(out colorAdjustments))
             {
                 // Obtido com sucesso
             }
@@ -84,7 +83,7 @@ namespace patrick
 
         void Update()
         {
-            if (Core.Instance.gameManager.GetStageType() == StageType.Nightmare)
+            if (CoreSingleton.Instance.gameStateManager.GetStageType() == StageType.Nightmare)
             {
                 PaniniManager();
                 ChromaticAberrationManager();
@@ -101,14 +100,14 @@ namespace patrick
                     SetPaniniProjectionDistance(paniniDistanceValue);
                 }
 
-                if(chromaticAberrationIntensity > 0)
+                if (chromaticAberrationIntensity > 0)
                 {
                     chromaticAberrationIntensity -= chromaticAberrationIncrement * 2 * Time.deltaTime;
                     chromaticAberrationIntensity = Mathf.Clamp(chromaticAberrationIntensity, 0, maxChromaticAberrationIntensity);
                     chromaticAberration.intensity.value = chromaticAberrationIntensity;
                 }
 
-                if(lensDistortionIntensity > 0)
+                if (lensDistortionIntensity > 0)
                 {
                     lensDistortionIntensity -= lensDistortionIncrement * 2 * Time.deltaTime;
                     lensDistortionIntensity = Mathf.Clamp(lensDistortionIntensity, 0, maxLensDistortionIntensity);

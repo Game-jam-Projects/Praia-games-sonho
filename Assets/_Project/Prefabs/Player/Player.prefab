@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2106049924790068099}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.16, y: -3.193, z: 0}
+  m_LocalPosition: {x: 0.16, y: -0.196, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -136,7 +136,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1.5
+  m_GravityScale: 3.6
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -180,7 +180,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.044978738, y: -1.4860872}
+  m_Offset: {x: 0.044978738, y: 1.46}
   m_Size: {x: 1.2628262, y: 3.0155232}
   m_Direction: 0
 --- !u!95 &1117272652709106307
@@ -193,7 +193,7 @@ Animator:
   m_GameObject: {fileID: 3176689778812194262}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 56d460e243f61fb40ba5a8605f875037, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: 635b54e557bc5784580e1dbaf167c67e, type: 2}
   _playerRB: {fileID: 7526001367700971059}
+  isGrounded: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
@@ -225,12 +226,14 @@ MonoBehaviour:
   groundXSize: 2.1
   groundYSize: 0.3
   velocity: 6
-  jumpForce: 10
+  jumpForce: 16
   playerSr: {fileID: 577852003979540802}
   playerNoColor: {r: 0.9339623, g: 0, b: 0, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   landingParticles: {fileID: 0}
   positionParticles: {fileID: 4420156145297178048}
+  dreamController: {fileID: 9100000, guid: 56d460e243f61fb40ba5a8605f875037, type: 2}
+  nightmareController: {fileID: 22100000, guid: e248319ec6dacbd4887ce830ee75be4f, type: 2}
 --- !u!114 &1161701590682265360
 MonoBehaviour:
   m_ObjectHideFlags: 0

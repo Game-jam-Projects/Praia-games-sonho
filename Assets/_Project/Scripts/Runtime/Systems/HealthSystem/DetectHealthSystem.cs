@@ -1,74 +1,67 @@
 ﻿using UnityEngine;
 
-public class DetectHealthSystem : MonoBehaviour
+namespace DreamTeam.Runtime.Systems.Health
 {
-    public enum DetectionType
+    public class DetectHealthSystem : MonoBehaviour
     {
-        Collision,
-        Trigger,
-    }
-
-    [SerializeField] private DetectionType type;
-    [Tooltip("Quantidade de dano")]
-    [SerializeField] private float damage;
-    [Tooltip("Quantidade de cura")]
-    [SerializeField] private float heal;
-
-    [SerializeField] private bool destroyOnCollide = true;
-    
-    [SerializeField] private GameObject spawnEffectPrefab;
-
-    private void Start()
-    {
-        //teste de mudanças de dano
-       //damage = PowerUpController.Instance.m_player.BulletDamage;
-      
-
-    }
-
-  
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (type != DetectionType.Collision)
-            return;
-
-        if(collision.gameObject.TryGetComponent(out IDamageable damageable))
+        public enum DetectionType
         {
-            damageable.TakeDamage(transform.position, damage);
-            damageable.Heal(heal);
+            Collision,
+            Trigger,
         }
 
-        DestroyObject();
-    }
+        [SerializeField] private DetectionType type;
+        [Tooltip("Quantidade de dano")]
+        [SerializeField] private float damage;
+        [Tooltip("Quantidade de cura")]
+        [SerializeField] private float heal;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (type != DetectionType.Trigger)
-            return;
+        [SerializeField] private bool destroyOnCollide = true;
 
-        if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+        [SerializeField] private GameObject spawnEffectPrefab;
+
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            damageable.TakeDamage(transform.position, damage);
-            damageable.Heal(heal);
+            if (type != DetectionType.Collision)
+                return;
+
+            if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.TakeDamage(transform.position, damage);
+                damageable.Heal(heal);
+            }
+
+            DestroyObject();
         }
 
-        DestroyObject();
-    }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (type != DetectionType.Trigger)
+                return;
 
-    public void SetChangeDamage(float valor)
-    {
-        damage += valor;
-    }
+            if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.TakeDamage(transform.position, damage);
+                damageable.Heal(heal);
+            }
 
-    private void DestroyObject()
-    {
-        if (!destroyOnCollide)
-            return;
+            DestroyObject();
+        }
 
-        if (spawnEffectPrefab)
-            Instantiate(spawnEffectPrefab, transform.position, Quaternion.identity);
+        public void SetChangeDamage(float valor)
+        {
+            damage += valor;
+        }
 
-        Destroy(gameObject);
+        private void DestroyObject()
+        {
+            if (!destroyOnCollide)
+                return;
+
+            if (spawnEffectPrefab)
+                Instantiate(spawnEffectPrefab, transform.position, Quaternion.identity);
+
+            Destroy(gameObject);
+        }
     }
 }
