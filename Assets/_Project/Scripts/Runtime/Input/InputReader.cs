@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static PlayerInputMap;
@@ -9,7 +7,7 @@ using static PlayerInputMap;
 public class InputReader : ScriptableObject, IGameplayActions
 {
     public Vector2 Movement { get; private set; }
-    
+
     public event Action OnButtonSouthUp;
     public event Action OnButtonSouthDown;
 
@@ -21,15 +19,19 @@ public class InputReader : ScriptableObject, IGameplayActions
 
     private PlayerInputMap controls;
 
-    private void OnEnable()
+    public void EnableInput()
     {
-        if(controls ==  null)
-        {
-            controls = new PlayerInputMap();
-            controls.Gameplay.SetCallbacks(this);
-        }
+        controls ??= new PlayerInputMap();
 
+        controls.Gameplay.SetCallbacks(this);
         controls.Gameplay.Enable();
+    }
+
+    public void DisableInput()
+    {
+        controls.Gameplay.RemoveCallbacks(this);
+
+        controls.Disable();
     }
 
     public void OnMovement(InputAction.CallbackContext context)

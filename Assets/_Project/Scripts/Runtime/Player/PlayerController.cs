@@ -1,7 +1,4 @@
 using DreamTeam.Runtime.Systems.Core;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -50,6 +47,8 @@ public class PlayerController : MonoBehaviour
     {
         CoreSingleton.Instance.gameStateManager.ChagedStageType += EChangeStageType;
 
+        inputReader.EnableInput();
+
         inputReader.OnButtonSouthDown += OnJump;
         inputReader.OnButtonNorthDown += OnButtonNorth;
     }
@@ -60,6 +59,8 @@ public class PlayerController : MonoBehaviour
 
         inputReader.OnButtonSouthDown -= OnJump;
         inputReader.OnButtonNorthDown -= OnButtonNorth;
+
+        inputReader.DisableInput();
     }
 
     void Update()
