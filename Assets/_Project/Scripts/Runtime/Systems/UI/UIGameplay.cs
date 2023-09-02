@@ -1,4 +1,5 @@
 using DreamTeam.Runtime.System.Core;
+using DreamTeam.Runtime.Systems.Health;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,19 +20,18 @@ namespace DreamTeam.Runtime.System.UI
         [SerializeField] private Button firstButtonGameOver;
         [SerializeField] private Button firstButtonGameWin;
 
-        //private HealthSystem healthSystem;
-        //private PlayerController playerController;
+        private HealthSystem healthSystem;
+        private PlayerController playerController;
 
         private void Awake()
         {
-            // playerController = FindObjectOfType<PlayerController>();
-            // healthSystem = playerController.GetComponent<HealthSystem>();
+             playerController = FindObjectOfType<PlayerController>();
+             healthSystem = playerController.GetComponent<HealthSystem>();
         }
 
         private void Start()
         {
-            //playerController.OnUpdateManaQuantity += UpdateManaBar;
-            //healthSystem.OnChangeHealth += UpdateLifeBar;
+            healthSystem.OnChangeHealth += UpdateLifeBar;
 
             GameManager.Instance.OnPauseStatusChange += UpdatePauseMenu;
             GameManager.Instance.OnGameOver += OpenGameoverMenu;
@@ -40,22 +40,16 @@ namespace DreamTeam.Runtime.System.UI
 
         private void OnDestroy()
         {
-            //playerController.OnUpdateManaQuantity -= UpdateManaBar;
-            //healthSystem.OnChangeHealth -= UpdateLifeBar;
+            healthSystem.OnChangeHealth -= UpdateLifeBar;
 
             GameManager.Instance.OnPauseStatusChange -= UpdatePauseMenu;
             GameManager.Instance.OnGameOver -= OpenGameoverMenu;
             GameManager.Instance.OnGameWin -= OpenGamewinMenu;
         }
 
-        private void UpdateLifeBar(float current, float max)
+        private void UpdateLifeBar(HealthArgs healthArgs)
         {
-            playerHealthBar.fillAmount = current / max;
-        }
-
-        private void UpdateManaBar(float current, float max)
-        {
-            playerManaBar.fillAmount = current / max;
+            playerHealthBar.fillAmount = healthArgs.current / healthArgs.max;
         }
 
         private void UpdatePauseMenu(bool value)
