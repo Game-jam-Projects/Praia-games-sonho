@@ -354,6 +354,7 @@ GameObject:
   - component: {fileID: 912681913}
   - component: {fileID: 912681912}
   - component: {fileID: 912681911}
+  - component: {fileID: 912681914}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -426,6 +427,104 @@ Transform:
   m_Children:
   - {fileID: 1776352137}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &912681914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912681910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3307b6068adeb2746907b0bff609aa3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeholder: []
+  dream:
+  - {fileID: 11400000, guid: 514f4690eb6e28542ba19988f3a5bb30, type: 2}
+  - {fileID: 11400000, guid: bd3d5900be0828b45832ec497f6ecb59, type: 2}
+  - {fileID: 11400000, guid: 0798693568ae88c4888006b33ae2be92, type: 2}
+  - {fileID: 11400000, guid: 2ed479bd97491e34c82e58ca26004fb5, type: 2}
+  - {fileID: 11400000, guid: 5f6a9c9b174246347a29bb854bdcd11e, type: 2}
+  - {fileID: 11400000, guid: 548b33fb486ccd04da00c58bbe26f154, type: 2}
+  - {fileID: 11400000, guid: 8529ad9f7ed6b93468c4d63b1f5ec920, type: 2}
+  - {fileID: 11400000, guid: 778aa764905593245a463754457ac6e6, type: 2}
+  - {fileID: 11400000, guid: e8953154a91623c4ea3135d4e8156df4, type: 2}
+  nightmare:
+  - {fileID: 11400000, guid: ee44f76f02161134d9c3c92027fed9c4, type: 2}
+  - {fileID: 11400000, guid: c3153e08f1b47da458e5b81f0f93a20e, type: 2}
+  - {fileID: 11400000, guid: df5f1e749ad9c5e40902df4e871ae7f3, type: 2}
+  - {fileID: 11400000, guid: 5fac9ae4c9a18ed409a09b1bb70a5d53, type: 2}
+  - {fileID: 11400000, guid: 23d88fe38907a32418cd2ab32c90eeaa, type: 2}
+  - {fileID: 11400000, guid: 148a542b217d4eb40ba9e19b46dfe44f, type: 2}
+  - {fileID: 11400000, guid: 07a6ba9c6f724374a88b824368885486, type: 2}
+  - {fileID: 11400000, guid: 0f259372382ab1d44a9f178b6ee4d19f, type: 2}
+  - {fileID: 11400000, guid: fea81e90b8776704bb4af6150b66dd83, type: 2}
+  Tilemaps: []
+--- !u!1 &1067818728
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1067818729}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1067818729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067818728}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1116336946}
+  - {fileID: 1662773195}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1116336945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1116336946}
+  m_Layer: 0
+  m_Name: Sonho
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1116336946
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1116336945}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1067818729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1535181276
 GameObject:
@@ -511,6 +610,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 237900354}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1662773194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1662773195}
+  m_Layer: 0
+  m_Name: Pesadelo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1662773195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662773194}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1067818729}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1776352136
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,7 +653,6 @@ GameObject:
   - component: {fileID: 1776352140}
   - component: {fileID: 1776352139}
   - component: {fileID: 1776352138}
-  - component: {fileID: 1776352141}
   m_Layer: 6
   m_Name: Tilemap
   m_TagString: Untagged
@@ -1847,39 +1976,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1776352141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1776352136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3307b6068adeb2746907b0bff609aa3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dream:
-  - {fileID: 11400000, guid: 514f4690eb6e28542ba19988f3a5bb30, type: 2}
-  - {fileID: 11400000, guid: bd3d5900be0828b45832ec497f6ecb59, type: 2}
-  - {fileID: 11400000, guid: 0798693568ae88c4888006b33ae2be92, type: 2}
-  - {fileID: 11400000, guid: 2ed479bd97491e34c82e58ca26004fb5, type: 2}
-  - {fileID: 11400000, guid: 5f6a9c9b174246347a29bb854bdcd11e, type: 2}
-  - {fileID: 11400000, guid: 548b33fb486ccd04da00c58bbe26f154, type: 2}
-  - {fileID: 11400000, guid: 8529ad9f7ed6b93468c4d63b1f5ec920, type: 2}
-  - {fileID: 11400000, guid: 778aa764905593245a463754457ac6e6, type: 2}
-  - {fileID: 11400000, guid: e8953154a91623c4ea3135d4e8156df4, type: 2}
-  nightmare:
-  - {fileID: 11400000, guid: ee44f76f02161134d9c3c92027fed9c4, type: 2}
-  - {fileID: 11400000, guid: c3153e08f1b47da458e5b81f0f93a20e, type: 2}
-  - {fileID: 11400000, guid: df5f1e749ad9c5e40902df4e871ae7f3, type: 2}
-  - {fileID: 11400000, guid: 5fac9ae4c9a18ed409a09b1bb70a5d53, type: 2}
-  - {fileID: 11400000, guid: 23d88fe38907a32418cd2ab32c90eeaa, type: 2}
-  - {fileID: 11400000, guid: 148a542b217d4eb40ba9e19b46dfe44f, type: 2}
-  - {fileID: 11400000, guid: 07a6ba9c6f724374a88b824368885486, type: 2}
-  - {fileID: 11400000, guid: 0f259372382ab1d44a9f178b6ee4d19f, type: 2}
-  - {fileID: 11400000, guid: fea81e90b8776704bb4af6150b66dd83, type: 2}
-  Tilemaps: []
 --- !u!1001 &2080864620
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2073,3 +2169,4 @@ SceneRoots:
   - {fileID: 237900354}
   - {fileID: 2080864620}
   - {fileID: 912681913}
+  - {fileID: 1067818729}

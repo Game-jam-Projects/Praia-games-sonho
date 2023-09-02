@@ -62,6 +62,15 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ButtonWest"",
+                    ""type"": ""Button"",
+                    ""id"": ""1e287a5c-b6cb-45e1-9a53-133ecfad1a27"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -317,6 +326,28 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
                     ""action"": ""ButtonNorth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f36102f-b84b-4a84-bb0f-0a61146ed859"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""ButtonWest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dbeb2cb4-162c-4074-aa36-4177071054e1"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""keyboard + mouse"",
+                    ""action"": ""ButtonWest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -357,6 +388,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_ButtonNorth = m_Gameplay.FindAction("ButtonNorth", throwIfNotFound: true);
+        m_Gameplay_ButtonWest = m_Gameplay.FindAction("ButtonWest", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -422,6 +454,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Pause;
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_ButtonNorth;
+    private readonly InputAction m_Gameplay_ButtonWest;
     public struct GameplayActions
     {
         private @PlayerInputMap m_Wrapper;
@@ -430,6 +463,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @ButtonNorth => m_Wrapper.m_Gameplay_ButtonNorth;
+        public InputAction @ButtonWest => m_Wrapper.m_Gameplay_ButtonWest;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -451,6 +485,9 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
             @ButtonNorth.started += instance.OnButtonNorth;
             @ButtonNorth.performed += instance.OnButtonNorth;
             @ButtonNorth.canceled += instance.OnButtonNorth;
+            @ButtonWest.started += instance.OnButtonWest;
+            @ButtonWest.performed += instance.OnButtonWest;
+            @ButtonWest.canceled += instance.OnButtonWest;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -467,6 +504,9 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
             @ButtonNorth.started -= instance.OnButtonNorth;
             @ButtonNorth.performed -= instance.OnButtonNorth;
             @ButtonNorth.canceled -= instance.OnButtonNorth;
+            @ButtonWest.started -= instance.OnButtonWest;
+            @ButtonWest.performed -= instance.OnButtonWest;
+            @ButtonWest.canceled -= instance.OnButtonWest;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -508,5 +548,6 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnButtonNorth(InputAction.CallbackContext context);
+        void OnButtonWest(InputAction.CallbackContext context);
     }
 }

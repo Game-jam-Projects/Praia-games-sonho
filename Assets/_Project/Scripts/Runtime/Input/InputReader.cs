@@ -17,6 +17,9 @@ public class InputReader : ScriptableObject, IGameplayActions
     public event Action OnButtonNorthUp;
     public event Action OnButtonNorthDown;
 
+    public event Action OnButtonWestUp;
+    public event Action OnButtonWestDown;
+
     private PlayerInputMap controls;
 
     public void EnableInput()
@@ -61,5 +64,13 @@ public class InputReader : ScriptableObject, IGameplayActions
             OnButtonNorthDown?.Invoke();
         else if (context.canceled)
             OnButtonNorthUp?.Invoke();
+    }
+
+    public void OnButtonWest(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            OnButtonWestDown?.Invoke();
+        else if (context.canceled)
+            OnButtonWestUp?.Invoke();
     }
 }

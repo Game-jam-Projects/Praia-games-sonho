@@ -1,4 +1,5 @@
 using DreamTeam.Runtime.Systems.Core;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -36,6 +37,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private RuntimeAnimatorController dreamController;
     [SerializeField] private RuntimeAnimatorController nightmareController;
 
+    [Header("Dash System")]
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.2f;
+    private bool isDashing = false;
+
+
+
     private void Awake()
     {
         playerSr = GetComponent<SpriteRenderer>();
@@ -51,6 +59,7 @@ public class PlayerController : MonoBehaviour
 
         inputReader.OnButtonSouthDown += OnJump;
         inputReader.OnButtonNorthDown += OnButtonNorth;
+        inputReader.OnButtonWestDown += OnButtonWest;
     }
 
     private void OnDestroy()
@@ -59,6 +68,7 @@ public class PlayerController : MonoBehaviour
 
         inputReader.OnButtonSouthDown -= OnJump;
         inputReader.OnButtonNorthDown -= OnButtonNorth;
+        inputReader.OnButtonWestDown -= OnButtonWest;
 
         inputReader.DisableInput();
     }
@@ -70,6 +80,8 @@ public class PlayerController : MonoBehaviour
 
         animator.SetFloat("speedY", _playerRB.velocity.y);
         animator.SetBool("isGrounded", isGrounded);
+
+        if(isDashing == true && isGrounded == true) { isDashing = false; }
     }
 
     private void FixedUpdate()
@@ -112,6 +124,16 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnDash()
+    {
+        
+
+        if(isDashing == false && isGrounded == false)
+        {
+            StartCoroutine(Dash(inputReader.Movement.normalized));
+        }
+    }
+
     public void Flip()
     {
         isLookLeft = !isLookLeft;
@@ -142,11 +164,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private IEnumerator Dash(Vector2 direction)
+    {
+        isDashing = true;
+
+        float startTime = Time.time;
+
+        while (Time.time < startTime + dashDuration)
+        {
+            GetComponent<Rigidbody2D>().velocity = direction * dashSpeed;
+            yield return null;
+        }
+
+        //isDashing = false;
+    }
+
     private void OnButtonNorth()
     {
         CoreSingleton.Instance.gameStateManager.ChangeStageType();
     }
 
+    private void OnButtonWest()
+    {
+        OnDash();
+    }
 
     private void OnDrawGizmos()
     {
