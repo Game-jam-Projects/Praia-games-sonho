@@ -1,4 +1,7 @@
-﻿public static class DreamKeys
+﻿namespace DreamTeam.Runtime.Systems.Core
 {
-    public const string ScriptablePath = "DREAM TEAM/Scriptables/";
+    public static class DreamKeys
+    {
+        public const string ScriptablePath = "DREAM TEAM/Scriptables/";
+    }
 }

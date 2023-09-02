@@ -53,6 +53,15 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ButtonNorth"",
+                    ""type"": ""Button"",
+                    ""id"": ""4aa6c95d-0b10-49d1-9200-fea5ee22d963"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -167,6 +176,61 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""DPad"",
+                    ""id"": ""13fd524b-00e4-4822-b1ac-36a488ed03f3"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""7583e1da-fa4f-44d3-aa0b-62233e1c75ce"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""3ae79870-b1c6-4253-94c7-3a5ebab13514"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""66bc8e41-29d0-463d-8212-4f54b256b710"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""52e746e1-2fad-46ef-a467-c0dee292e64d"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""4a76fb39-4724-45ba-a2ff-0ac7d9f7196b"",
                     ""path"": ""<Keyboard>/p"",
@@ -231,6 +295,28 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff73947e-fadf-464b-aebc-5bce4c8df762"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""ButtonNorth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""73f1c940-5122-44ea-96b5-6f691d503055"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""keyboard + mouse"",
+                    ""action"": ""ButtonNorth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -270,6 +356,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
+        m_Gameplay_ButtonNorth = m_Gameplay.FindAction("ButtonNorth", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -334,6 +421,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Movement;
     private readonly InputAction m_Gameplay_Pause;
     private readonly InputAction m_Gameplay_Jump;
+    private readonly InputAction m_Gameplay_ButtonNorth;
     public struct GameplayActions
     {
         private @PlayerInputMap m_Wrapper;
@@ -341,6 +429,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Gameplay_Movement;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
+        public InputAction @ButtonNorth => m_Wrapper.m_Gameplay_ButtonNorth;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -359,6 +448,9 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @ButtonNorth.started += instance.OnButtonNorth;
+            @ButtonNorth.performed += instance.OnButtonNorth;
+            @ButtonNorth.canceled += instance.OnButtonNorth;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -372,6 +464,9 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @ButtonNorth.started -= instance.OnButtonNorth;
+            @ButtonNorth.performed -= instance.OnButtonNorth;
+            @ButtonNorth.canceled -= instance.OnButtonNorth;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -412,5 +507,6 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnButtonNorth(InputAction.CallbackContext context);
     }
 }

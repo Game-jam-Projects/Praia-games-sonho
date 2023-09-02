@@ -8,13 +8,16 @@ using static PlayerInputMap;
 [CreateAssetMenu(fileName = "New Input Reader", menuName = "Scriptables/Input Reader")]
 public class InputReader : ScriptableObject, IGameplayActions
 {
-    public Vector2 movement { get; private set; }
+    public Vector2 Movement { get; private set; }
     
-    public event Action OnJumpUp;
-    public event Action OnJumpDown;
+    public event Action OnButtonSouthUp;
+    public event Action OnButtonSouthDown;
 
     public event Action OnPauseUp;
     public event Action OnPauseDown;
+
+    public event Action OnButtonNorthUp;
+    public event Action OnButtonNorthDown;
 
     private PlayerInputMap controls;
 
@@ -31,7 +34,7 @@ public class InputReader : ScriptableObject, IGameplayActions
 
     public void OnMovement(InputAction.CallbackContext context)
     {
-        movement = context.ReadValue<Vector2>();
+        Movement = context.ReadValue<Vector2>();
     }
 
     public void OnPause(InputAction.CallbackContext context)
@@ -45,8 +48,16 @@ public class InputReader : ScriptableObject, IGameplayActions
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started)
-            OnJumpDown?.Invoke();
+            OnButtonSouthDown?.Invoke();
         else if (context.canceled)
-            OnJumpUp?.Invoke();
+            OnButtonSouthUp?.Invoke();
+    }
+
+    public void OnButtonNorth(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            OnButtonNorthDown?.Invoke();
+        else if (context.canceled)
+            OnButtonNorthUp?.Invoke();
     }
 }

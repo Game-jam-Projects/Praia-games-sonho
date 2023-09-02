@@ -1,7 +1,8 @@
+using EasyTransition;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System;
 
 namespace DreamTeam.Runtime.System.Core
 {
@@ -9,20 +10,10 @@ namespace DreamTeam.Runtime.System.Core
     {
         public event Action OnSceneStartLoading;
 
-        private readonly int FadeInParam = Animator.StringToHash("FadeIn");
-        private readonly int FadeOutParam = Animator.StringToHash("FadeOut");
-
-        [SerializeField] private GameObject fadeCanvas;
-        [SerializeField] private Animator animator;
+        [SerializeField] private TransitionSettings transition;
         [SerializeField] private float animationFadeTime = 0.3f;
 
         private bool isLoadingScene;
-
-        protected override void Awake()
-        {
-            base.Awake();
-            fadeCanvas.SetActive(true);
-        }
 
         public void ReloadScene()
         {
@@ -53,18 +44,11 @@ namespace DreamTeam.Runtime.System.Core
 
             OnSceneStartLoading?.Invoke();
 
-            animator.SetTrigger(FadeInParam);
-
-            yield return new WaitForSecondsRealtime(animationFadeTime);
+            TransitionManager.Instance().Transition(sceneIndex, transition, 0f);
 
             GameManager.Instance.ResumeGame();
-            var operation = SceneManager.LoadSceneAsync(sceneIndex);
 
             yield return new WaitForEndOfFrame();
-            yield return new WaitUntil(() => operation.isDone);
-            yield return new WaitForEndOfFrame();
-
-            animator.SetTrigger(FadeOutParam);
 
             isLoadingScene = false;
         }
