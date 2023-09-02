@@ -499,7 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b39bd4b4e173584399fc92d63ff5bb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VCAName: M
+  VCAName: Music
 --- !u!1 &8716071646268568285
 GameObject:
   m_ObjectHideFlags: 0
