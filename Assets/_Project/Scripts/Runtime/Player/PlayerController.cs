@@ -17,6 +17,15 @@ public class PlayerController : MonoBehaviour
     public float groundXSize, groundYSize;
     [Space]
 
+    [Header("Wall")]
+    public LayerMask whatIsWall;
+    public Transform wallCheck;
+    public float wallXSize, wallYSize;
+    public bool isWall;
+    public bool isJumpWall;
+    public float jumpWallSideForce;
+    [Space]
+
     [Header("Variables")]
     public float velocity = 2f;
     public float jumpForce = 100f;
@@ -76,10 +85,21 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         movementInput = new Vector2(inputReader.Movement.x, inputReader.Movement.y);
-        _playerRB.velocity = new Vector2(inputReader.Movement.x * velocity, _playerRB.velocity.y);
-
+        if (isJumpWall == false)
+        {
+            _playerRB.velocity = new Vector2(inputReader.Movement.x * velocity, _playerRB.velocity.y);
+        }
         animator.SetFloat("speedY", _playerRB.velocity.y);
         animator.SetBool("isGrounded", isGrounded);
+
+        if(isWall == true && _playerRB.velocity.y < 0)
+        {
+            _playerRB.gravityScale = 1;
+        }
+        else
+        {
+            _playerRB.gravityScale = 3.6f;
+        }
 
         if(isDashing == true && isGrounded == true) { isDashing = false; }
     }
@@ -87,6 +107,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapBox(groundCheck.transform.position, new Vector2(groundXSize, groundYSize), 0f, whatIsGround);
+        isWall = Physics2D.OverlapBox(wallCheck.transform.position, new Vector2(wallXSize, wallYSize), 0f, whatIsWall);
 
         var isWalk = _playerRB.velocity != new Vector2(0, 0);
 
@@ -114,6 +135,28 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump()
     {
+        if(isWall == true && isJumpWall == false)
+        {
+            isJumpWall = true;
+            Vector2 dir = Vector2.zero;
+            if(isLookLeft == true)
+            {
+                dir.Set(jumpWallSideForce, 0);
+                
+            }
+            else
+            {
+                dir.Set(-jumpWallSideForce, 0);
+            }
+
+            Flip();
+
+            _playerRB.velocity = dir;
+            
+            _playerRB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            Invoke("JumpWallOff", 0.3f);
+        }
+
         if (isGrounded)
         {
             _playerRB.velocity = Vector2.zero;
@@ -124,6 +167,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void JumpWallOff()
+    {
+        isJumpWall = false;
+    }
     private void OnDash()
     {
         
@@ -193,5 +240,7 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireCube(groundCheck.transform.position, new Vector2(groundXSize, groundYSize));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(wallCheck.transform.position, new Vector2(wallXSize, wallYSize));
     }
 }
