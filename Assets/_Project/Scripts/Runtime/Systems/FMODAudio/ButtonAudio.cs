@@ -10,19 +10,22 @@ namespace DreamTeam.Runtime.System.FMODAudio
         [SerializeField] private FMODAudioReferenceData HoverIn;
         [SerializeField] private FMODAudioReferenceData HoverOut;
 
-        [SerializeField] private bool disableClickSound;
+        [SerializeField] private bool disableClickByScript;
 
         public void ClickSound()
         {
-            FMODUnity.RuntimeManager.PlayOneShotAttached(Click.fmodPath, gameObject);
+            if(Click)
+                FMODUnity.RuntimeManager.PlayOneShotAttached(Click.fmodPath, gameObject);
         }
         public void HoverInSound()
         {
-            FMODUnity.RuntimeManager.PlayOneShotAttached(HoverIn.fmodPath, gameObject);
+            if(HoverIn)
+                FMODUnity.RuntimeManager.PlayOneShotAttached(HoverIn.fmodPath, gameObject);
         }
         public void HoverOutSound()
         {
-            FMODUnity.RuntimeManager.PlayOneShotAttached(HoverOut.fmodPath, gameObject);
+            if(HoverOut)
+                FMODUnity.RuntimeManager.PlayOneShotAttached(HoverOut.fmodPath, gameObject);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -37,7 +40,8 @@ namespace DreamTeam.Runtime.System.FMODAudio
 
         protected override void ButtonBehaviour()
         {
-            ClickSound();
+            if(disableClickByScript)
+                ClickSound();
         }
     }
 }

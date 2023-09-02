@@ -7,28 +7,26 @@ namespace DreamTeam.Runtime.System.UI
     public class ButtonFeedback : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private TextMeshProUGUI textMeshProUGUI;
-
-        [SerializeField] private Color OnMouseEnterColor = Color.gray;
-        [SerializeField] private Color OnMouseExitColor = Color.white;
+        [SerializeField] private ButtonFeedbackData textMeshColor;
 
         public void OnSelect(BaseEventData eventData)
         {
-            textMeshProUGUI.color = OnMouseEnterColor;
+            textMeshProUGUI.color = textMeshColor.OnMouseEnterColor;
         }
 
         public void OnDeselect(BaseEventData eventData)
         {
-            textMeshProUGUI.color = OnMouseExitColor;
+            textMeshProUGUI.color = textMeshColor.OnMouseExitColor;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            textMeshProUGUI.color = OnMouseEnterColor;
+            textMeshProUGUI.color = textMeshColor.OnMouseEnterColor;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            textMeshProUGUI.color = OnMouseExitColor;
+            textMeshProUGUI.color = textMeshColor.OnMouseExitColor;
         }
     }
 }

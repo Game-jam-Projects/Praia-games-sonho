@@ -1,45 +1,45 @@
-using DreamTeam.Runtime.System.FMODAudio;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ParameterSetByName : MonoBehaviour
+namespace DreamTeam.Runtime.System.FMODAudio
 {
-    FMOD.Studio.EventInstance Ambience;
-
-    private void Start()
+    public class ParameterSetByName : MonoBehaviour
     {
-        Ambience = FMODUnity.RuntimeManager.CreateInstance(FMODKeys.EVENT_Music_Ambience);
-        Ambience.start();
-    }
+        FMOD.Studio.EventInstance Ambience;
 
-    /*private void OnTriggerEnter(Collider other)
-    {
-        if (other.name == "PLAYER")
-            Ambience.setParameterByName("Ambience Fade", 1f);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.name == "PLAYER")
-            Ambience.setParameterByName("Ambience Fade", 0f);
-    }*/
-
-    /*private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.TryGetComponent(out PlayerController player))
+        private void Start()
         {
-            Ambience.setParameterByName("Ambience Fade", 1f);
-            print("a");
+            Ambience = FMODUnity.RuntimeManager.CreateInstance(FMODKeys.EVENT_Music_Ambience);
+            Ambience.start();
         }
-    }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.TryGetComponent(out PlayerController player))
-        {
-            Ambience.setParameterByName("Ambience Fade", 0f);
-            print("b");
-        }
-    }*/
 
+        /*private void OnTriggerEnter(Collider other)
+        {
+            if (other.name == "PLAYER")
+                Ambience.setParameterByName("Ambience Fade", 1f);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.name == "PLAYER")
+                Ambience.setParameterByName("Ambience Fade", 0f);
+        }*/
+
+        /*private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.TryGetComponent(out PlayerController player))
+            {
+                Ambience.setParameterByName("Ambience Fade", 1f);
+                print("a");
+            }
+        }
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.gameObject.TryGetComponent(out PlayerController player))
+            {
+                Ambience.setParameterByName("Ambience Fade", 0f);
+                print("b");
+            }
+        }*/
+
+    }
 }
