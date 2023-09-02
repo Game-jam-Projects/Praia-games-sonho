@@ -10,8 +10,8 @@ namespace PainfulSmile.Runtime.Utilities.AutoTimer.Core
 
         public event Action OnExpire;
         public event Action<UpdateProgressArgs> OnUpdateProgress;
-        public float InitTime { get; private set; }
-        [field: SerializeField] public float Time { get; private set; }
+        [field:SerializeField] public float InitTime { get; private set; }
+        public float Time { get; private set; }
 
         public bool Initialized { get; private set; }
         private bool finished;
