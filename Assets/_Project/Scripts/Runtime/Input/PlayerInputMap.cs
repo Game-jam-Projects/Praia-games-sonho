@@ -71,6 +71,15 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightTrigger"",
+                    ""type"": ""Button"",
+                    ""id"": ""2ff82903-d9b6-4136-abe3-f7421a86c9f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -348,6 +357,28 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
                     ""action"": ""ButtonWest"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""001c0de2-56c7-4865-965c-625899a70038"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""gamepad"",
+                    ""action"": ""RightTrigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c51aca18-680d-4d9a-a0b4-e45f21b01e67"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""keyboard + mouse"",
+                    ""action"": ""RightTrigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -389,6 +420,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
         m_Gameplay_Jump = m_Gameplay.FindAction("Jump", throwIfNotFound: true);
         m_Gameplay_ButtonNorth = m_Gameplay.FindAction("ButtonNorth", throwIfNotFound: true);
         m_Gameplay_ButtonWest = m_Gameplay.FindAction("ButtonWest", throwIfNotFound: true);
+        m_Gameplay_RightTrigger = m_Gameplay.FindAction("RightTrigger", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -455,6 +487,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Jump;
     private readonly InputAction m_Gameplay_ButtonNorth;
     private readonly InputAction m_Gameplay_ButtonWest;
+    private readonly InputAction m_Gameplay_RightTrigger;
     public struct GameplayActions
     {
         private @PlayerInputMap m_Wrapper;
@@ -464,6 +497,7 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Gameplay_Jump;
         public InputAction @ButtonNorth => m_Wrapper.m_Gameplay_ButtonNorth;
         public InputAction @ButtonWest => m_Wrapper.m_Gameplay_ButtonWest;
+        public InputAction @RightTrigger => m_Wrapper.m_Gameplay_RightTrigger;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -488,6 +522,9 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
             @ButtonWest.started += instance.OnButtonWest;
             @ButtonWest.performed += instance.OnButtonWest;
             @ButtonWest.canceled += instance.OnButtonWest;
+            @RightTrigger.started += instance.OnRightTrigger;
+            @RightTrigger.performed += instance.OnRightTrigger;
+            @RightTrigger.canceled += instance.OnRightTrigger;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -507,6 +544,9 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
             @ButtonWest.started -= instance.OnButtonWest;
             @ButtonWest.performed -= instance.OnButtonWest;
             @ButtonWest.canceled -= instance.OnButtonWest;
+            @RightTrigger.started -= instance.OnRightTrigger;
+            @RightTrigger.performed -= instance.OnRightTrigger;
+            @RightTrigger.canceled -= instance.OnRightTrigger;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -549,5 +589,6 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnButtonNorth(InputAction.CallbackContext context);
         void OnButtonWest(InputAction.CallbackContext context);
+        void OnRightTrigger(InputAction.CallbackContext context);
     }
 }

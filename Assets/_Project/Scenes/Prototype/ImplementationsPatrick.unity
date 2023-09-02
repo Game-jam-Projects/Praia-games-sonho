@@ -427,6 +427,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7299596338501517960, guid: 23d6df4f681cb7e4aae0d4cde1f91d18, type: 3}
+      propertyPath: grippingSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299596338501517960, guid: 23d6df4f681cb7e4aae0d4cde1f91d18, type: 3}
       propertyPath: jumpWallSideForce
       value: 12
       objectReference: {fileID: 0}
