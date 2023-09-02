@@ -84,7 +84,8 @@ namespace DreamTeam.Runtime.Systems.Scenary
                 {
                     renderer.DOFade(0f, forced ? 0f : transitionDuration).OnComplete(() =>
                     {
-                        swap.gameObject.SetActive(false);
+                        if(swap.gameObject)
+                            swap.gameObject.SetActive(false);
                     });
                 }
                 else
@@ -96,7 +97,8 @@ namespace DreamTeam.Runtime.Systems.Scenary
 
         private void EnableObjects(Swap swap, bool forced)
         {
-            swap.gameObject.SetActive(true);
+            if (swap.gameObject)
+                swap.gameObject.SetActive(true);
             swap.colliders.ForEach(collider => collider.enabled = true);
 
             foreach (var renderer in swap.renderers)
