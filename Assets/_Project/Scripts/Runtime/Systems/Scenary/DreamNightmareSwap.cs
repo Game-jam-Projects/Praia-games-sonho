@@ -1,12 +1,13 @@
 using DG.Tweening;
 using DreamTeam.Runtime.Systems.Core;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace DreamTeam.Runtime.Systems.Scenary
 {
+    [Serializable]
     public struct Swap
     {
         public List<SpriteRenderer> renderers;
@@ -14,7 +15,7 @@ namespace DreamTeam.Runtime.Systems.Scenary
         public GameObject gameObject;
     }
 
-    public class DreamNightmare : MonoBehaviour
+    public class DreamNightmareSwap : MonoBehaviour
     {
         [SerializeField] private float transitionDuration;
 
@@ -24,6 +25,8 @@ namespace DreamTeam.Runtime.Systems.Scenary
         private void Start()
         {
             CoreSingleton.Instance.gameStateManager.ChagedStageType += GameStateManager_ChagedStageType;
+
+            ForcedChagedStageType(CoreSingleton.Instance.gameStateManager.GetStageType());
         }
 
         private void OnDestroy()
@@ -36,28 +39,42 @@ namespace DreamTeam.Runtime.Systems.Scenary
             switch (stageType)
             {
                 case StageType.Dream:
-                    OnDream();
+                    OnDream(false);
                     break;
 
                 case StageType.Nightmare:
-                    OnNightmare();
+                    OnNightmare(false);
                     break;
             }
         }
 
-        private void OnDream()
+        private void ForcedChagedStageType(StageType stageType)
         {
-            DisableObjects(nightmare);
-            EnableObjects(dream);
+            switch (stageType)
+            {
+                case StageType.Dream:
+                    OnDream(true);
+                    break;
+
+                case StageType.Nightmare:
+                    OnNightmare(true);
+                    break;
+            }
         }
 
-        private void OnNightmare()
+        private void OnDream(bool forced)
         {
-            DisableObjects(dream);
-            EnableObjects(nightmare);
+            DisableObjects(nightmare, forced);
+            EnableObjects(dream, forced);
         }
 
-        private void DisableObjects(Swap swap)
+        private void OnNightmare(bool forced)
+        {
+            DisableObjects(dream, forced);
+            EnableObjects(nightmare, forced);
+        }
+
+        private void DisableObjects(Swap swap, bool forced)
         {
             swap.colliders.ForEach(collider => collider.enabled = false);
 
@@ -65,33 +82,35 @@ namespace DreamTeam.Runtime.Systems.Scenary
             {
                 if (swap.renderers.Last() == renderer)
                 {
-                    renderer.DOFade(0f, transitionDuration).OnComplete(() =>
+                    renderer.DOFade(0f, forced ? 0f : transitionDuration).OnComplete(() =>
                     {
                         swap.gameObject.SetActive(false);
                     });
                 }
                 else
                 {
-                    renderer.DOFade(0f, transitionDuration);
+                    renderer.DOFade(0f, forced ? 0f : transitionDuration);
                 }
             }
         }
 
-        private void EnableObjects(Swap swap)
+        private void EnableObjects(Swap swap, bool forced)
         {
+            swap.gameObject.SetActive(true);
+            swap.colliders.ForEach(collider => collider.enabled = true);
+
             foreach (var renderer in swap.renderers)
             {
                 if (swap.renderers.Last() == renderer)
                 {
-                    renderer.DOFade(1f, transitionDuration).OnComplete(() =>
+                    renderer.DOFade(1f, forced ? 0f : transitionDuration).OnComplete(() =>
                     {
-                        swap.gameObject.SetActive(true);
-                        swap.colliders.ForEach(collider => collider.enabled = true);
+                        //caso precise ativar os colisores, coloque a linha 84 aqui
                     });
                 }
                 else
                 {
-                    renderer.DOFade(1f, transitionDuration);
+                    renderer.DOFade(1f, forced ? 0f : transitionDuration);
                 }
             }
         }

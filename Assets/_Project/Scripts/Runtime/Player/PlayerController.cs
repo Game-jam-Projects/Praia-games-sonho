@@ -1,4 +1,5 @@
 using DreamTeam.Runtime.Systems.Core;
+using PainfulSmile.Runtime.Utilities.AutoTimer.Core;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -35,6 +36,9 @@ public class PlayerController : MonoBehaviour
     [Header("Dream Animation")]
     [SerializeField] private RuntimeAnimatorController dreamController;
     [SerializeField] private RuntimeAnimatorController nightmareController;
+
+    [SerializeField] private AutoTimer changeStageCooldown;
+    private bool canChangeStage = true;
 
     private void Awake()
     {
@@ -144,7 +148,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnButtonNorth()
     {
+        if (canChangeStage == false)
+            return;
+
+        canChangeStage = false;
         CoreSingleton.Instance.gameStateManager.ChangeStageType();
+
+        changeStageCooldown.Start(changeStageCooldown.InitTime);
+        changeStageCooldown.OnExpire += () =>
+        {
+            canChangeStage = true;
+        };
     }
 
 

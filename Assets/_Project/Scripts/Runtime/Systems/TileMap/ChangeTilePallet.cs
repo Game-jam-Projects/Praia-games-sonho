@@ -18,6 +18,11 @@ public class ChangeTilePallet : MonoBehaviour
         Tilemaps = GetComponentsInChildren<Tilemap>();
     }
 
+    private void OnDestroy()
+    {
+        CoreSingleton.Instance.gameStateManager.ChagedStageType -= EChangeStageType;
+    }
+
     public void EChangeStageType(StageType stageType)
     {
         switch (stageType)
