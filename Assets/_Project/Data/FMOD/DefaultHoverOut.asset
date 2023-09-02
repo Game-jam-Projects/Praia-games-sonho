@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fmodPath:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
+      Data1: -842621341
+      Data2: 1237465267
+      Data3: 1479813775
+      Data4: 387397799
     Path: event:/SFX/UI/Hover 2
