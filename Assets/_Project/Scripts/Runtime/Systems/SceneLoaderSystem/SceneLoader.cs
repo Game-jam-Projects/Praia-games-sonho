@@ -18,10 +18,10 @@ namespace DreamTeam.Runtime.System.Core
 
         private bool isLoadingScene;
 
-        private void Start()
+        protected override void Awake()
         {
+            base.Awake();
             fadeCanvas.SetActive(true);
-            LoadTitle();
         }
 
         public void ReloadScene()
