@@ -283,17 +283,6 @@ public partial class @PlayerInputMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f7e36b3e-b30a-41e1-bd59-756dbf15c7d3"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""keyboard + mouse"",
-                    ""action"": ""Jump"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""80bc42f0-bc9c-42c6-833f-48bd0a025c5d"",
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
