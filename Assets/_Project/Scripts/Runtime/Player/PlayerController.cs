@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         CoreSingleton.Instance.gameStateManager.ChagedStageType += EChangeStageType;
+        CoreSingleton.Instance.playerController = this;
 
         inputReader.EnableInput();
 
@@ -331,6 +332,32 @@ public class PlayerController : MonoBehaviour
     {
         OnGrip(false);
         _playerRB.gravityScale = 3.6f;
+    }
+
+    public void NewDash()
+    {
+        isDashing = false;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("SecretPassage"))
+        {
+            if (isShowEcho == true)
+            {
+                collision.gameObject.GetComponent<IBreakObjects>().BreakObject();
+            }
+        }
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Item"))
+        {
+            collision.GetComponent<ICollectible>().Collect();
+            _playerRB.velocity = Vector2.zero;
+        }
     }
 
     private void OnDrawGizmos()
