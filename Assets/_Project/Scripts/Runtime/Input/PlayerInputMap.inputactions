@@ -295,7 +295,29 @@
                 {
                     "name": "",
                     "id": "73f1c940-5122-44ea-96b5-6f691d503055",
+                    "path": "<Keyboard>/alt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard + mouse",
+                    "action": "ButtonNorth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ce7337c4-131c-4e10-a679-95768d097856",
                     "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard + mouse",
+                    "action": "ButtonNorth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "30bd023d-ee82-4cf7-b64c-95c95e0ac95d",
+                    "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
                     "groups": "keyboard + mouse",
@@ -338,6 +360,17 @@
                 },
                 {
                     "name": "",
+                    "id": "64caac64-34e5-4ab7-8300-d8f079ea9f1d",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard + mouse",
+                    "action": "ButtonWest",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "001c0de2-56c7-4865-965c-625899a70038",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
@@ -362,6 +395,17 @@
                     "name": "",
                     "id": "98a02d62-526e-4707-95da-f1314a4dfc60",
                     "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard + mouse",
+                    "action": "RightTrigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8463e07c-c554-4f87-85dd-663af56fd89c",
+                    "path": "<Keyboard>/k",
                     "interactions": "",
                     "processors": "",
                     "groups": "keyboard + mouse",
