@@ -7,7 +7,7 @@ namespace DreamTeam.Runtime.System.UI
     {
         protected Slider slider;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             slider = GetComponent<Slider>();
             slider.onValueChanged.AddListener(OnUpdateBeahviour);

@@ -133,6 +133,10 @@ PrefabInstance:
       propertyPath: VCAName
       value: SFX
       objectReference: {fileID: 0}
+    - target: {fileID: 6958855675598811741, guid: c51b1f06ca005e04290db1c18f4195e2, type: 3}
+      propertyPath: m_text
+      value: Sfx
+      objectReference: {fileID: 0}
     - target: {fileID: 7509897710357448185, guid: c51b1f06ca005e04290db1c18f4195e2, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
