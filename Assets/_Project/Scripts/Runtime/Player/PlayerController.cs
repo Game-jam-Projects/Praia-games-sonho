@@ -98,12 +98,28 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         movementInput = new Vector2(inputReader.Movement.x, inputReader.Movement.y);
-        if (isJumpWall == false)
+        Vector2 plaveVelocity = Vector2.zero;
+        if (isGrounded == true)
         {
-            _playerRB.velocity = new Vector2(inputReader.Movement.x * velocity, _playerRB.velocity.y);
-            
+            plaveVelocity = new Vector2(inputReader.Movement.x * velocity, _playerRB.velocity.y);
         }
-       
+        else if( isGrounded == false && isJumpWall == true)
+        {
+            plaveVelocity = _playerRB.velocity;
+        }
+        else if(isGrounded == false)
+        {
+            if (movementInput.x != 0)
+            {
+                plaveVelocity = new Vector2(inputReader.Movement.x * velocity, _playerRB.velocity.y);
+            }
+            else
+            {
+                plaveVelocity = _playerRB.velocity;
+            }
+        }
+
+        _playerRB.velocity = plaveVelocity;
 
         if (isGripping == true && isWall == true)
         {
