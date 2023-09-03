@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reloadTime: 5
+  spriteRenderer: {fileID: 3367668820344066629}
 --- !u!58 &5594276709969779913
 CircleCollider2D:
   m_ObjectHideFlags: 0

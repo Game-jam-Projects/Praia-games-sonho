@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2106049924790068099}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.16, y: -0.196, z: 0}
+  m_LocalPosition: {x: -0.27, y: -0.196, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 3064706337775485174}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.41, y: 0.83, z: 0}
+  m_LocalPosition: {x: 0.65, y: 0.83, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -142,7 +142,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 33f01867aaf5a7a42b8812b352e4fa3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -256,7 +256,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: {fileID: 4420156145297178048}
-  groundXSize: 2.1
+  groundXSize: 1.21
   groundYSize: 0.3
   whatIsWall:
     serializedVersion: 2
@@ -265,8 +265,13 @@ MonoBehaviour:
   wallXSize: 0.27
   wallYSize: 1.12
   isWall: 0
-  velocity: 6
-  jumpForce: 16
+  isJumpWall: 0
+  jumpWallSideForce: 12
+  gripTime: 3
+  gripTimer: 0
+  grippingSpeed: 3
+  velocity: 10
+  jumpForce: 20
   playerSr: {fileID: 577852003979540802}
   playerNoColor: {r: 0.9339623, g: 0, b: 0, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
@@ -274,8 +279,11 @@ MonoBehaviour:
   positionParticles: {fileID: 4420156145297178048}
   dreamController: {fileID: 9100000, guid: 56d460e243f61fb40ba5a8605f875037, type: 2}
   nightmareController: {fileID: 22100000, guid: e248319ec6dacbd4887ce830ee75be4f, type: 2}
-  dashSpeed: 20
+  dashSpeed: 45
   dashDuration: 0.2
+  echoPrefab: {fileID: 5760413288332399061, guid: 602494192e037f747967e048b925cda8, type: 3}
+  timeBtwEcho: 0.035
+  timecho: 0
 --- !u!114 &1161701590682265360
 MonoBehaviour:
   m_ObjectHideFlags: 0

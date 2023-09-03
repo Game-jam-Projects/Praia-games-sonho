@@ -7,9 +7,15 @@ namespace DreamTeam.Runtime.System.FMODAudio
         FMOD.Studio.VCA vca;
         public string VCAName;
 
-        private void Awake()
+        protected override void Awake()
         {
             vca = FMODUnity.RuntimeManager.GetVCA("vca:/" + VCAName);
+
+            vca.getVolume(out float newVolume);
+
+            slider.value = newVolume;
+
+            base.Awake();
         }
 
         protected override void OnUpdateBeahviour(float value)
