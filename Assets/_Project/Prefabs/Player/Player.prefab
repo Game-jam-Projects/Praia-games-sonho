@@ -284,6 +284,8 @@ MonoBehaviour:
   echoPrefab: {fileID: 5760413288332399061, guid: 602494192e037f747967e048b925cda8, type: 3}
   timeBtwEcho: 0.035
   timecho: 0
+  changeStageCooldown:
+    <InitTime>k__BackingField: 5
 --- !u!114 &1161701590682265360
 MonoBehaviour:
   m_ObjectHideFlags: 0
