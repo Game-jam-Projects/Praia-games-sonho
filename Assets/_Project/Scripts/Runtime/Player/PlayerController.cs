@@ -65,6 +65,14 @@ public class PlayerController : MonoBehaviour
     public float timeBtwEcho;
     public float timecho;
 
+
+    [Header("Fly System")]
+    public float flySpeed = 5.0f;
+    public float rotationSpeed = 120.0f;
+    public float maxFlyTime = 5.0f;
+    private float currentFlyTime = 0.0f;
+    private bool isFlying = false;
+
     [SerializeField] private AutoTimer changeStageCooldown;
     private bool canChangeStage = true;
 
@@ -102,6 +110,13 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         movementInput = new Vector2(inputReader.Movement.x, inputReader.Movement.y);
+
+        if (isFlying == true)
+        {
+            TemporaryFly();
+            return;
+        }
+
         Vector2 plaveVelocity = Vector2.zero;
         if (isGrounded == true)
         {
@@ -283,6 +298,25 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void TemporaryFly()
+    {
+        if (currentFlyTime >= maxFlyTime)
+        {
+            isFlying = false;
+            transform.eulerAngles = Vector3.zero;
+            return;
+        }
+
+
+        float rotationAmount = movementInput.x * rotationSpeed * Time.deltaTime;
+        transform.Rotate(0, 0, -rotationAmount);
+
+        Vector2 direction = transform.up;
+        _playerRB.velocity = direction * flySpeed;
+
+        currentFlyTime += Time.deltaTime;
+    }
+
     private void GravityManager()
     {
         if(isGripping)
@@ -295,7 +329,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _playerRB.gravityScale = 3.6f;
+            _playerRB.gravityScale = 4f;
         }
     }
 
@@ -367,6 +401,12 @@ public class PlayerController : MonoBehaviour
     public void NewDash()
     {
         isDashing = false;
+    }
+
+    public void Fly()
+    {
+        isFlying = true;
+        currentFlyTime = 0;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
