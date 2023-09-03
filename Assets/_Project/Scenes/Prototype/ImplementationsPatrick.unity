@@ -427,6 +427,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7299596338501517960, guid: 23d6df4f681cb7e4aae0d4cde1f91d18, type: 3}
+      propertyPath: dashSpeed
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299596338501517960, guid: 23d6df4f681cb7e4aae0d4cde1f91d18, type: 3}
+      propertyPath: echoPrefab
+      value: 
+      objectReference: {fileID: 5760413288332399061, guid: 602494192e037f747967e048b925cda8, type: 3}
+    - target: {fileID: 7299596338501517960, guid: 23d6df4f681cb7e4aae0d4cde1f91d18, type: 3}
+      propertyPath: timeBtwEcho
+      value: 0.035
+      objectReference: {fileID: 0}
+    - target: {fileID: 7299596338501517960, guid: 23d6df4f681cb7e4aae0d4cde1f91d18, type: 3}
       propertyPath: grippingSpeed
       value: 3
       objectReference: {fileID: 0}

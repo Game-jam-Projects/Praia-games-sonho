@@ -59,6 +59,10 @@ public class PlayerController : MonoBehaviour
     public float dashSpeed = 20f;
     public float dashDuration = 0.2f;
     private bool isDashing = false;
+    private bool isShowEcho;
+    public GameObject echoPrefab;
+    public float timeBtwEcho;
+    public float timecho;
 
     private void Awake()
     {
@@ -115,6 +119,12 @@ public class PlayerController : MonoBehaviour
             canGrip = true;
             gripTimer = 0;
         }
+
+        if(isShowEcho == true)
+        {
+            Echo();
+        }
+
         GravityManager();
 
         animator.SetFloat("speedY", _playerRB.velocity.y);
@@ -174,6 +184,7 @@ public class PlayerController : MonoBehaviour
         if (isWall == true && isJumpWall == false)
         {
             isJumpWall = true;
+            isGripping = false;
             Vector2 dir = Vector2.zero;
             if (isLookLeft == true)
             {
@@ -208,9 +219,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnDash()
     {
-
-
-        if (isDashing == false && isGrounded == false)
+        if (isDashing == false && isShowEcho == false)
         {
             StartCoroutine(Dash(inputReader.Movement.normalized));
         }
@@ -226,6 +235,23 @@ public class PlayerController : MonoBehaviour
         isLookLeft = !isLookLeft;
         float x = transform.localScale.x * -1; //Inverte o sinal do scale X
         transform.localScale = new Vector3(x, transform.localScale.y, transform.localScale.z);
+    }
+    public void Echo()
+    {
+        if(timecho >= timeBtwEcho)
+        {
+            GameObject echoInstance = Instantiate(echoPrefab, transform.position, Quaternion.identity);
+            if(isLookLeft == true)
+            {
+                echoInstance.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            Destroy(echoInstance, 0.25f);
+            timecho = 0;
+        }
+        else
+        {
+            timecho += Time.deltaTime;
+        }
     }
     private void PlayLandingParticles()
     {
@@ -269,15 +295,17 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Dash(Vector2 direction)
     {
         isDashing = true;
-
+        isShowEcho = true;
         float startTime = Time.time;
 
         while (Time.time < startTime + dashDuration)
         {
-            GetComponent<Rigidbody2D>().velocity = direction * dashSpeed;
+            _playerRB.velocity = direction * dashSpeed;
             yield return null;
         }
 
+        _playerRB.velocity = Vector2.zero;
+        isShowEcho = false;
         //isDashing = false;
     }
 
