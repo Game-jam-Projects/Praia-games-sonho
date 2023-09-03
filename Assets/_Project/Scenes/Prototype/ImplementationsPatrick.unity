@@ -505,15 +505,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 778aa764905593245a463754457ac6e6, type: 2}
   - {fileID: 11400000, guid: e8953154a91623c4ea3135d4e8156df4, type: 2}
   nightmare:
-  - {fileID: 11400000, guid: ee44f76f02161134d9c3c92027fed9c4, type: 2}
-  - {fileID: 11400000, guid: c3153e08f1b47da458e5b81f0f93a20e, type: 2}
-  - {fileID: 11400000, guid: df5f1e749ad9c5e40902df4e871ae7f3, type: 2}
-  - {fileID: 11400000, guid: 5fac9ae4c9a18ed409a09b1bb70a5d53, type: 2}
-  - {fileID: 11400000, guid: 23d88fe38907a32418cd2ab32c90eeaa, type: 2}
-  - {fileID: 11400000, guid: 148a542b217d4eb40ba9e19b46dfe44f, type: 2}
-  - {fileID: 11400000, guid: 07a6ba9c6f724374a88b824368885486, type: 2}
-  - {fileID: 11400000, guid: 0f259372382ab1d44a9f178b6ee4d19f, type: 2}
-  - {fileID: 11400000, guid: fea81e90b8776704bb4af6150b66dd83, type: 2}
+  - {fileID: 11400000, guid: ab3edfd3ed5ce1d468c64f0324a172cd, type: 2}
+  - {fileID: 11400000, guid: 60b7bfc3bbdccff409da24d05e170e6c, type: 2}
+  - {fileID: 11400000, guid: f64e4a4041f83ed49a3b067a28dbfc1a, type: 2}
+  - {fileID: 11400000, guid: a7102c2694123b643bf0ad7279218501, type: 2}
+  - {fileID: 11400000, guid: 66c25200ad8606e4cbb690d727eb167e, type: 2}
+  - {fileID: 11400000, guid: 161a8d8433853094d9ace2c0edfe3776, type: 2}
+  - {fileID: 11400000, guid: 53ebe7fdb65e4374a8eb8db48ba2de3a, type: 2}
+  - {fileID: 11400000, guid: 7b4911beefbb9fa46917817e4f4b9422, type: 2}
+  - {fileID: 11400000, guid: 5a5e2c351e1f97440b6c4e150ee69edc, type: 2}
   Tilemaps: []
 --- !u!1 &1067818728
 GameObject:
@@ -3599,6 +3599,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3120566310503310730, guid: 8788a96efbc4972469e1ba2f4fa0cd2c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695535395139044022, guid: 8788a96efbc4972469e1ba2f4fa0cd2c, type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695535395139044022, guid: 8788a96efbc4972469e1ba2f4fa0cd2c, type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695535395139044022, guid: 8788a96efbc4972469e1ba2f4fa0cd2c, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.07450981
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695535395139044022, guid: 8788a96efbc4972469e1ba2f4fa0cd2c, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.0627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695535395139044022, guid: 8788a96efbc4972469e1ba2f4fa0cd2c, type: 3}
+      propertyPath: m_BackGroundColor.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7014946906748045309, guid: 8788a96efbc4972469e1ba2f4fa0cd2c, type: 3}
