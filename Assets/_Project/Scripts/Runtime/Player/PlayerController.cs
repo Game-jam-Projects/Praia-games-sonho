@@ -255,7 +255,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnDash()
     {
-        if (isDashing == false && isShowEcho == false)
+        if (isDashing == false && isShowEcho == false && isFlying == false)
         {
             StartCoroutine(Dash(inputReader.Movement.normalized));
         }
@@ -304,6 +304,7 @@ public class PlayerController : MonoBehaviour
         {
             isFlying = false;
             transform.eulerAngles = Vector3.zero;
+            animator.SetBool("Fly", false);
             return;
         }
 
@@ -403,10 +404,20 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
     }
 
-    public void Fly()
+    public void Fly(Vector3 startEuler, float flightTime)
     {
+        if (isFlying == false)
+        {
+            transform.eulerAngles = startEuler;
+            currentFlyTime -= flightTime;
+        }
+        else
+        {
+            currentFlyTime = 0;
+        }
         isFlying = true;
-        currentFlyTime = 0;
+        animator.SetBool("Fly", true);
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
