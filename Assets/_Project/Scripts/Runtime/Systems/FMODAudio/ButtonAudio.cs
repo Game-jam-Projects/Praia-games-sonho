@@ -4,43 +4,55 @@ using UnityEngine.EventSystems;
 
 namespace DreamTeam.Runtime.System.FMODAudio
 {
-    public class ButtonAudio : ButtonBase, IPointerEnterHandler, IPointerExitHandler
+    public class ButtonAudio : ButtonBase, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
     {
         [SerializeField] private FMODAudioReferenceData Click;
         [SerializeField] private FMODAudioReferenceData HoverIn;
         [SerializeField] private FMODAudioReferenceData HoverOut;
 
         [SerializeField] private bool disableClickByScript;
+        [SerializeField] private bool disableHoverOut = true;
 
         public void ClickSound()
         {
-            if(Click)
+            if (Click)
                 FMODUnity.RuntimeManager.PlayOneShotAttached(Click.fmodPath, gameObject);
         }
-        public void HoverInSound()
+
+        public void OnSelect(BaseEventData eventData)
         {
-            if(HoverIn)
+            if (HoverIn)
                 FMODUnity.RuntimeManager.PlayOneShotAttached(HoverIn.fmodPath, gameObject);
         }
-        public void HoverOutSound()
+
+        public void OnDeselect(BaseEventData eventData)
         {
-            if(HoverOut)
+            if(disableHoverOut)
+                    return;
+
+            if (HoverOut)
                 FMODUnity.RuntimeManager.PlayOneShotAttached(HoverOut.fmodPath, gameObject);
         }
 
+
         public void OnPointerEnter(PointerEventData eventData)
         {
-            HoverInSound();
+            if (HoverIn)
+                FMODUnity.RuntimeManager.PlayOneShotAttached(HoverIn.fmodPath, gameObject);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            HoverOutSound();
+            if (disableHoverOut)
+                return;
+
+            if (HoverOut)
+                FMODUnity.RuntimeManager.PlayOneShotAttached(HoverOut.fmodPath, gameObject);
         }
 
         protected override void ButtonBehaviour()
         {
-            if(disableClickByScript)
+            if (disableClickByScript)
                 ClickSound();
         }
     }
