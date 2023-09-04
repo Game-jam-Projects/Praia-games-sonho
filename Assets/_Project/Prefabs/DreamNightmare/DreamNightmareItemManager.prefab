@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624a49a659c1a31498854f18baef7bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionDuration: 0
+  transitionDuration: 0.25
   dream:
     renderers: []
     colliders: []

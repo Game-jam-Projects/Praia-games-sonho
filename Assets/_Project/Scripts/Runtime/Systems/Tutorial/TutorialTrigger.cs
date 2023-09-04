@@ -1,3 +1,4 @@
+using DreamTeam.Runtime.Systems.Core;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,17 @@ public class TutorialTrigger : MonoBehaviour
     public bool isShow;
     public bool isHide;
 
+    [Header("Skills")]
+    public bool DASH;
+    public bool SWAPDREAM;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
        
         if (collision.gameObject.CompareTag("Player"))
         {
+            CoreSingleton.Instance.gameManager.DASH = DASH;
+            CoreSingleton.Instance.gameManager.SWAPDREAM = SWAPDREAM;
             StopCoroutine(nameof(IEDisable));
             isShow = true;
             ShowTutorial.SetActive(true);

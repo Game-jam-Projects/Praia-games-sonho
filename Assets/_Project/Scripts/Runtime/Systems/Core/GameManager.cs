@@ -27,6 +27,10 @@ namespace DreamTeam.Runtime.System.Core
 
         public int swapDreamItem;
 
+        [Header("Skills")]
+        public bool DASH;
+        public bool SWAPDREAM;
+
         private void Start()
         {
             QualitySettings.vSyncCount = 0;
