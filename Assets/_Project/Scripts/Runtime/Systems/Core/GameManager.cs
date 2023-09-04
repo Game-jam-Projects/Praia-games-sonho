@@ -9,6 +9,8 @@ namespace DreamTeam.Runtime.System.Core
         public event Action<bool> OnPauseStatusChange;
         public event Action OnGameOver;
         public event Action OnGameWin;
+        public event Action OnTransitionFinished;
+        public event Action<int> OnUpdateSwapItemAmount;
 
         public bool Paused { get; private set; }
 
@@ -22,6 +24,8 @@ namespace DreamTeam.Runtime.System.Core
         [Header("Seletor de Personagem")]
         [SerializeField] private int idChar;
         public Character[] characters;
+
+        public int swapDreamItem;
 
         private void Start()
         {
@@ -137,6 +141,25 @@ namespace DreamTeam.Runtime.System.Core
             return characters[this.idChar];
         }
 
+        public void SetItem(int value)
+        {
+            swapDreamItem += value;
+
+            if (swapDreamItem < 0)
+                return;
+
+            OnUpdateSwapItemAmount?.Invoke(swapDreamItem);
+        }
+
+        public int GetItem()
+        {
+            return swapDreamItem;
+        }
+
+        public void TriggerTransitionFinish()
+        {
+            OnTransitionFinished?.Invoke();
+        }
     }
 
     

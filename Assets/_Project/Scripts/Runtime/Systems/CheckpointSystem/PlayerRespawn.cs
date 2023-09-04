@@ -42,6 +42,7 @@ namespace DreamTeam.Runtime.Systems.CheckpointSystem
             {
                 transform.position = spawnPosition;
                 GameManager.Instance.CanPause = true;
+                GameManager.Instance.TriggerTransitionFinish();
                 healthSystem.ResetLife();
 
                 animator.updateMode = AnimatorUpdateMode.Normal;
