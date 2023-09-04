@@ -108,6 +108,15 @@ namespace DreamTeam.Runtime.System.Core
             
         }
 
+        public void RankingClear()
+        {
+            playerDataRanking = new PlayerDataRanking();
+            chrono = new Chrono();
+
+            collectableDreams = 0;
+            deathCount = 0;
+        }
+
         #endregion
 
     }
