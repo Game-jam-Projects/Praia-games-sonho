@@ -10,6 +10,7 @@ namespace DreamTeam.Runtime.System.Core
     {
         public event Action OnSceneStartLoading;
 
+        [SerializeField] private int titleScene = 2;
         [SerializeField] private TransitionSettings transition;
         [SerializeField] private float animationFadeTime = 0.3f;
 
@@ -27,7 +28,7 @@ namespace DreamTeam.Runtime.System.Core
 
         public void LoadTitle()
         {
-            LoadScene(1);
+            LoadScene(titleScene);
         }
 
         private void LoadScene(int sceneIndex)

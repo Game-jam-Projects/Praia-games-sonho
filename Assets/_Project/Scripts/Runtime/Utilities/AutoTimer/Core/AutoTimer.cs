@@ -88,9 +88,10 @@ namespace PainfulSmile.Runtime.Utilities.AutoTimer.Core
 
             Initialized = false;
             finished = true;
+            loop = false;
 
             Time = 0f;
-            InitTime = 0f;
+            _currentUpdateEventThresholder = 0f;
 
             OnExpire = null;
             OnUpdateProgress = null;
