@@ -163,6 +163,7 @@ namespace DreamTeam.Runtime.System.Core
         public void TriggerTransitionFinish()
         {
             OnTransitionFinished?.Invoke();
+            SetDeathCount();
         }
     }
 
