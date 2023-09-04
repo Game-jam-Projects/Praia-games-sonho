@@ -19,6 +19,10 @@ namespace DreamTeam.Runtime.System.Core
         public PlayerDataRanking playerDataRanking;
         public Chrono chrono;
 
+        [Header("Seletor de Personagem")]
+        [SerializeField] private int idChar;
+        public Character[] characters;
+
         private void Start()
         {
             QualitySettings.vSyncCount = 0;
@@ -110,5 +114,25 @@ namespace DreamTeam.Runtime.System.Core
 
         #endregion
 
+        public void SelectChar(int idChar)
+        {
+            this.idChar = idChar;
+        }
+
+        public Character GetCharacter()
+        {
+            return characters[this.idChar];
+        }
+
     }
+
+    
+}
+
+[Serializable]
+public struct Character
+{
+    public string playerName;
+    public RuntimeAnimatorController dreamController;
+    public RuntimeAnimatorController nightmareController;
 }

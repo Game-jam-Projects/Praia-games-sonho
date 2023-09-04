@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
     public float timeBtwEcho;
     public float timecho;
 
+    
 
     [Header("Fly System")]
     public float flySpeed = 5.0f;
@@ -95,6 +96,11 @@ public class PlayerController : MonoBehaviour
         inputReader.OnButtonWestDown += OnButtonWest;
         inputReader.OnRightTriggerDown += OnRightTriggerDown;
         inputReader.OnRightTriggerUp += OnRightTriggerUp;
+
+        Character selectedChar = CoreSingleton.Instance.gameManager.GetCharacter();
+        dreamController = selectedChar.dreamController;
+        nightmareController = selectedChar.nightmareController;
+
     }
     private void OnDestroy()
     {
