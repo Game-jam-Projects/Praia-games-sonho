@@ -23,6 +23,9 @@ public class InputReader : ScriptableObject, IGameplayActions
     public event Action OnRightTriggerUp;
     public event Action OnRightTriggerDown;
 
+    public event Action OnInteractUp;
+    public event Action OnInteractDown;
+
     private PlayerInputMap controls;
 
     public void EnableInput()
@@ -83,5 +86,13 @@ public class InputReader : ScriptableObject, IGameplayActions
             OnRightTriggerDown?.Invoke();
         else if (context.canceled)
             OnRightTriggerUp?.Invoke();
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            OnInteractDown?.Invoke();
+        else if (context.canceled)
+            OnInteractUp?.Invoke();
     }
 }
