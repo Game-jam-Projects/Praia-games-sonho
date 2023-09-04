@@ -22,6 +22,7 @@ namespace DreamTeam.Runtime.Systems.Scenary
         [SerializeField] private Swap dream;
         [SerializeField] private Swap nightmare;
 
+
         private void Start()
         {
             CoreSingleton.Instance.gameStateManager.ChagedStageType += GameStateManager_ChagedStageType;
@@ -66,12 +67,16 @@ namespace DreamTeam.Runtime.Systems.Scenary
         {
             DisableObjects(nightmare, forced);
             EnableObjects(dream, forced);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Fade Sonho", transform.position);
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Music Fade", 0f);
         }
 
         private void OnNightmare(bool forced)
         {
             DisableObjects(dream, forced);
             EnableObjects(nightmare, forced);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Fade Pesadelo", transform.position);
+            FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Music Fade", 1f);
         }
 
         private void DisableObjects(Swap swap, bool forced)
