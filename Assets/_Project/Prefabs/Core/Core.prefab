@@ -188,6 +188,10 @@ PrefabInstance:
       value: GamePostProcessing
       objectReference: {fileID: 0}
     - target: {fileID: 4863817571869490522, guid: 9f09bc2702798f34689eb97399459dfe, type: 3}
+      propertyPath: paniniIncrement
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863817571869490522, guid: 9f09bc2702798f34689eb97399459dfe, type: 3}
       propertyPath: maxHueShiftValue
       value: 0
       objectReference: {fileID: 0}
@@ -198,6 +202,30 @@ PrefabInstance:
     - target: {fileID: 4863817571869490522, guid: 9f09bc2702798f34689eb97399459dfe, type: 3}
       propertyPath: hueShiftIncrement
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863817571869490522, guid: 9f09bc2702798f34689eb97399459dfe, type: 3}
+      propertyPath: maxPaniniDistanceValue
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863817571869490522, guid: 9f09bc2702798f34689eb97399459dfe, type: 3}
+      propertyPath: lensDistortionIncrement
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863817571869490522, guid: 9f09bc2702798f34689eb97399459dfe, type: 3}
+      propertyPath: maxLensDistortionIntensity
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863817571869490522, guid: 9f09bc2702798f34689eb97399459dfe, type: 3}
+      propertyPath: minLensDistortionIntensity
+      value: -0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863817571869490522, guid: 9f09bc2702798f34689eb97399459dfe, type: 3}
+      propertyPath: chromaticAberrationIncrement
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863817571869490522, guid: 9f09bc2702798f34689eb97399459dfe, type: 3}
+      propertyPath: maxChromaticAberrationIntensity
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4914850836200382126, guid: 9f09bc2702798f34689eb97399459dfe, type: 3}
       propertyPath: m_LocalPosition.x

@@ -5,12 +5,11 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class ChangeTilePallet : MonoBehaviour
-{
-    public TileBase[] placeholder;
+{    
     public TileBase[] dream;
     public TileBase[] nightmare;
 
-    public Tilemap[] Tilemaps;
+   [HideInInspector] public Tilemap[] Tilemaps;
 
     private void Start()
     {

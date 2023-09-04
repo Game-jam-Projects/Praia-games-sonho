@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public Transform wallCheck;
     public float wallXSize, wallYSize;
     public bool isWall;
+    private bool isWallSlide;
     public bool isJumpWall;
     public float jumpWallSideForce;
 
@@ -163,19 +164,22 @@ public class PlayerController : MonoBehaviour
 
         GravityManager();
 
+        bool isWalk = movementInput.sqrMagnitude != 0;
+
         animator.SetFloat("speedY", _playerRB.velocity.y);
+        animator.SetBool("isGrounded", isGrounded);
+        animator.SetBool("isWalk", isWalk);
+        animator.SetBool("isWall", isWall);
+        animator.SetBool("isWallSlide", isWallSlide);
+        animator.SetBool("isGripWall", isGripping);
+        animator.SetBool("isDash", isShowEcho);
         animator.SetBool("isGrounded", isGrounded);
     }
     private void FixedUpdate()
     {
         isGrounded = Physics2D.OverlapBox(groundCheck.transform.position, new Vector2(groundXSize, groundYSize), 0f, whatIsGround);
         isWall = Physics2D.OverlapBox(wallCheck.transform.position, new Vector2(wallXSize, wallYSize), 0f, whatIsWall);
-
-        var isWalk = _playerRB.velocity != new Vector2(0, 0);
-
-        animator.SetBool("isWalk", isWalk);
-        animator.SetBool("isGrounded", isGrounded);
-
+        isWallSlide = isWall && _playerRB.velocity.y < 0;
         //virar o player
         if (movementInput.x < 0 && isLookLeft == false)
         {
