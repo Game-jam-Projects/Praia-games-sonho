@@ -5,25 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Game/1.PreTitle.unity
     guid: e94cafc881a9a8547addba28e16b46c6
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Game/2.CutsceneInit.unity
     guid: 35b4c39661af36741b2183ea44b32e31
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Game/3.Title.unity
     guid: 524c8b1901ff4a048872cdfde2eb7bba
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Prototype/ImplementationsInteraction.unity
     guid: 2cf8593fdab423446a73d7a2c755f93f
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Project/Scenes/Game/4.Gameplay.unity
     guid: e785254a5c2c5664daf7602c2a993f2f
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Game/5.GameplayBoss.unity
     guid: c73f754be984fa943b0d4d3eafeb661f
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Game/6.CutsceneFinish.unity
     guid: b990f557c4e0f2f4994909e473a23020
   m_configObjects: {}
