@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="MixerGroup" id="{9fe9ba9c-eb3e-4f04-97b7-e5f670d6e6fc}">
+		<property name="volume">
+			<value>10</value>
+		</property>
 		<property name="name">
 			<value>SFX</value>
 		</property>
@@ -29,7 +32,7 @@
 	<object class="MixerBusFader" id="{8f459c72-7a0d-499f-9a25-fadf8ff515b4}" />
 	<object class="CompressorEffect" id="{8c4abf84-8e4a-406c-a709-fe4afd99eb1f}">
 		<property name="threshold">
-			<value>-15</value>
+			<value>-12</value>
 		</property>
 		<property name="ratio">
 			<value>1.14999998</value>

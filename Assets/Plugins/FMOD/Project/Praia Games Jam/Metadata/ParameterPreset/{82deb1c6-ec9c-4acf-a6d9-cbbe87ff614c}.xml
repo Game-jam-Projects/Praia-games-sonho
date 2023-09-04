@@ -19,10 +19,10 @@
 			<value>0</value>
 		</property>
 		<property name="seekSpeed">
-			<value>0.39999997615814209</value>
+			<value>0.34999999403953552</value>
 		</property>
 		<property name="seekSpeedDescending">
-			<value>0.39999997615814209</value>
+			<value>0.34999999403953552</value>
 		</property>
 		<property name="seekSpeedAsymmetric">
 			<value>true</value>
