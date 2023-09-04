@@ -17,6 +17,7 @@ public class PlatformHiding : MonoBehaviour
     [SerializeField] private bool isPlatformDestroy;
 
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Animator anim;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -29,7 +30,10 @@ public class PlatformHiding : MonoBehaviour
 
     IEnumerator IEDellayDisable()
     {
+        
         yield return new WaitForSeconds(timeToDisable);
+        anim.SetTrigger("Disable");
+        yield return new WaitForSeconds(1);
         FadeDisable();
     }
 
@@ -41,9 +45,10 @@ public class PlatformHiding : MonoBehaviour
 
     private void FadeDisable()
     {
+        
         spriteRenderer.DOFade(0f, timeTransition).OnComplete(() =>
         {
-            platform.SetActive(false);
+            //platform.SetActive(false);
             if(isPlatformDestroy == false)
                 StartCoroutine(nameof(IEDellayEnable));
         });
@@ -51,8 +56,9 @@ public class PlatformHiding : MonoBehaviour
 
     private void FadeEnable()
     {
-        platform.SetActive(true);
+        //platform.SetActive(true);
         spriteRenderer.DOFade(1f, timeTransition);
+        anim.SetTrigger("Enable");
     }
 
     /// <summary>
