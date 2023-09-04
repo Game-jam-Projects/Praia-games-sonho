@@ -1,3 +1,4 @@
+using DreamTeam.Runtime.System.Ranking;
 using System;
 using UnityEngine;
 
@@ -11,10 +12,19 @@ namespace DreamTeam.Runtime.System.Core
 
         public bool Paused { get; private set; }
 
+
+        [Header("Ranking")]
+        [SerializeField] private int collectableDreams;
+        [SerializeField] private int deathCount;
+        public PlayerDataRanking playerDataRanking;
+        public Chrono chrono;
+
         private void Start()
         {
             QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = 60;
+            playerDataRanking = new PlayerDataRanking();
+            chrono = new Chrono();
         }
 
         /// <summary>
@@ -25,6 +35,7 @@ namespace DreamTeam.Runtime.System.Core
         private void PauseGame()
         {
             Paused = true;
+            chrono.Stop();
             Time.timeScale = 0;
             OnPauseStatusChange?.Invoke(Paused);
         }
@@ -32,6 +43,7 @@ namespace DreamTeam.Runtime.System.Core
         public void ResumeGame()
         {
             Paused = false;
+            chrono.Start();
             Time.timeScale = 1;
             OnPauseStatusChange?.Invoke(Paused);
         }
@@ -58,6 +70,45 @@ namespace DreamTeam.Runtime.System.Core
         public void GameWin()
         {
             OnGameWin?.Invoke();
+            FinishSaveStatusGame();
         }
+
+        public void SetDeathCount()
+        {
+            deathCount++;
+        }
+
+        public void SetCollectableDreams()
+        {
+            collectableDreams++;
+        }
+
+        #region CODIGOS RANKING
+
+        public void SetPlayerName(string nameUser)
+        {
+            playerDataRanking.playerName = nameUser;
+        }
+
+        public void StartTimeGame()
+        {
+            chrono.Start();
+        }
+
+        /// <summary>
+        /// Função para indicar vitória da partida e salvar informações para o ranking
+        /// </summary>
+        public void FinishSaveStatusGame()
+        {
+            chrono.Stop();
+            playerDataRanking.time = chrono.GetFinalTime();
+            playerDataRanking.collectibleCount = collectableDreams;
+            playerDataRanking.deathCount = deathCount;
+            chrono.ResetTimer();
+            
+        }
+
+        #endregion
+
     }
 }
