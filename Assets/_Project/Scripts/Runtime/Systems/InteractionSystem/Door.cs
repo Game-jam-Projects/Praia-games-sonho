@@ -5,14 +5,23 @@ namespace DreamTeam.Runtime.Systems.InteractionSystem
 {
     public class Door : MonoBehaviour
     {
-        [SerializeField] private Transform doorVisual;
-        [SerializeField] private Transform finishPoint;
-        [SerializeField] private float duration = 1f;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Sprite closed;
+        [SerializeField] private Sprite open;
+
+        [SerializeField] private BoxCollider2D collider2d;
+
+        private void Start()
+        {
+            _spriteRenderer.sprite = closed;
+            collider2d.enabled = true;
+        }
 
         [ContextMenu("OpenDoor")]
         public void OpenDoor()
         {
-            doorVisual.DOMove(finishPoint.position, duration);
+            _spriteRenderer.sprite = open;
+            collider2d.enabled = false;
         }
     }
 }

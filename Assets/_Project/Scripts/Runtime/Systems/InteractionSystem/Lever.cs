@@ -1,12 +1,22 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace DreamTeam.Runtime.Systems.InteractionSystem
 {
     public class Lever : InteractableBase
     {
-        [SerializeField] private Door doorToOpen;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Sprite disabled;
+        [SerializeField] private Sprite enable;
+
+        [SerializeField] private List<Door> doorToOpen;
 
         private bool isTriggered;
+
+        private void Start()
+        {
+            _spriteRenderer.sprite = disabled;
+        }
 
         public override bool Interact()
         {
@@ -15,8 +25,11 @@ namespace DreamTeam.Runtime.Systems.InteractionSystem
 
             isTriggered = true;
             interactCollider.enabled = false;
-
-            doorToOpen.OpenDoor();
+            _spriteRenderer.sprite = enable;
+            
+            
+            doorToOpen.ForEach(x => x.OpenDoor());
+            
             return true;
         }
     }
