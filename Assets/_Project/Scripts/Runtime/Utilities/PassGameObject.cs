@@ -18,8 +18,12 @@ namespace DreamTeam.Runtime.Utilities
 
         [SerializeField] private AutoTimer timer;
 
+        [SerializeField] private InputReader cutsceneInputReader;
+
         private void Start()
         {
+            cutsceneInputReader.EnableCutsceneInput();
+
             UpdateHandle(true);
 
             timer.Start(timer.InitTime, true);
@@ -27,13 +31,25 @@ namespace DreamTeam.Runtime.Utilities
             {
                 Next();
             };
+
+            cutsceneInputReader.OnSkipCutsceneDown += Next;
+        }
+
+        private void OnDestroy()
+        {
+            cutsceneInputReader.OnSkipCutsceneDown -= Next;
+
+            cutsceneInputReader.DisableCutsceneInput();
         }
 
         public void Next()
         {
+            if(finished) 
+                return;
+
             index++;
 
-            if (index == gameObjects.Length && finished == false)
+            if (index == gameObjects.Length)
             {
                 finished = true;
                 timer.Kill();

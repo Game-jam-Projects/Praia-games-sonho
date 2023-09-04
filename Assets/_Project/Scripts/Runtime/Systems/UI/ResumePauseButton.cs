@@ -6,7 +6,7 @@ namespace DreamTeam.Runtime.System.UI
     {
         protected override void ButtonBehaviour()
         {
-            GameManager.Instance.ResumeGame();
+            GameManager.Instance.ForcedResumeGame();
         }
     }
 }

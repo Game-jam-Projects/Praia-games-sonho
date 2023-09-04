@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2230a0e4b592f469b5f4c0560823b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroy: 1
-  titleScene: 3
+  dontDestroy: 0
+  titleScene: 2
   transition: {fileID: 11400000, guid: 06fa0ad2bc756f44ab258bc74947381d, type: 2}
   animationFadeTime: 0.5
 --- !u!114 &1375188388052912139

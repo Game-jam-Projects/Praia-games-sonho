@@ -36,20 +36,24 @@ namespace DreamTeam.Runtime.System.Core
         /// </summary>
         public bool CanPause = true;
 
-        private void PauseGame()
+        public void ForcedPauseGame()
         {
             Paused = true;
             chrono.Stop();
             Time.timeScale = 0;
-            OnPauseStatusChange?.Invoke(Paused);
+
+            if(CanPause)
+                OnPauseStatusChange?.Invoke(Paused);
         }
 
-        public void ResumeGame()
+        public void ForcedResumeGame()
         {
             Paused = false;
             chrono.Start();
             Time.timeScale = 1;
-            OnPauseStatusChange?.Invoke(Paused);
+
+            if(CanPause)
+                OnPauseStatusChange?.Invoke(Paused);
         }
 
         public void GameOver()
@@ -66,9 +70,9 @@ namespace DreamTeam.Runtime.System.Core
                 return;
 
             if (Paused)
-                ResumeGame();
+                ForcedResumeGame();
             else
-                PauseGame();
+                ForcedPauseGame();
         }
 
         public void GameWin()
@@ -110,6 +114,15 @@ namespace DreamTeam.Runtime.System.Core
             playerDataRanking.deathCount = deathCount;
             chrono.ResetTimer();
             
+        }
+
+        public void RankingClear()
+        {
+            playerDataRanking = new PlayerDataRanking();
+            chrono = new Chrono();
+
+            collectableDreams = 0;
+            deathCount = 0;
         }
 
         #endregion
