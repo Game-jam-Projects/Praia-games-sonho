@@ -48,11 +48,11 @@ namespace DreamTeam.Runtime.Utilities
                 return;
 
             index++;
+            timer.Restart();
 
             if (index == gameObjects.Length)
             {
                 finished = true;
-                timer.Kill();
 
                 if(disableOnFinish)
                 {
