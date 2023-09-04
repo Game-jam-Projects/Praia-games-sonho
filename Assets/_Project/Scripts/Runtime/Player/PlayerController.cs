@@ -135,6 +135,8 @@ public class PlayerController : MonoBehaviour
     {
         isTriggeredDeadAnimation = false;
         animator.SetBool("IsDead", false);
+
+        isFlying = false;
     }
 
     void Update()
