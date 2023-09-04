@@ -20,8 +20,7 @@ namespace DreamTeam.Runtime.Systems.Health
 
         private void Start()
         {
-            CurrentHealth = MaxHealth;
-            OnChangeHealth?.Invoke(new() { current = CurrentHealth, max = MaxHealth });
+           ResetLife();
         }
 
         public void TakeDamage(Vector3 direction, float damage)
@@ -68,6 +67,13 @@ namespace DreamTeam.Runtime.Systems.Health
 
             OnChangeHealth?.Invoke(new() { current = CurrentHealth, max = MaxHealth });
             OnHeal?.Invoke();
+        }
+
+        public void ResetLife()
+        {
+            IsDie = false;
+            CurrentHealth = MaxHealth;
+            OnChangeHealth?.Invoke(new() { current = CurrentHealth, max = MaxHealth });
         }
     }
 }

@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 1161701590682265360}
   - component: {fileID: 1713121751155616299}
   - component: {fileID: 335032191786985717}
+  - component: {fileID: 7059078843799974405}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -334,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b8fe6bba177944a8e25100f58e1c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 0
+  <MaxHealth>k__BackingField: 0.5
   destroyOnDie: 0
   disableOnDie: 0
 --- !u!114 &1713121751155616299
@@ -369,3 +370,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   canInteract: 1
+--- !u!114 &7059078843799974405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176689778812194262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3184a68c34163a4428c90ab640b98fff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transition: {fileID: 11400000, guid: 06fa0ad2bc756f44ab258bc74947381d, type: 2}
+  playerAnimationTime: 1

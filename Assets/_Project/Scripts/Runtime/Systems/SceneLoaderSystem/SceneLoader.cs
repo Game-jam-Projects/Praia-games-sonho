@@ -47,11 +47,13 @@ namespace DreamTeam.Runtime.System.Core
 
             TransitionManager.Instance().Transition(sceneIndex, transition, 0f);
 
-            GameManager.Instance.ResumeGame();
+            TransitionManager.Instance().onTransitionCutPointReached += () =>
+            {
+                GameManager.Instance.ForcedResumeGame();
+                isLoadingScene = false;
+            };
 
             yield return new WaitForEndOfFrame();
-
-            isLoadingScene = false;
         }
     }
 }
