@@ -1,3 +1,4 @@
+using PainfulSmile.Runtime.Utilities.AutoTimer.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,8 @@ namespace DreamTeam.Runtime.System.UI
 
         private InputDevice _lastDevice;
 
+        [SerializeField] private AutoTimer timer;
+
         private void Start()
         {
             Desactive();
@@ -20,6 +23,12 @@ namespace DreamTeam.Runtime.System.UI
 
         private void OnEnable()
         {
+            timer.Start(timer.InitTime);
+            timer.OnExpire += () =>
+            {
+                Active();
+            };
+
             InputSystem.onActionChange += (obj, change) =>
             {
                 if (change == InputActionChange.ActionPerformed)
@@ -53,6 +62,11 @@ namespace DreamTeam.Runtime.System.UI
                     _lastDevice = lastDevice;
                 }
             };
+        }
+
+        private void OnDisable()
+        {
+            timer.Kill();
         }
 
         private void DisableAll()
