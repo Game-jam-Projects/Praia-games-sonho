@@ -8,4 +8,8 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: NightmareCheckpoint
   m_Controller: {fileID: 9100000, guid: c8f37f615fee956419791b9d8823d599, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: b078abb5e49093f4686499b6a68ecac7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2b6d776803d00194a98d14305c7681dc, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 1de36315f62bdc64380664315faaef9d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b198021f81cdb464a897c0a7474739de, type: 2}
