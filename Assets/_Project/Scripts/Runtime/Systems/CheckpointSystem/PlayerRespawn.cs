@@ -1,55 +1,57 @@
 ﻿using DreamTeam.Runtime.System.Core;
-using DreamTeam.Runtime.Systems.CheckpointSystem;
 using DreamTeam.Runtime.Systems.Health;
 using EasyTransition;
 using UnityEngine;
 
-public class PlayerRespawn : MonoBehaviour
+namespace DreamTeam.Runtime.Systems.CheckpointSystem
 {
-    [SerializeField] private TransitionSettings transition;
-    [SerializeField] private float playerAnimationTime = 1f;
-
-    private HealthSystem healthSystem;
-    private Animator animator;
-
-    private void Awake()
+    public class PlayerRespawn : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-        healthSystem = GetComponent<HealthSystem>();
-    }
+        [SerializeField] private TransitionSettings transition;
+        [SerializeField] private float playerAnimationTime = 1f;
 
-    private void Start()
-    {
-        healthSystem.OnDie += RespawnPlayerByDeath;
-    }
+        private HealthSystem healthSystem;
+        private Animator animator;
 
-    private void OnDestroy()
-    {
-        healthSystem.OnDie -= RespawnPlayerByDeath;
-    }
-
-    private void RespawnPlayerByDeath(IDamageable damageable)
-    {
-        var spawnPosition = CheckpointManager.Instance.GetCheckpointPosition();
-
-        animator.updateMode = AnimatorUpdateMode.UnscaledTime;
-
-        GameManager.Instance.CanPause = false;
-
-        TransitionManager.Instance().Transition(transition, playerAnimationTime);
-        TransitionManager.Instance().onTransitionCutPointReached += () =>
+        private void Awake()
         {
-            transform.position = spawnPosition;
-            GameManager.Instance.CanPause = true;
-            healthSystem.ResetLife();
+            animator = GetComponent<Animator>();
+            healthSystem = GetComponent<HealthSystem>();
+        }
 
-            animator.updateMode = AnimatorUpdateMode.Normal;
-        };
-    }
+        private void Start()
+        {
+            healthSystem.OnDie += RespawnPlayerByDeath;
+        }
 
-    [ContextMenu("Respawn")]
-    public void ForceRespawn()
-    {
-        healthSystem.TakeDamage(Vector3.zero, 1f);
+        private void OnDestroy()
+        {
+            healthSystem.OnDie -= RespawnPlayerByDeath;
+        }
+
+        private void RespawnPlayerByDeath(IDamageable damageable)
+        {
+            var spawnPosition = CheckpointManager.Instance.GetCheckpointPosition();
+
+            animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+
+            GameManager.Instance.CanPause = false;
+
+            TransitionManager.Instance().Transition(transition, playerAnimationTime);
+            TransitionManager.Instance().onTransitionCutPointReached += () =>
+            {
+                transform.position = spawnPosition;
+                GameManager.Instance.CanPause = true;
+                healthSystem.ResetLife();
+
+                animator.updateMode = AnimatorUpdateMode.Normal;
+            };
+        }
+
+        [ContextMenu("Respawn")]
+        public void ForceRespawn()
+        {
+            healthSystem.TakeDamage(Vector3.zero, 1f);
+        }
     }
 }
