@@ -365,6 +365,7 @@ MonoBehaviour:
   disableOnFinish: 1
   timer:
     <InitTime>k__BackingField: 5
+  cutsceneInputReader: {fileID: 11400000, guid: 635b54e557bc5784580e1dbaf167c67e, type: 2}
 --- !u!114 &716534137204406561
 MonoBehaviour:
   m_ObjectHideFlags: 0

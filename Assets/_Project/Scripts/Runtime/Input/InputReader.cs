@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using static PlayerInputMap;
 
 [CreateAssetMenu(fileName = "New Input Reader", menuName = "Scriptables/Input Reader")]
-public class InputReader : ScriptableObject, IGameplayActions
+public class InputReader : ScriptableObject, IGameplayActions, ICutsceneActions
 {
     public Vector2 Movement { get; private set; }
 
@@ -26,12 +26,18 @@ public class InputReader : ScriptableObject, IGameplayActions
     public event Action OnInteractUp;
     public event Action OnInteractDown;
 
+    public event Action OnSkipCutsceneUp;
+    public event Action OnSkipCutsceneDown;
+
     private PlayerInputMap controls;
+
+    private void OnEnable()
+    {
+        controls ??= new PlayerInputMap();
+    }
 
     public void EnableInput()
     {
-        controls ??= new PlayerInputMap();
-
         controls.Gameplay.SetCallbacks(this);
         controls.Gameplay.Enable();
     }
@@ -39,8 +45,19 @@ public class InputReader : ScriptableObject, IGameplayActions
     public void DisableInput()
     {
         controls.Gameplay.RemoveCallbacks(this);
+        controls.Gameplay.Disable();
+    }
 
-        controls.Disable();
+    public void EnableCutsceneInput()
+    {
+        controls.Cutscene.SetCallbacks(this);
+        controls.Cutscene.Enable();
+    }
+
+    public void DisableCutsceneInput()
+    {
+        controls.Cutscene.RemoveCallbacks(this);
+        controls.Cutscene.Disable();
     }
 
     public void OnMovement(InputAction.CallbackContext context)
@@ -94,5 +111,13 @@ public class InputReader : ScriptableObject, IGameplayActions
             OnInteractDown?.Invoke();
         else if (context.canceled)
             OnInteractUp?.Invoke();
+    }
+
+    public void OnNext(InputAction.CallbackContext context)
+    {
+        if (context.started)
+            OnSkipCutsceneDown?.Invoke();
+        else if (context.canceled)
+            OnSkipCutsceneUp?.Invoke();
     }
 }
