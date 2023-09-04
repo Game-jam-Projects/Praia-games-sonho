@@ -14,10 +14,16 @@ namespace DreamTeam.Runtime.System.Ranking
     public float time;
     }
 
-    public class RankingManager : MonoBehaviour
+    public class RankingManagerLocal : MonoBehaviour
     {
 
         public List<PlayerDataRanking> rankingList;
+
+        public TMPro.TextMeshProUGUI[] rPlayerName;
+        public TMPro.TextMeshProUGUI[] rCollectibleCount;
+        public TMPro.TextMeshProUGUI[] rDeathCount;
+        public TMPro.TextMeshProUGUI[] rTime;
+
 
         void Start()
         {
@@ -75,6 +81,25 @@ namespace DreamTeam.Runtime.System.Ranking
             else
             {
                 rankingList = new List<PlayerDataRanking>();
+            }
+            LoadingUI();
+        }
+
+        void LoadingUI()
+        {
+            for (int i = 0; i < rPlayerName.Count(); i++)
+            {
+                rPlayerName[i].text = " ---------- ";
+                rCollectibleCount[i].text = "0";
+                rDeathCount[i].text = "0";
+                rTime[i].text = "0";
+                if(rankingList.Count > i)
+                {
+                    rPlayerName[i].text = rankingList[i].playerName.ToString();
+                    rCollectibleCount[i].text = rankingList[i].collectibleCount.ToString();
+                    rDeathCount[i].text = rankingList[i].deathCount.ToString();
+                    rTime[i].text = rankingList[i].time.ToString();
+                }
             }
         }
     }

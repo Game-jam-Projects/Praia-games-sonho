@@ -49,7 +49,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 6103897102809361258}
   closed: {fileID: 771477378, guid: 7a8ffbf5def126843b6758340d46146d, type: 3}
   open: {fileID: -1481316307, guid: 7a8ffbf5def126843b6758340d46146d, type: 3}
-  collider2d: {fileID: 0}
+  collider2d: {fileID: 3607527572806184907}
 --- !u!1 &7235569645299250549
 GameObject:
   m_ObjectHideFlags: 0
