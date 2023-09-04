@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlatformHidingNightMare
+  m_Controller: {fileID: 9100000, guid: da5e86eb5ec1ac94aa8adad5f3c3193e, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 2d3f85a3d7416f148a6dbe3e2567a13b, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 015f633a958e9854e83a293ddc1879aa, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d5804b38535db1342b81bc0dad452aca, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d7699ce262814b641a873275e7d1a0c1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 37a09eec5b939834dbcfb1807bdac549, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ce2fb0ec0df68474e87455f56e174122, type: 2}
