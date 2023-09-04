@@ -1,6 +1,7 @@
 using DreamTeam.Runtime.Systems.Core;
 using DreamTeam.Runtime.Systems.Health;
 using PainfulSmile.Runtime.Utilities.AutoTimer.Core;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -520,5 +521,10 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireCube(groundCheck.transform.position, new Vector2(groundXSize, groundYSize));
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(wallCheck.transform.position, new Vector2(wallXSize, wallYSize));
+    }
+
+    public InputReader GetInput()
+    {
+        return inputReader;
     }
 }
