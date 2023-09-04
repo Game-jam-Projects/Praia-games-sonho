@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reloadTime: 10
+  flightTime: 3
   spriteRenderer: {fileID: 6927312539589579634}
 --- !u!1 &6927312539589579634
 GameObject:

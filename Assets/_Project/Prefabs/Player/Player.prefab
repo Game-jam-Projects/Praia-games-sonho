@@ -203,7 +203,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3.6
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -260,7 +260,7 @@ Animator:
   m_GameObject: {fileID: 3176689778812194262}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 56d460e243f61fb40ba5a8605f875037, type: 2}
+  m_Controller: {fileID: 22100000, guid: 4d1faed531d188f42856071e2b7007d1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -318,11 +318,11 @@ MonoBehaviour:
   echoPrefab: {fileID: 5760413288332399061, guid: 602494192e037f747967e048b925cda8, type: 3}
   timeBtwEcho: 0.035
   timecho: 0
-  flySpeed: 5
+  flySpeed: 10
   rotationSpeed: 120
-  maxFlyTime: 5
+  maxFlyTime: 3
   changeStageCooldown:
-    <InitTime>k__BackingField: 5
+    <InitTime>k__BackingField: 1
 --- !u!114 &1161701590682265360
 MonoBehaviour:
   m_ObjectHideFlags: 0

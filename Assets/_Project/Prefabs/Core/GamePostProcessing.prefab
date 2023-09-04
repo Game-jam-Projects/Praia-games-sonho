@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522070603318319311}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -62,20 +62,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59455cf4afb613a48beefc9244d5ec2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPaniniDistanceValue: 0.2
-  paniniIncrement: 0.1
+  maxPaniniDistanceValue: 0.02
+  paniniIncrement: 0.01
   paniniDistanceValue: 0
-  maxChromaticAberrationIntensity: 1
-  chromaticAberrationIncrement: 0.25
+  maxChromaticAberrationIntensity: 0.3
+  chromaticAberrationIncrement: 0.01
   chromaticAberrationIntensity: 0
   maxLensDistortionIntensity: 0.3
   minLensDistortionIntensity: -0.3
-  lensDistortionIncrement: 0.1
+  lensDistortionIncrement: 0.05
   lensDistortionIntensity: 0
   maxFilmGrainIntensity: 1
   filmGrainIncrement: 0.5
   filmGrainIntensity: 0
-  maxHueShiftValue: 180
-  minHueShiftValue: -180
-  hueShiftIncrement: 10
+  maxHueShiftValue: 0
+  minHueShiftValue: 0
+  hueShiftIncrement: 0
   hueShiftValue: 0

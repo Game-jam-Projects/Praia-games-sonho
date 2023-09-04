@@ -52,4 +52,12 @@ MonoBehaviour:
     collectibleCount: 0
     deathCount: 0
     time: 0
+  idChar: 1
+  characters:
+  - playerName: Alyson
+    dreamController: {fileID: 9100000, guid: 56d460e243f61fb40ba5a8605f875037, type: 2}
+    nightmareController: {fileID: 22100000, guid: e248319ec6dacbd4887ce830ee75be4f, type: 2}
+  - playerName: Zago
+    dreamController: {fileID: 22100000, guid: 4d1faed531d188f42856071e2b7007d1, type: 2}
+    nightmareController: {fileID: 22100000, guid: 2c721a6bfcb76a14099e1c20cbefcefc, type: 2}
   CanPause: 1
