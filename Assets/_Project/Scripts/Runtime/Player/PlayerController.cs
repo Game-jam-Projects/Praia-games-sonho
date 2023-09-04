@@ -242,6 +242,7 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded && !_wasGrounded)
         {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Foley/Fall", transform.position);
             PlayLandingParticles();
         }
 
@@ -368,7 +369,6 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-
         float rotationAmount = movementInput.x * rotationSpeed * Time.deltaTime;
         transform.Rotate(0, 0, -rotationAmount);
 
@@ -415,7 +415,7 @@ public class PlayerController : MonoBehaviour
         isDashing = true;
         isShowEcho = true;
         float startTime = Time.time;
-
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Foley/Dash", transform.position);
         while (Time.time < startTime + dashDuration)
         {
             _playerRB.velocity = direction * dashSpeed;
@@ -491,7 +491,8 @@ public class PlayerController : MonoBehaviour
         }
         isFlying = true;
         animator.SetBool("Fly", true);
-        
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Foley/Fly", transform.position);
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
