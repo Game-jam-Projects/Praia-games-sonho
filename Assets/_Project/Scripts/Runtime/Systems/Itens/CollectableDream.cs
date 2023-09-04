@@ -8,6 +8,7 @@ public class CollectableDream : MonoBehaviour, ICollectible
     public void Collect()
     {
         GameManager.Instance.SetCollectableDreams();
+        Destroy(this.gameObject);
     }
 
 }
