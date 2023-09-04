@@ -5,6 +5,7 @@ namespace DreamTeam.Runtime.Systems.Core
     public class CoreSingleton : Singleton<CoreSingleton>
     {
         public GameStateManager gameStateManager;
+        public GameManager gameManager;
 
        [HideInInspector] public PlayerController playerController;
         
