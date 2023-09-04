@@ -22,6 +22,8 @@ namespace DreamTeam.Runtime.Systems.Scenary
         [SerializeField] private Swap dream;
         [SerializeField] private Swap nightmare;
 
+        bool transitionSound = false;
+
 
         private void Start()
         {
@@ -67,7 +69,11 @@ namespace DreamTeam.Runtime.Systems.Scenary
         {
             DisableObjects(nightmare, forced);
             EnableObjects(dream, forced);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Fade Sonho", transform.position);
+            if(transitionSound==true)
+            {
+                FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Fade Sonho", transform.position);
+            }
+            transitionSound = true;
             FMODUnity.RuntimeManager.StudioSystem.setParameterByName("Music Fade", 0f);
         }
 
