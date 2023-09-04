@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 4870685492887127796}
   - component: {fileID: 335032191786985717}
   - component: {fileID: 7059078843799974405}
+  - component: {fileID: 7254630122510942190}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -313,12 +314,10 @@ MonoBehaviour:
   landingParticles: {fileID: 0}
   positionParticles: {fileID: 4420156145297178048}
   dreamController: {fileID: 9100000, guid: 56d460e243f61fb40ba5a8605f875037, type: 2}
-  nightmareController: {fileID: 22100000, guid: e248319ec6dacbd4887ce830ee75be4f,
-    type: 2}
+  nightmareController: {fileID: 22100000, guid: e248319ec6dacbd4887ce830ee75be4f, type: 2}
   dashSpeed: 45
   dashDuration: 0.2
-  echoPrefab: {fileID: 5760413288332399061, guid: 602494192e037f747967e048b925cda8,
-    type: 3}
+  echoPrefab: {fileID: 5760413288332399061, guid: 602494192e037f747967e048b925cda8, type: 3}
   timeBtwEcho: 0.035
   timecho: 0
   flySpeed: 10
@@ -404,3 +403,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transition: {fileID: 11400000, guid: 06fa0ad2bc756f44ab258bc74947381d, type: 2}
   playerAnimationTime: 1
+--- !u!114 &7254630122510942190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176689778812194262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e898d4c499565a479a6ea2513fe122e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
