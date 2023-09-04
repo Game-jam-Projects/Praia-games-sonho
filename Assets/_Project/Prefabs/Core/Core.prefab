@@ -167,21 +167,37 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6942455363518957562, guid: 85c94bc6a650c7f438088c341743e682, type: 3}
-      propertyPath: characters.Array.size
+      propertyPath: idChar
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942455363518957562, guid: 85c94bc6a650c7f438088c341743e682, type: 3}
+      propertyPath: characters.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6942455363518957562, guid: 85c94bc6a650c7f438088c341743e682, type: 3}
       propertyPath: characters.Array.data[0].playerName
       value: Alyson
       objectReference: {fileID: 0}
     - target: {fileID: 6942455363518957562, guid: 85c94bc6a650c7f438088c341743e682, type: 3}
+      propertyPath: characters.Array.data[1].playerName
+      value: Zago
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942455363518957562, guid: 85c94bc6a650c7f438088c341743e682, type: 3}
       propertyPath: characters.Array.data[0].dreamController
       value: 
       objectReference: {fileID: 9100000, guid: 56d460e243f61fb40ba5a8605f875037, type: 2}
     - target: {fileID: 6942455363518957562, guid: 85c94bc6a650c7f438088c341743e682, type: 3}
+      propertyPath: characters.Array.data[1].dreamController
+      value: 
+      objectReference: {fileID: 22100000, guid: 4d1faed531d188f42856071e2b7007d1, type: 2}
+    - target: {fileID: 6942455363518957562, guid: 85c94bc6a650c7f438088c341743e682, type: 3}
       propertyPath: characters.Array.data[0].nightmareController
       value: 
       objectReference: {fileID: 22100000, guid: e248319ec6dacbd4887ce830ee75be4f, type: 2}
+    - target: {fileID: 6942455363518957562, guid: 85c94bc6a650c7f438088c341743e682, type: 3}
+      propertyPath: characters.Array.data[1].nightmareController
+      value: 
+      objectReference: {fileID: 22100000, guid: 2c721a6bfcb76a14099e1c20cbefcefc, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

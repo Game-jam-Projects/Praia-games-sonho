@@ -97,10 +97,8 @@ public class PlayerController : MonoBehaviour
         inputReader.OnRightTriggerDown += OnRightTriggerDown;
         inputReader.OnRightTriggerUp += OnRightTriggerUp;
 
-        Character selectedChar = CoreSingleton.Instance.gameManager.GetCharacter();
-        dreamController = selectedChar.dreamController;
-        nightmareController = selectedChar.nightmareController;
 
+        SelectedPlayer();
     }
     private void OnDestroy()
     {
@@ -114,6 +112,15 @@ public class PlayerController : MonoBehaviour
 
         inputReader.DisableInput();
     }
+
+    public void SelectedPlayer()
+    {
+        Character selectedChar = CoreSingleton.Instance.gameManager.GetCharacter();
+        dreamController = selectedChar.dreamController;
+        nightmareController = selectedChar.nightmareController;
+        animator.runtimeAnimatorController = dreamController;
+    }
+
     void Update()
     {
         movementInput = new Vector2(inputReader.Movement.x, inputReader.Movement.y);
