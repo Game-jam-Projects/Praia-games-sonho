@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 335032191786985717}
   - component: {fileID: 7059078843799974405}
   - component: {fileID: 7254630122510942190}
+  - component: {fileID: 6043208742523709157}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -136,6 +137,7 @@ Transform:
   - {fileID: 4420156145297178048}
   - {fileID: 1933914783284034873}
   - {fileID: 2583659786387276421}
+  - {fileID: 8228846703089327228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &577852003979540802
@@ -415,3 +417,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e898d4c499565a479a6ea2513fe122e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6043208742523709157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176689778812194262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dac2148a305e6df40a51d686b88689f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkInteract: {fileID: 8228846703089327228}
+  checkSize: {x: 21.6, y: 27.6}
+  whatIsBoss:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!1 &4788884463013308560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8228846703089327228}
+  m_Layer: 0
+  m_Name: bossCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8228846703089327228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4788884463013308560}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.2, y: 8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5923776582248832730}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
