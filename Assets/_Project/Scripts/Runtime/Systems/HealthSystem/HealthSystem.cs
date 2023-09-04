@@ -13,6 +13,7 @@ namespace DreamTeam.Runtime.Systems.Health
         public event Action<HealthArgs> OnChangeHealth;
         public event Action<IDamageable> OnDie;
         public event Action<Vector3> OnTakeDamage;
+        public event Action OnRevive;
         public event Action OnHeal;
 
         [SerializeField] private bool destroyOnDie;
@@ -20,7 +21,7 @@ namespace DreamTeam.Runtime.Systems.Health
 
         private void Start()
         {
-           ResetLife();
+           ResetLife(false);
         }
 
         public void TakeDamage(Vector3 direction, float damage)
@@ -69,11 +70,14 @@ namespace DreamTeam.Runtime.Systems.Health
             OnHeal?.Invoke();
         }
 
-        public void ResetLife()
+        public void ResetLife(bool trigger = true)
         {
             IsDie = false;
             CurrentHealth = MaxHealth;
             OnChangeHealth?.Invoke(new() { current = CurrentHealth, max = MaxHealth });
+
+            if(trigger)
+                OnRevive?.Invoke();
         }
     }
 }

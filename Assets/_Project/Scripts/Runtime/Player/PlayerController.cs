@@ -1,4 +1,5 @@
 using DreamTeam.Runtime.Systems.Core;
+using DreamTeam.Runtime.Systems.Health;
 using PainfulSmile.Runtime.Utilities.AutoTimer.Core;
 using System.Collections;
 using UnityEngine;
@@ -78,11 +79,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AutoTimer changeStageCooldown;
     private bool canChangeStage = true;
 
+    private HealthSystem healthSystem;
+    private bool isTriggeredDeadAnimation;
+
     private void Awake()
     {
         playerSr = GetComponent<SpriteRenderer>();
         _playerRB = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        healthSystem = GetComponent<HealthSystem>();
     }
     void Start()
     {
@@ -97,9 +102,11 @@ public class PlayerController : MonoBehaviour
         inputReader.OnRightTriggerDown += OnRightTriggerDown;
         inputReader.OnRightTriggerUp += OnRightTriggerUp;
 
+        healthSystem.OnRevive += Revive;
 
         SelectedPlayer();
     }
+
     private void OnDestroy()
     {
         CoreSingleton.Instance.gameStateManager.ChagedStageType -= EChangeStageType;
@@ -109,6 +116,8 @@ public class PlayerController : MonoBehaviour
         inputReader.OnButtonWestDown -= OnButtonWest;
         inputReader.OnRightTriggerDown -= OnRightTriggerDown;
         inputReader.OnRightTriggerUp -= OnRightTriggerUp;
+
+        healthSystem.OnRevive -= Revive;
 
         inputReader.DisableInput();
     }
@@ -121,8 +130,33 @@ public class PlayerController : MonoBehaviour
         animator.runtimeAnimatorController = dreamController;
     }
 
+    private void Revive()
+    {
+        isTriggeredDeadAnimation = false;
+        animator.SetBool("IsDead", false);
+    }
+
     void Update()
     {
+        if(healthSystem.IsDie)
+        {
+            if(isTriggeredDeadAnimation == false)
+            {
+                isTriggeredDeadAnimation = true;
+                animator.SetBool("IsDead", true);
+            }
+
+            animator.SetFloat("speedY", 0f);
+            animator.SetBool("isWalk", false);
+            animator.SetBool("isWall", false);
+            animator.SetBool("isWallSlide", false);
+            animator.SetBool("isGripWall", false);
+            animator.SetBool("isDash", false);
+
+            _playerRB.velocity = Vector2.zero;
+            return;
+        }
+
         movementInput = new Vector2(inputReader.Movement.x, inputReader.Movement.y);
 
         if (isFlying == true)
@@ -190,6 +224,8 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if(healthSystem.IsDie) return;
+
         isGrounded = Physics2D.OverlapBox(groundCheck.transform.position, new Vector2(groundXSize, groundYSize), 0f, whatIsGround);
         isWall = Physics2D.OverlapBox(wallCheck.transform.position, new Vector2(wallXSize, wallYSize), 0f, whatIsWall);
         isWallSlide = isWall && _playerRB.velocity.y < 0;
@@ -212,6 +248,8 @@ public class PlayerController : MonoBehaviour
     }
     private void GripWall()
     {
+        if (healthSystem.IsDie) return;
+
         if (gripTimer < gripTime)
         {            
             if(movementInput.y != 0)
@@ -234,6 +272,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump()
     {
+        if (healthSystem.IsDie) return;
+
         if (isWall == true && isJumpWall == false)
         {
             isJumpWall = true;
@@ -308,6 +348,8 @@ public class PlayerController : MonoBehaviour
     }
     private void PlayLandingParticles()
     {
+        if (healthSystem.IsDie) return;
+
         if (landingParticles != null)
         {
             landingParticles.transform.position = positionParticles.position;
@@ -337,7 +379,9 @@ public class PlayerController : MonoBehaviour
 
     private void GravityManager()
     {
-        if(isGripping)
+        if (healthSystem.IsDie) return;
+
+        if (isGripping)
         {
             _playerRB.gravityScale = 0;
         }
@@ -384,6 +428,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnButtonNorth()
     {
+        if (healthSystem.IsDie) return;
+
         if (canChangeStage == false)
             return;
 
@@ -399,11 +445,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnButtonWest()
     {
+        if (healthSystem.IsDie) return;
+
         OnDash();
     }
 
     private void OnRightTriggerDown()
     {
+        if (healthSystem.IsDie) return;
+
         if (canGrip == true)
         {
             OnGrip(true);
@@ -412,17 +462,23 @@ public class PlayerController : MonoBehaviour
 
     private void OnRightTriggerUp()
     {
+        if (healthSystem.IsDie) return;
+
         OnGrip(false);
         _playerRB.gravityScale = 3.6f;
     }
 
     public void NewDash()
     {
+        if (healthSystem.IsDie) return;
+
         isDashing = false;
     }
 
     public void Fly(Vector3 startEuler, float flightTime)
     {
+        if (healthSystem.IsDie) return;
+
         if (isFlying == false)
         {
             transform.eulerAngles = startEuler;
