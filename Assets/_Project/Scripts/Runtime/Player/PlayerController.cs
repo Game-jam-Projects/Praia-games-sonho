@@ -1,3 +1,4 @@
+using DreamTeam.Runtime.System.Core;
 using DreamTeam.Runtime.Systems.Core;
 using DreamTeam.Runtime.Systems.Health;
 using PainfulSmile.Runtime.Utilities.AutoTimer.Core;
@@ -106,6 +107,7 @@ public class PlayerController : MonoBehaviour
         healthSystem.OnRevive += Revive;
 
         SelectedPlayer();
+        //GameManager.Instance.chrono.Start();
     }
 
     private void OnDestroy()
