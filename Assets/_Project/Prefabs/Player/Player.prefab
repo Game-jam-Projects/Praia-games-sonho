@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 7299596338501517960}
   - component: {fileID: 1161701590682265360}
   - component: {fileID: 1713121751155616299}
+  - component: {fileID: 4870685492887127796}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -284,6 +285,9 @@ MonoBehaviour:
   echoPrefab: {fileID: 5760413288332399061, guid: 602494192e037f747967e048b925cda8, type: 3}
   timeBtwEcho: 0.035
   timecho: 0
+  flySpeed: 5
+  rotationSpeed: 120
+  maxFlyTime: 5
   changeStageCooldown:
     <InitTime>k__BackingField: 5
 --- !u!114 &1161701590682265360
@@ -314,3 +318,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: 635b54e557bc5784580e1dbaf167c67e, type: 2}
+--- !u!114 &4870685492887127796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3176689778812194262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36bdcf9ffdd8bf342b626249dba6d541, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialCheckLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  groundTypes: []
+  distance: 0.4
