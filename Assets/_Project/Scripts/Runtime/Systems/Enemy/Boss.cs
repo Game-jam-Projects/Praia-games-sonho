@@ -9,7 +9,7 @@ public class Boss : MonoBehaviour
     private Animator animator;
 
     private bool isLocked;
-
+    private bool isFirstView;
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -18,6 +18,7 @@ public class Boss : MonoBehaviour
     private void Start()
     {
         CoreSingleton.Instance.gameStateManager.ChagedStageType += GameStateManager_ChagedStageType;
+        CoreSingleton.Instance.gameManager.OnTransitionFinished += SetNewPosition;
     }
 
     private void Update()
@@ -49,6 +50,7 @@ public class Boss : MonoBehaviour
     private void OnDestroy()
     {
         CoreSingleton.Instance.gameStateManager.ChagedStageType -= GameStateManager_ChagedStageType;
+        CoreSingleton.Instance.gameManager.OnTransitionFinished -= SetNewPosition;
     }
 
     private void GameStateManager_ChagedStageType(StageType stageType)
@@ -65,8 +67,8 @@ public class Boss : MonoBehaviour
 
             case StageType.Nightmare:
 
-                target = FindObjectOfType<PlayerController>().transform;
-
+                target = CoreSingleton.Instance.playerController.transform;
+                isFirstView = true;
                 SetChase();
 
                 break;
@@ -83,5 +85,22 @@ public class Boss : MonoBehaviour
     {
         isLocked = true;
         animator.SetBool("isHidding", true);
+    }
+
+    private void SetNewPosition()
+    {
+        if(isFirstView == false) { return; }
+
+        Vector3 newPosition = CoreSingleton.Instance.playerController.transform.position;
+
+        if(Random.Range(0,100) <= 50)
+        {
+            newPosition += new Vector3(15f, Random.Range(-12,12), 0);
+        }
+        else
+        {
+            newPosition += new Vector3(-15f, Random.Range(-12, 12), 0);
+        }
+        transform.position = newPosition;
     }
 }

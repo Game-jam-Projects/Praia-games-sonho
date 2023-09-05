@@ -10,5 +10,4 @@ public class CollectableDream : MonoBehaviour, ICollectible
         GameManager.Instance.SetCollectableDreams();
         Destroy(this.gameObject);
     }
-
 }
