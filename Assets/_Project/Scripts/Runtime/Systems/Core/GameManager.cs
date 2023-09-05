@@ -37,6 +37,15 @@ namespace DreamTeam.Runtime.System.Core
            // Application.targetFrameRate = 60;
             playerDataRanking = new PlayerDataRanking();
             chrono = new Chrono();
+            chrono.Start();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKey(KeyCode.B))
+            {
+                GameWin();
+            }
         }
 
         /// <summary>

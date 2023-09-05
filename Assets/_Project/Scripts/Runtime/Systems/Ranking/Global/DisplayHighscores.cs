@@ -25,11 +25,19 @@ public class DisplayHighscores : MonoBehaviour
         for (int i = 0; i < rNames.Length;i ++)
         {
             rNames[i].text = "-----";
+            rCollectables[i].text = "0";
             rDeath[i].text = "0";
+            rTime[i].text = "0";
+
             if (highscoreList.Length > i)
             {
-                rDeath[i].text = highscoreList[i].collectableItem.ToString();
                 rNames[i].text = highscoreList[i].username;
+                rCollectables[i].text = highscoreList[i].collectableItem.ToString();
+                rDeath[i].text = highscoreList[i].deathCount.ToString();
+                int minutos = Mathf.FloorToInt(highscoreList[i].time / 60);
+                int segundos = Mathf.FloorToInt(highscoreList[i].time % 60);
+                string textoFormatado = string.Format("{0:00}:{1:00}", minutos, segundos);
+                rTime[i].text = textoFormatado;
             }
         }
     }
