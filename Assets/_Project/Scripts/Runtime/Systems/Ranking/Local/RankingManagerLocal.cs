@@ -98,6 +98,9 @@ namespace DreamTeam.Runtime.System.Ranking
                     rPlayerName[i].text = rankingList[i].playerName.ToString();
                     rCollectibleCount[i].text = rankingList[i].collectibleCount.ToString();
                     rDeathCount[i].text = rankingList[i].deathCount.ToString();
+                    int minutos = Mathf.FloorToInt(rankingList[i].time / 60);
+                    int segundos = Mathf.FloorToInt(rankingList[i].time % 60);
+                    string textoFormatado = string.Format("{0:00}:{1:00}", minutos, segundos);
                     rTime[i].text = rankingList[i].time.ToString();
                 }
             }
