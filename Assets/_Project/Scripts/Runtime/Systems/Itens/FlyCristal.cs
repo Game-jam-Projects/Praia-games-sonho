@@ -9,11 +9,14 @@ public class FlyCristal : MonoBehaviour, ICollectible
     public float flightTime;
     private bool isCollected;
     public GameObject spriteRenderer;
+
+    public Transform startDirection;
     
     public void Collect()
     {
         if (isCollected == true) { return; }
-        CoreSingleton.Instance.playerController.Fly(transform.eulerAngles, flightTime);
+        isCollected = true;
+        CoreSingleton.Instance.playerController.Fly(startDirection.eulerAngles, flightTime);
         spriteRenderer.SetActive(false);
         StartCoroutine(nameof(IERespawn));
     }

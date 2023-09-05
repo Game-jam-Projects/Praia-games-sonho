@@ -1,8 +1,6 @@
-using DreamTeam.Runtime.System.Core;
 using DreamTeam.Runtime.Systems.Core;
 using DreamTeam.Runtime.Systems.Health;
 using PainfulSmile.Runtime.Utilities.AutoTimer.Core;
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -39,8 +37,6 @@ public class PlayerController : MonoBehaviour
     private bool isClimbable;
     [Space]
 
-
-
     [Header("Variables")]
     public float velocity = 2f;
     public float jumpForce = 100f;
@@ -69,9 +65,7 @@ public class PlayerController : MonoBehaviour
     public GameObject echoPrefab;
     public float timeBtwEcho;
     public float timecho;
-
     
-
     [Header("Fly System")]
     public float flySpeed = 5.0f;
     public float rotationSpeed = 120.0f;
@@ -85,6 +79,9 @@ public class PlayerController : MonoBehaviour
     private HealthSystem healthSystem;
     private bool isTriggeredDeadAnimation;
 
+
+    #region UNITY
+
     private void Awake()
     {
         playerSr = GetComponent<SpriteRenderer>();
@@ -92,6 +89,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         healthSystem = GetComponent<HealthSystem>();
     }
+    
     void Start()
     {
         CoreSingleton.Instance.gameStateManager.ChagedStageType += EChangeStageType;
@@ -110,7 +108,7 @@ public class PlayerController : MonoBehaviour
         SelectedPlayer();
         //GameManager.Instance.chrono.Start();
     }
-
+    
     private void OnDestroy()
     {
         CoreSingleton.Instance.gameStateManager.ChagedStageType -= EChangeStageType;
@@ -126,27 +124,11 @@ public class PlayerController : MonoBehaviour
         inputReader.DisableInput();
     }
 
-    public void SelectedPlayer()
-    {
-        Character selectedChar = CoreSingleton.Instance.gameManager.GetCharacter();
-        dreamController = selectedChar.dreamController;
-        nightmareController = selectedChar.nightmareController;
-        animator.runtimeAnimatorController = dreamController;
-    }
-
-    private void Revive()
-    {
-        isTriggeredDeadAnimation = false;
-        animator.SetBool("IsDead", false);
-        transform.eulerAngles = Vector2.zero;
-        isFlying = false;
-    }
-
     void Update()
     {
-        if(healthSystem.IsDie)
+        if (healthSystem.IsDie)
         {
-            if(isTriggeredDeadAnimation == false)
+            if (isTriggeredDeadAnimation == false)
             {
                 isTriggeredDeadAnimation = true;
                 animator.SetBool("IsDead", true);
@@ -177,11 +159,11 @@ public class PlayerController : MonoBehaviour
         {
             plaveVelocity = new Vector2(inputReader.Movement.x * velocity, _playerRB.velocity.y);
         }
-        else if( isGrounded == false && isJumpWall == true)
+        else if (isGrounded == false && isJumpWall == true)
         {
             plaveVelocity = _playerRB.velocity;
         }
-        else if(isGrounded == false)
+        else if (isGrounded == false)
         {
             if (movementInput.x != 0)
             {
@@ -211,7 +193,7 @@ public class PlayerController : MonoBehaviour
             gripTimer = 0;
         }
 
-        if(isShowEcho == true)
+        if (isShowEcho == true)
         {
             Echo();
         }
@@ -230,14 +212,15 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isDash", isShowEcho);
         animator.SetBool("isGrounded", isGrounded);
     }
+
     private void FixedUpdate()
     {
-        if(healthSystem.IsDie) return;
+        if (healthSystem.IsDie) return;
 
         isGrounded = Physics2D.OverlapBox(groundCheck.transform.position, new Vector2(groundXSize, groundYSize), 0f, whatIsGround);
         Collider2D wall = Physics2D.OverlapBox(wallCheck.transform.position, new Vector2(wallXSize, wallYSize), 0f, whatIsWall);
-        isWall = wall != null;       
-        if(wall != null)
+        isWall = wall != null;
+        if (wall != null)
         {
             if (wall.TryGetComponent<WallSystem>(out WallSystem wallSystem))
             {
@@ -272,6 +255,77 @@ public class PlayerController : MonoBehaviour
 
         _wasGrounded = isGrounded;
     }
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("SecretPassage"))
+        {
+            if (isShowEcho == true)
+            {
+                collision.gameObject.GetComponent<IBreakObjects>().BreakObject();
+            }
+        }
+    }
+    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Item"))
+        {
+            collision.GetComponent<ICollectible>().Collect();
+
+        }
+        else if (collision.gameObject.CompareTag("WallExit"))
+        {
+            if (isGripping == false) { return; }
+            isGripping = false;
+            _playerRB.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
+            animator.SetBool("isGripWall", isGripping);
+        }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireCube(groundCheck.transform.position, new Vector2(groundXSize, groundYSize));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(wallCheck.transform.position, new Vector2(wallXSize, wallYSize));
+    }
+
+    private IEnumerator Dash(Vector2 direction)
+    {
+        isDashing = true;
+        isShowEcho = true;
+        float startTime = Time.time;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Foley/Dash", transform.position);
+        while (Time.time < startTime + dashDuration)
+        {
+            _playerRB.velocity = direction * dashSpeed;
+            yield return null;
+        }
+
+        _playerRB.velocity = Vector2.zero;
+        isShowEcho = false;
+        //isDashing = false;
+    }
+
+    #endregion
+
+    public void SelectedPlayer()
+    {
+        Character selectedChar = CoreSingleton.Instance.gameManager.GetCharacter();
+        dreamController = selectedChar.dreamController;
+        nightmareController = selectedChar.nightmareController;
+        animator.runtimeAnimatorController = dreamController;
+    }
+
+    private void Revive()
+    {
+        isTriggeredDeadAnimation = false;
+        animator.SetBool("IsDead", false);
+        transform.eulerAngles = Vector2.zero;
+        isFlying = false;
+    }
+    
     private void GripWall()
     {
         if (healthSystem.IsDie) return;
@@ -332,11 +386,13 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    
     public void JumpWallOff()
     {
         isJumpWall = false;
     }
-    private void OnDash()
+    
+    private void Dash()
     {
         if(CoreSingleton.Instance.gameManager.DASH == false) { return; }
 
@@ -345,12 +401,14 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(Dash(inputReader.Movement.normalized));
         }
     }
+    
     private void OnGrip(bool isGrip)
     {
         if (isWall == false) { return; }
 
         isGripping = isGrip;
     }
+    
     public void Flip()
     {
         isLookLeft = !isLookLeft;
@@ -428,6 +486,38 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+
+
+
+    #region COLLECT ITEM
+
+    public void DashCrystal()
+    {
+        if (healthSystem.IsDie) return;
+
+        isDashing = false;
+    }
+
+    public void Fly(Vector3 startEuler, float flightTime)
+    {
+        if (healthSystem.IsDie) return;
+
+        maxFlyTime += flightTime;
+
+        if (isFlying == false)
+        {
+            transform.eulerAngles = startEuler;
+        }
+        isFlying = true;
+        animator.SetBool("Fly", true);
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Foley/Fly", transform.position);
+
+    }
+
+    #endregion
+
+    #region EVENT CALLS
     public void EChangeStageType(StageType stageType)
     {
         switch (stageType)
@@ -442,28 +532,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator Dash(Vector2 direction)
-    {
-        isDashing = true;
-        isShowEcho = true;
-        float startTime = Time.time;
-        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Foley/Dash", transform.position);
-        while (Time.time < startTime + dashDuration)
-        {
-            _playerRB.velocity = direction * dashSpeed;
-            yield return null;
-        }
+    #endregion
 
-        _playerRB.velocity = Vector2.zero;
-        isShowEcho = false;
-        //isDashing = false;
-    }
+    #region INPUT
 
     private void OnButtonNorth()
     {
         if (healthSystem.IsDie) return;
 
-        if(CoreSingleton.Instance.gameManager.SWAPDREAM == false) { return; }
+        if (CoreSingleton.Instance.gameManager.SWAPDREAM == false) { return; }
 
         if (CoreSingleton.Instance.gameManager.GetItem() <= 0) { return; }
 
@@ -486,14 +563,14 @@ public class PlayerController : MonoBehaviour
     {
         if (healthSystem.IsDie) return;
 
-        OnDash();
+        Dash();
     }
 
     private void OnRightTriggerDown()
     {
         if (healthSystem.IsDie) return;
 
-        if(isClimbable == false) { return; }
+        if (isClimbable == false) { return; }
 
         if (canGrip == true)
         {
@@ -509,63 +586,7 @@ public class PlayerController : MonoBehaviour
         _playerRB.gravityScale = 3.6f;
     }
 
-    public void NewDash()
-    {
-        if (healthSystem.IsDie) return;
-
-        isDashing = false;
-    }
-
-    public void Fly(Vector3 startEuler, float flightTime)
-    {
-        if (healthSystem.IsDie) return;
-
-        maxFlyTime += flightTime;
-
-        if (isFlying == false)
-        {
-            transform.eulerAngles = startEuler;            
-        }       
-        isFlying = true;
-        animator.SetBool("Fly", true);
-        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Foley/Fly", transform.position);
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("SecretPassage"))
-        {
-            if (isShowEcho == true)
-            {
-                collision.gameObject.GetComponent<IBreakObjects>().BreakObject();
-            }
-        }        
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.CompareTag("Item"))
-        {
-            collision.GetComponent<ICollectible>().Collect();
-
-        }
-        else if(collision.gameObject.CompareTag("WallExit"))
-        {
-            if(isGripping == false) { return; }
-            isGripping = false;
-            _playerRB.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
-            animator.SetBool("isGripWall", isGripping);
-        }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.magenta;
-        Gizmos.DrawWireCube(groundCheck.transform.position, new Vector2(groundXSize, groundYSize));
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(wallCheck.transform.position, new Vector2(wallXSize, wallYSize));
-    }
+    #endregion
 
     public InputReader GetInput()
     {
