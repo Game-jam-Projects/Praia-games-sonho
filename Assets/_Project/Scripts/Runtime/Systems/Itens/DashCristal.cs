@@ -4,15 +4,18 @@ using System.Collections;
 
 public class DashCristal : MonoBehaviour, ICollectible
 {
-    public float reloadTime;
+    public float reloadTime;    
     private bool isCollected;
     public GameObject spriteRenderer;
     public void Collect()
     {
         if(isCollected == true) { return; }
-        CoreSingleton.Instance.playerController.NewDash();
+        CoreSingleton.Instance.playerController.DashCrystal();
         spriteRenderer.SetActive(false);
-        StartCoroutine(nameof(IERespawn));
+        if (reloadTime > 0)
+        {
+            StartCoroutine(nameof(IERespawn));
+        }
     }
 
     IEnumerator IERespawn()

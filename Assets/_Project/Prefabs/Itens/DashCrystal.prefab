@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 3367668820344066629}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29ad76b22bbd93b49a1bd65b78377a90, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -116,9 +116,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2336582083867565992}
   - component: {fileID: 6748071247430046752}
-  - component: {fileID: 5594276709969779913}
+  - component: {fileID: 1913539738859436444}
   m_Layer: 0
-  m_Name: DashCristal
+  m_Name: DashCrystal
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reloadTime: 5
   spriteRenderer: {fileID: 3367668820344066629}
---- !u!58 &5594276709969779913
+--- !u!58 &1913539738859436444
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,6 +186,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.35}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.85
