@@ -141,6 +141,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isWallSlide", false);
             animator.SetBool("isGripWall", false);
             animator.SetBool("isDash", false);
+            animator.SetBool("Fly", false);
 
             _playerRB.velocity = Vector2.zero;
             return;
@@ -395,6 +396,8 @@ public class PlayerController : MonoBehaviour
     private void Dash()
     {
         if(CoreSingleton.Instance.gameManager.DASH == false) { return; }
+        if(isGripping == true) { return; }
+        if(movementInput.sqrMagnitude == 0) { return; }
 
         if (isDashing == false && isShowEcho == false && isFlying == false)
         {
