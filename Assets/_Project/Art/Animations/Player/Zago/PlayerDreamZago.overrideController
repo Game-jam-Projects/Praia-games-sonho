@@ -7,10 +7,8 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PlayerDreamZago
-  m_Controller: {fileID: 9100000, guid: 56d460e243f61fb40ba5a8605f875037, type: 2}
+  m_Controller: {fileID: 9100000, guid: b43b70deace3f92449de406444b23f94, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 5deb1f676a11edc47a3a283c7eab76b8, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 01f2f76021ca1b84fb1908f31bf8d997, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 34153182d669deb41b7f6218c67b4fab, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 88f965a6e51d22d44a48394eaa0679e4, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 787382a995fa7e940a33501a9bda8263, type: 2}
@@ -19,8 +17,6 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400000, guid: 54b75724f4dee8e41bd85154368d9797, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 2c98107d02ec3ae49a6a5d9d26cc3e94, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 516329a9ae128c44f84cf450ea8ae747, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 1078a283ec8ea3e4b9bcbc1b6d311033, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 1de80d30012b6e84c95ea86aad026bc3, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 35be3e42af2a5f442abb57d0e97b78ac, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 1f11a37baf531024680171fe466ce079, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 89b4b65ab59f5344996c8e5339b89a03, type: 2}

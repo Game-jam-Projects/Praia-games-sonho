@@ -7,7 +7,7 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PlayerNightmare
-  m_Controller: {fileID: 9100000, guid: 56d460e243f61fb40ba5a8605f875037, type: 2}
+  m_Controller: {fileID: 9100000, guid: b43b70deace3f92449de406444b23f94, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 34153182d669deb41b7f6218c67b4fab, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: b9ddc8905912e0b4490115bb1f002e7e, type: 2}
@@ -17,17 +17,11 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400000, guid: 965f10940cb54ad4bb883112c96df4d7, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 2c98107d02ec3ae49a6a5d9d26cc3e94, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 795e3984dfd427a4e9793e7fc1a6248c, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 1078a283ec8ea3e4b9bcbc1b6d311033, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 1054e499508977347978b9297438ccb7, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 35be3e42af2a5f442abb57d0e97b78ac, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: fb52d0f970d65c741a31599a99df35c2, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 5deb1f676a11edc47a3a283c7eab76b8, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: edf85d004cf07ac41be28917b9763bc6, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 89b4b65ab59f5344996c8e5339b89a03, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: b53320694abea5e4b9132ca21fd014ad, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 31e4861fa7f2f724ebdeda2eba1a4b6d, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 715eb71cc0091e54d9d1e1073310a15a, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 326053c4bceef3a418dff510208b02e1, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 6979b121c6ab6634e8bdafb4ebe1bda0, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: a6dcba77eae43004ca239bcf141110a6, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 994c26771005cf049bdad39dfd28de94, type: 2}
