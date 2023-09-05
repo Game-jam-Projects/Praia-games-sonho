@@ -7,7 +7,8 @@ namespace DreamTeam.Runtime.Systems.Core
         public GameStateManager gameStateManager;
         public GameManager gameManager;
 
-       [HideInInspector] public PlayerController playerController;
-        
+        [HideInInspector] public CamerasManager camerasManager;
+        [HideInInspector] public PlayerController playerController;
+
     }
 }

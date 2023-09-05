@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float grippingSpeed;
     private bool isGripping = false;
     private bool canGrip = true;
+    private bool isClimbable;
     [Space]
 
 
@@ -135,7 +136,7 @@ public class PlayerController : MonoBehaviour
     {
         isTriggeredDeadAnimation = false;
         animator.SetBool("IsDead", false);
-
+        transform.eulerAngles = Vector2.zero;
         isFlying = false;
     }
 
@@ -152,6 +153,7 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("speedY", 0f);
             animator.SetBool("isWalk", false);
             animator.SetBool("isWall", false);
+            animator.SetBool("isWalkWall", false);
             animator.SetBool("isWallSlide", false);
             animator.SetBool("isGripWall", false);
             animator.SetBool("isDash", false);
@@ -214,11 +216,12 @@ public class PlayerController : MonoBehaviour
 
         GravityManager();
 
-        bool isWalk = movementInput.sqrMagnitude != 0;
-
+        bool isWalk = movementInput.x != 0;
+        bool isWalkWall = movementInput.y != 0;
         animator.SetFloat("speedY", _playerRB.velocity.y);
         animator.SetBool("isGrounded", isGrounded);
         animator.SetBool("isWalk", isWalk);
+        animator.SetBool("isWalkWall", isWalkWall);
         animator.SetBool("isWall", isWall);
         animator.SetBool("isWallSlide", isWallSlide);
         animator.SetBool("isGripWall", isGripping);
@@ -230,7 +233,24 @@ public class PlayerController : MonoBehaviour
         if(healthSystem.IsDie) return;
 
         isGrounded = Physics2D.OverlapBox(groundCheck.transform.position, new Vector2(groundXSize, groundYSize), 0f, whatIsGround);
-        isWall = Physics2D.OverlapBox(wallCheck.transform.position, new Vector2(wallXSize, wallYSize), 0f, whatIsWall);
+        Collider2D wall = Physics2D.OverlapBox(wallCheck.transform.position, new Vector2(wallXSize, wallYSize), 0f, whatIsWall);
+        isWall = wall != null;       
+        if(wall != null)
+        {
+            if (wall.TryGetComponent<WallSystem>(out WallSystem wallSystem))
+            {
+                isClimbable = wallSystem.isClimbable;
+            }
+            else
+            {
+                isClimbable = false;
+            }
+        }
+        else
+        {
+            isClimbable = false;
+        }
+
         isWallSlide = isWall && _playerRB.velocity.y < 0;
         //virar o player
         if (movementInput.x < 0 && isLookLeft == false)
@@ -316,6 +336,8 @@ public class PlayerController : MonoBehaviour
     }
     private void OnDash()
     {
+        if(CoreSingleton.Instance.gameManager.DASH == false) { return; }
+
         if (isDashing == false && isShowEcho == false && isFlying == false)
         {
             StartCoroutine(Dash(inputReader.Movement.normalized));
@@ -333,6 +355,12 @@ public class PlayerController : MonoBehaviour
         float x = transform.localScale.x * -1; //Inverte o sinal do scale X
         transform.localScale = new Vector3(x, transform.localScale.y, transform.localScale.z);
     }
+
+    public bool GetLookLeft()
+    {
+        return isLookLeft;
+    }
+
     public void Echo()
     {
         if(timecho >= timeBtwEcho)
@@ -363,7 +391,7 @@ public class PlayerController : MonoBehaviour
 
     private void TemporaryFly()
     {
-        if (currentFlyTime >= maxFlyTime)
+        if (maxFlyTime <= 0)
         {
             isFlying = false;
             transform.eulerAngles = Vector3.zero;
@@ -377,7 +405,7 @@ public class PlayerController : MonoBehaviour
         Vector2 direction = transform.up;
         _playerRB.velocity = direction * flySpeed;
 
-        currentFlyTime += Time.deltaTime;
+        maxFlyTime -= Time.deltaTime;
     }
 
     private void GravityManager()
@@ -433,8 +461,14 @@ public class PlayerController : MonoBehaviour
     {
         if (healthSystem.IsDie) return;
 
+        if(CoreSingleton.Instance.gameManager.SWAPDREAM == false) { return; }
+
+        if (CoreSingleton.Instance.gameManager.GetItem() <= 0) { return; }
+
         if (canChangeStage == false)
             return;
+
+        CoreSingleton.Instance.gameManager.SetItem(-1);
 
         canChangeStage = false;
         CoreSingleton.Instance.gameStateManager.ChangeStageType();
@@ -456,6 +490,8 @@ public class PlayerController : MonoBehaviour
     private void OnRightTriggerDown()
     {
         if (healthSystem.IsDie) return;
+
+        if(isClimbable == false) { return; }
 
         if (canGrip == true)
         {
@@ -482,15 +518,12 @@ public class PlayerController : MonoBehaviour
     {
         if (healthSystem.IsDie) return;
 
+        maxFlyTime += flightTime;
+
         if (isFlying == false)
         {
-            transform.eulerAngles = startEuler;
-            currentFlyTime -= flightTime;
-        }
-        else
-        {
-            currentFlyTime = 0;
-        }
+            transform.eulerAngles = startEuler;            
+        }       
         isFlying = true;
         animator.SetBool("Fly", true);
         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Foley/Fly", transform.position);
@@ -505,8 +538,7 @@ public class PlayerController : MonoBehaviour
             {
                 collision.gameObject.GetComponent<IBreakObjects>().BreakObject();
             }
-        }
-        
+        }        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -514,7 +546,14 @@ public class PlayerController : MonoBehaviour
         if(collision.CompareTag("Item"))
         {
             collision.GetComponent<ICollectible>().Collect();
-            _playerRB.velocity = Vector2.zero;
+
+        }
+        else if(collision.gameObject.CompareTag("WallExit"))
+        {
+            if(isGripping == false) { return; }
+            isGripping = false;
+            _playerRB.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
+            animator.SetBool("isGripWall", isGripping);
         }
     }
 

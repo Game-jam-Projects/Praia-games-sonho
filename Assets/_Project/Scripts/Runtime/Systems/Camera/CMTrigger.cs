@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
+using DreamTeam.Runtime.Systems.Core;
 using UnityEngine;
+using System.Collections;
 
 public class CMTrigger : MonoBehaviour
 {
-    public GameObject eneableCam;
-    public GameObject disableCam;
+    public GameObject areaCam;
+
+    IEnumerator Start()
+    {
+        yield return new WaitForEndOfFrame();
+        CoreSingleton.Instance.camerasManager.RegisterCamera(areaCam);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            eneableCam.SetActive(true);
-            disableCam.SetActive(false);
+            CoreSingleton.Instance.camerasManager.HandleCamera(areaCam);
         }
     }
 }
