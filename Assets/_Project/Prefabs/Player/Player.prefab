@@ -180,7 +180,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1927827483
   m_SortingLayer: 1
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 33f01867aaf5a7a42b8812b352e4fa3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -305,9 +305,9 @@ MonoBehaviour:
   isWall: 0
   isJumpWall: 0
   jumpWallSideForce: 12
-  gripTime: 3
+  gripTime: 8
   gripTimer: 0
-  grippingSpeed: 3
+  grippingSpeed: 5
   velocity: 10
   jumpForce: 20
   playerSr: {fileID: 577852003979540802}
@@ -324,7 +324,7 @@ MonoBehaviour:
   timecho: 0
   flySpeed: 10
   rotationSpeed: 120
-  maxFlyTime: 3
+  maxFlyTime: 0
   changeStageCooldown:
     <InitTime>k__BackingField: 1
 --- !u!114 &1161701590682265360
