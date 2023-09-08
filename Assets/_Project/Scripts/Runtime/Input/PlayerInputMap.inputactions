@@ -292,17 +292,6 @@
                 },
                 {
                     "name": "",
-                    "id": "73f1c940-5122-44ea-96b5-6f691d503055",
-                    "path": "<Keyboard>/alt",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "keyboard + mouse",
-                    "action": "ButtonNorth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ce7337c4-131c-4e10-a679-95768d097856",
                     "path": "<Keyboard>/r",
                     "interactions": "",
