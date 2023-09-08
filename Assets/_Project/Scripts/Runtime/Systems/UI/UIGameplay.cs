@@ -2,6 +2,7 @@ using DreamTeam.Runtime.System.Core;
 using DreamTeam.Runtime.Systems.Health;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace DreamTeam.Runtime.System.UI
 {
@@ -23,6 +24,10 @@ namespace DreamTeam.Runtime.System.UI
         private HealthSystem healthSystem;
         private PlayerController playerController;
 
+        [Header("HUD")]
+        public TMP_Text tradeDreamAmount;
+        public TMP_Text tradeDreamShadow;
+
         private void Awake()
         {
              playerController = FindObjectOfType<PlayerController>();
@@ -36,6 +41,7 @@ namespace DreamTeam.Runtime.System.UI
             GameManager.Instance.OnPauseStatusChange += UpdatePauseMenu;
             GameManager.Instance.OnGameOver += OpenGameoverMenu;
             GameManager.Instance.OnGameWin += OpenGamewinMenu;
+            GameManager.Instance.OnUpdateSwapItemAmount += OnUpdateSwapItemAmount;
         }
 
         private void OnDestroy()
@@ -45,6 +51,7 @@ namespace DreamTeam.Runtime.System.UI
             GameManager.Instance.OnPauseStatusChange -= UpdatePauseMenu;
             GameManager.Instance.OnGameOver -= OpenGameoverMenu;
             GameManager.Instance.OnGameWin -= OpenGamewinMenu;
+            GameManager.Instance.OnUpdateSwapItemAmount -= OnUpdateSwapItemAmount;
         }
 
         private void UpdateLifeBar(HealthArgs healthArgs)
@@ -58,6 +65,12 @@ namespace DreamTeam.Runtime.System.UI
 
             firstButtonPause.Select();
             pausePanel.SetActive(value);
+        }
+
+        private void OnUpdateSwapItemAmount(int value)
+        {
+            tradeDreamAmount.text = value.ToString();
+            tradeDreamShadow.text = value.ToString();
         }
 
         private void OpenGameoverMenu()

@@ -6,17 +6,38 @@ using UnityEngine;
 public class FlyCristal : MonoBehaviour, ICollectible
 {
     public float reloadTime;
-    public float flightTime;
+    public float flightTimeDreamMode;
+    public float flightTimeNightmareMode;
     private bool isCollected;
     public GameObject spriteRenderer;
 
     public Transform startDirection;
-    
+
+    private void OnEnable()
+    {
+        CoreSingleton.Instance.gameManager.OnTransitionFinished += Reset;
+    }
+
+    private void OnDisable()
+    {
+        CoreSingleton.Instance.gameManager.OnTransitionFinished -= Reset;
+    }
+
     public void Collect()
     {
         if (isCollected == true) { return; }
         isCollected = true;
-        CoreSingleton.Instance.playerController.Fly(startDirection.eulerAngles, flightTime);
+        switch(CoreSingleton.Instance.gameStateManager.GetStageType())
+        {
+            case StageType.Dream:
+                CoreSingleton.Instance.playerController.Fly(startDirection.eulerAngles, flightTimeDreamMode);
+                break;
+
+            case StageType.Nightmare:
+                CoreSingleton.Instance.playerController.Fly(startDirection.eulerAngles, flightTimeNightmareMode);
+                break;
+        }
+        
         spriteRenderer.SetActive(false);
         StartCoroutine(nameof(IERespawn));
     }
@@ -26,5 +47,12 @@ public class FlyCristal : MonoBehaviour, ICollectible
         yield return new WaitForSeconds(reloadTime);
         spriteRenderer.SetActive(true);
         isCollected = false;
+    }
+
+    private void Reset()
+    {
+        spriteRenderer.SetActive(true);
+        isCollected = false;
+        StopCoroutine(nameof(IERespawn));
     }
 }

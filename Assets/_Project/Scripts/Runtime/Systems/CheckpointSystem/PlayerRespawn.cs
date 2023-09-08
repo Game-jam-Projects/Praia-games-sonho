@@ -1,5 +1,6 @@
 ﻿using DreamTeam.Runtime.System.Core;
 using DreamTeam.Runtime.Systems.Health;
+using DreamTeam.Runtime.Systems.Core;
 using EasyTransition;
 using UnityEngine;
 
@@ -37,14 +38,15 @@ namespace DreamTeam.Runtime.Systems.CheckpointSystem
 
             GameManager.Instance.CanPause = false;
 
-            TransitionManager.Instance().Transition(transition, playerAnimationTime);
+            TransitionManager.Instance().Transition(transition, playerAnimationTime);            
             TransitionManager.Instance().onTransitionCutPointReached += () =>
             {
                 transform.position = spawnPosition;
                 GameManager.Instance.CanPause = true;
                 GameManager.Instance.TriggerTransitionFinish();
+                CoreSingleton.Instance.camerasManager.Respawn();
                 healthSystem.ResetLife();
-
+                
                 animator.updateMode = AnimatorUpdateMode.Normal;
             };
         }

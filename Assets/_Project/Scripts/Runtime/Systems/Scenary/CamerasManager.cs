@@ -7,7 +7,7 @@ using UnityEngine;
 public class CamerasManager : MonoBehaviour
 {
     public List<GameObject> cameras = new List<GameObject>();
-
+    public GameObject checkPointCamera;
     private void Start()
     {
         CoreSingleton.Instance.camerasManager = this;
@@ -30,4 +30,13 @@ public class CamerasManager : MonoBehaviour
         camera.SetActive(true);
     }
 
+    public void SetCheckPointCamera(GameObject camera)
+    {
+        checkPointCamera = camera;
+    }
+
+    public void Respawn()
+    {
+        HandleCamera(checkPointCamera);
+    }
 }
