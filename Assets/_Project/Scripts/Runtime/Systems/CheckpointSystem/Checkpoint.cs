@@ -1,4 +1,4 @@
-using System;
+using DreamTeam.Runtime.Systems.Core;
 using UnityEngine;
 
 namespace DreamTeam.Runtime.Systems.CheckpointSystem
@@ -9,6 +9,10 @@ namespace DreamTeam.Runtime.Systems.CheckpointSystem
 
         [SerializeField] private Transform playerSpawnPoint;
         [SerializeField] private bool initCheckpoint;
+
+        [Header("Sector Camera")]
+        [SerializeField] private GameObject sectorCamera;
+        [SerializeField] private float bossDistanceMultiplier = 1;
 
         private void Awake()
         {
@@ -44,6 +48,8 @@ namespace DreamTeam.Runtime.Systems.CheckpointSystem
         private void UpdateCheckpoint()
         {
             CheckpointManager.Instance.SetCheckpoint(this, playerSpawnPoint.position);
+            CoreSingleton.Instance.camerasManager.SetCheckPointCamera(sectorCamera);
+            CoreSingleton.Instance.gameManager.bossDistanceMultiplier = bossDistanceMultiplier;
             animator.SetTrigger("Up");
         }
     }

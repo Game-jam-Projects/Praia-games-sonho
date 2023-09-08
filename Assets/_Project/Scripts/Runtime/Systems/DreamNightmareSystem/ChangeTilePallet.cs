@@ -5,16 +5,37 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class ChangeTilePallet : MonoBehaviour
-{    
+{
     public TileBase[] dream;
     public TileBase[] nightmare;
 
-   [HideInInspector] public Tilemap[] Tilemaps;
+
+
+    [HideInInspector] public Tilemap[] Tilemaps;
+
+    [Header("Versão 2")]
+    public bool v2;
+    public Color colorDream;
+    public Color colorNightmare;
+
+    public float transitionTime;
+    public bool isNightmaremode;
 
     private void Start()
     {
         CoreSingleton.Instance.gameStateManager.ChagedStageType += EChangeStageType;
         Tilemaps = GetComponentsInChildren<Tilemap>();
+
+        if (v2 == true)
+        {
+            foreach (Tilemap map in Tilemaps)
+            {
+                for (int i = 0; i < dream.Length; i++)
+                {
+                    map.SwapTile(dream[i], nightmare[i]);
+                }
+            }
+        }
     }
 
     private void OnDestroy()
@@ -28,27 +49,62 @@ public class ChangeTilePallet : MonoBehaviour
         {
             case StageType.Dream:
 
-                foreach (Tilemap map in Tilemaps)
+                if (v2 == true)
                 {
-                    for (int i = 0; i < nightmare.Length; i++)
+                    isNightmaremode = false;
+                }
+                else
+                {
+                    foreach (Tilemap map in Tilemaps)
                     {
-                        map.SwapTile(nightmare[i], dream[i]);
+                        for (int i = 0; i < nightmare.Length; i++)
+                        {
+                            map.SwapTile(nightmare[i], dream[i]);
+                        }
                     }
+
                 }
 
                 break;
 
             case StageType.Nightmare:
 
-                foreach (Tilemap map in Tilemaps)
+                if (v2 == true)
                 {
-                    for (int i = 0; i < dream.Length; i++)
+                    isNightmaremode = true;
+                }
+                else
+                {
+                    foreach (Tilemap map in Tilemaps)
                     {
-                        map.SwapTile(dream[i], nightmare[i]);
+                        for (int i = 0; i < dream.Length; i++)
+                        {
+                            map.SwapTile(dream[i], nightmare[i]);
+                        }
                     }
                 }
 
+
+
                 break;
+        }
+    }
+
+    private void Update()
+    {
+        if (isNightmaremode == true)
+        {
+            foreach (Tilemap map in Tilemaps)
+            {
+                map.color = Color.Lerp(map.color, colorNightmare, transitionTime * Time.deltaTime);
+            }
+        }
+        else
+        {
+            foreach (Tilemap map in Tilemaps)
+            {
+                map.color = Color.Lerp(map.color, colorDream, transitionTime * Time.deltaTime);
+            }
         }
     }
 }

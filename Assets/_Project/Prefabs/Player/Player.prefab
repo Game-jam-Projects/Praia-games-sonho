@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 3064706337775485174}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.65, y: 0.83, z: 0}
+  m_LocalPosition: {x: 0.65, y: 0.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -217,7 +217,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &4308330458256692523
 CapsuleCollider2D:
@@ -264,7 +264,7 @@ Animator:
   m_GameObject: {fileID: 3176689778812194262}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 56d460e243f61fb40ba5a8605f875037, type: 2}
+  m_Controller: {fileID: 9100000, guid: b43b70deace3f92449de406444b23f94, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
   isWall: 0
   isJumpWall: 0
   jumpWallSideForce: 12
-  gripTime: 8
+  gripTime: 2
   gripTimer: 0
   grippingSpeed: 5
   velocity: 10
@@ -318,7 +318,7 @@ MonoBehaviour:
   dreamController: {fileID: 9100000, guid: 56d460e243f61fb40ba5a8605f875037, type: 2}
   nightmareController: {fileID: 22100000, guid: e248319ec6dacbd4887ce830ee75be4f, type: 2}
   dashSpeed: 45
-  dashDuration: 0.2
+  dashDuration: 0.25
   echoPrefab: {fileID: 5760413288332399061, guid: 602494192e037f747967e048b925cda8, type: 3}
   timeBtwEcho: 0.035
   timecho: 0
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3176689778812194262}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dac2148a305e6df40a51d686b88689f2, type: 3}
   m_Name: 

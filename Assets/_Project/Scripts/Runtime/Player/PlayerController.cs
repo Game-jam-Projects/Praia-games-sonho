@@ -69,8 +69,8 @@ public class PlayerController : MonoBehaviour
     [Header("Fly System")]
     public float flySpeed = 5.0f;
     public float rotationSpeed = 120.0f;
-    public float maxFlyTime = 5.0f;
-    private float currentFlyTime = 0.0f;
+    public float maxFlyTime = 0f;
+    
     private bool isFlying = false;
 
     [SerializeField] private AutoTimer changeStageCooldown;
@@ -141,6 +141,9 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isWallSlide", false);
             animator.SetBool("isGripWall", false);
             animator.SetBool("isDash", false);
+            animator.SetBool("Fly", false);
+
+            maxFlyTime = 0;
 
             _playerRB.velocity = Vector2.zero;
             return;
@@ -395,6 +398,8 @@ public class PlayerController : MonoBehaviour
     private void Dash()
     {
         if(CoreSingleton.Instance.gameManager.DASH == false) { return; }
+        if(isGripping == true) { return; }
+        if(movementInput.sqrMagnitude == 0) { return; }
 
         if (isDashing == false && isShowEcho == false && isFlying == false)
         {
@@ -495,7 +500,7 @@ public class PlayerController : MonoBehaviour
     public void DashCrystal()
     {
         if (healthSystem.IsDie) return;
-
+        gripTimer = 0;
         isDashing = false;
     }
 

@@ -68,7 +68,7 @@ public class Boss : MonoBehaviour
             case StageType.Nightmare:
 
                 target = CoreSingleton.Instance.playerController.transform;
-                isFirstView = true;
+               isFirstView = true;
                 SetChase();
 
                 break;
@@ -91,15 +91,17 @@ public class Boss : MonoBehaviour
     {
         if(isFirstView == false) { return; }
 
+        float multiplier = CoreSingleton.Instance.gameManager.bossDistanceMultiplier;
+
         Vector3 newPosition = CoreSingleton.Instance.playerController.transform.position;
 
         if(Random.Range(0,100) <= 50)
         {
-            newPosition += new Vector3(15f, Random.Range(-12,12), 0);
+            newPosition += new Vector3(15f * multiplier, Random.Range(-12,12) * multiplier, 0);
         }
         else
         {
-            newPosition += new Vector3(-15f, Random.Range(-12, 12), 0);
+            newPosition += new Vector3(-15f * multiplier, Random.Range(-12, 12) * multiplier, 0);
         }
         transform.position = newPosition;
     }

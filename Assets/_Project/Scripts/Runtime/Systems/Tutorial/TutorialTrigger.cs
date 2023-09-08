@@ -13,6 +13,8 @@ public class TutorialTrigger : MonoBehaviour
     public bool DASH;
     public bool SWAPDREAM;
 
+    public GameObject ShowItemHud;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
        
@@ -23,6 +25,10 @@ public class TutorialTrigger : MonoBehaviour
             StopCoroutine(nameof(IEDisable));
             isShow = true;
             ShowTutorial.SetActive(true);
+            if(ShowItemHud != null)
+            {
+                ShowItemHud.SetActive(true);
+            }
         }
     }
 

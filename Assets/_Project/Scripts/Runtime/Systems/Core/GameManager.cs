@@ -1,6 +1,7 @@
 using DreamTeam.Runtime.System.Ranking;
 using System;
 using UnityEngine;
+using TMPro;
 
 namespace DreamTeam.Runtime.System.Core
 {
@@ -14,6 +15,7 @@ namespace DreamTeam.Runtime.System.Core
 
         public bool Paused { get; private set; }
 
+       
 
         [Header("Ranking")]
         [SerializeField] private int collectableDreams;
@@ -31,10 +33,12 @@ namespace DreamTeam.Runtime.System.Core
         public bool DASH;
         public bool SWAPDREAM;
 
+        public float bossDistanceMultiplier = 1;
         private void Start()
         {
-           // QualitySettings.vSyncCount = 0;
-           // Application.targetFrameRate = 60;
+            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 60;
+            Screen.SetResolution(1920, 1080, true);
             playerDataRanking = new PlayerDataRanking();
             chrono = new Chrono();
             chrono.Start();
@@ -157,7 +161,7 @@ namespace DreamTeam.Runtime.System.Core
         public void SetItem(int value)
         {
             swapDreamItem += value;
-
+           
             if (swapDreamItem < 0)
                 return;
 
