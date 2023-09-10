@@ -389,7 +389,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Estou exausto e n\xE3o conseguegui pensar em nada...\n\nzzzzzz"
+  m_text: "Estou exausto e n\xE3o consegui pensar em nada...\n\nzzzzzz"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 167d86c6e46b1c24ab6f080ace0a9189, type: 2}
   m_sharedMaterial: {fileID: -4410533518984290741, guid: 167d86c6e46b1c24ab6f080ace0a9189, type: 2}
