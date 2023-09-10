@@ -151,9 +151,12 @@ public class PlayerController : MonoBehaviour
 
         movementInput = new Vector2(inputReader.Movement.x, inputReader.Movement.y);
 
+        animator.SetBool("Fly", isFlying);
+
         if (isFlying == true)
         {
             TemporaryFly();
+
             return;
         }
 
@@ -214,6 +217,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isGripWall", isGripping);
         animator.SetBool("isDash", isShowEcho);
         animator.SetBool("isGrounded", isGrounded);
+        
     }
 
     private void FixedUpdate()
@@ -525,7 +529,7 @@ public class PlayerController : MonoBehaviour
             transform.eulerAngles = startEuler;
         }
         isFlying = true;
-        animator.SetBool("Fly", true);
+       
         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Foley/Fly", transform.position);
 
     }
