@@ -8,6 +8,7 @@ TagManager:
   - Item
   - SecretPassage
   - WallExit
+  - ExitFly
   layers:
   - Default
   - TransparentFX

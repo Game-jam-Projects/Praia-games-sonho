@@ -1,4 +1,5 @@
 using DreamTeam.Runtime.System.Core;
+using DreamTeam.Runtime.Systems.Core;
 using DreamTeam.Runtime.Systems.Health;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +28,11 @@ namespace DreamTeam.Runtime.System.UI
         [Header("HUD")]
         public TMP_Text tradeDreamAmount;
         public TMP_Text tradeDreamShadow;
+
+        [Header("Debug")]
+        public TMP_Text timer;
+        public TMP_Text itens;
+        public TMP_Text mortes;
 
         private void Awake()
         {
@@ -99,6 +105,13 @@ namespace DreamTeam.Runtime.System.UI
         {
             DisableAllMenus();
             hud.SetActive(false);
+        }
+
+        private void LateUpdate()
+        {
+            timer.text = "Tempo: " + CoreSingleton.Instance.gameManager.chrono.GetElapsedTime().ToString("N0");
+            itens.text = "Itens: " + CoreSingleton.Instance.gameManager.GetDreamAcount().ToString();
+            mortes.text = "Mortes: " + CoreSingleton.Instance.gameManager.GetDeathCount().ToString();
         }
     }
 }

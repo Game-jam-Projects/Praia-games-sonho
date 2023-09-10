@@ -36,6 +36,8 @@ namespace DreamTeam.Runtime.Systems.CheckpointSystem
         {
             if (collision.TryGetComponent(out PlayerController player))
             {
+                CoreSingleton.Instance.collectiblesManager.ConfirmedCollection();
+
                 if (CheckpointManager.Instance.GetCheckpointPosition() == playerSpawnPoint.position)
                 {
                     return;
@@ -50,6 +52,7 @@ namespace DreamTeam.Runtime.Systems.CheckpointSystem
             CheckpointManager.Instance.SetCheckpoint(this, playerSpawnPoint.position);
             CoreSingleton.Instance.camerasManager.SetCheckPointCamera(sectorCamera);
             CoreSingleton.Instance.gameManager.bossDistanceMultiplier = bossDistanceMultiplier;
+            
             animator.SetTrigger("Up");
         }
     }

@@ -280,9 +280,19 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.CompareTag("WallExit"))
         {
             if (isGripping == false) { return; }
-            isGripping = false;
-            _playerRB.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
-            animator.SetBool("isGripWall", isGripping);
+
+            if (movementInput.y > 0)
+            {
+                isGripping = false;
+                _playerRB.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
+                animator.SetBool("isGripWall", isGripping);
+            }
+        }
+        else if(collision.gameObject.CompareTag("ExitFly"))
+        {
+            isFlying = false;
+            transform.eulerAngles = Vector3.zero;
+            animator.SetBool("Fly", false);
         }
     }
     
@@ -333,8 +343,8 @@ public class PlayerController : MonoBehaviour
     {
         if (healthSystem.IsDie) return;
 
-        if (gripTimer < gripTime)
-        {            
+        //if (gripTimer < gripTime)
+        //{            
             if(movementInput.y != 0)
             {
                 _playerRB.velocity = new Vector2(_playerRB.velocity.x, movementInput.y * grippingSpeed);
@@ -345,12 +355,12 @@ public class PlayerController : MonoBehaviour
             }
             isGripping = true;
             gripTimer += Time.deltaTime;
-        }
-        else
-        {
-            isGripping = false;
-            canGrip = false;            
-        }
+        //}
+        //else
+        //{
+        //    isGripping = false;
+        //    canGrip = false;            
+        //}
     }
 
     private void OnJump()

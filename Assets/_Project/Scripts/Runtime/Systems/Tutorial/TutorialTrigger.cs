@@ -9,6 +9,9 @@ public class TutorialTrigger : MonoBehaviour
     public bool isShow;
     public bool isHide;
 
+    public bool isRepeat;
+    bool isViewed;
+
     [Header("Skills")]
     public bool DASH;
     public bool SWAPDREAM;
@@ -20,12 +23,15 @@ public class TutorialTrigger : MonoBehaviour
        
         if (collision.gameObject.CompareTag("Player"))
         {
+            if(isViewed == true && isRepeat == false) { return; }
+
             CoreSingleton.Instance.gameManager.DASH = DASH;
             CoreSingleton.Instance.gameManager.SWAPDREAM = SWAPDREAM;
             StopCoroutine(nameof(IEDisable));
             isShow = true;
             ShowTutorial.SetActive(true);
-            if(ShowItemHud != null)
+            isViewed = true;
+            if (ShowItemHud != null)
             {
                 ShowItemHud.SetActive(true);
             }

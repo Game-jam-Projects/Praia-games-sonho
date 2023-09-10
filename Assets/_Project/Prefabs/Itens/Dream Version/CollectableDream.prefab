@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5109265641427192100}
   - component: {fileID: 5324068477229213605}
   - component: {fileID: 7134420711986367320}
+  - component: {fileID: 1549805790590872407}
   m_Layer: 0
   m_Name: CollectableDream
   m_TagString: Item
@@ -155,3 +156,17 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1549805790590872407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7024344689902710148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4bf38361e94b9409110650ca1906ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dreamController: {fileID: 9100000, guid: 5d082c82a9260d94ea65e454c1ca1295, type: 2}
+  nightmareController: {fileID: 9100000, guid: 71800d00973a9874f9fe38f78adc10e1, type: 2}

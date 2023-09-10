@@ -36,7 +36,7 @@ public class DreamNightmareObjectManager : MonoBehaviour
 
     public void EChangeStageType(StageType stageType)
     {
-        if(dontChange == true) { return; }
+       if(dontChange == true) { return; }
        this.stageType = stageType;       
        StartCoroutine(nameof(FadeBetweenModes));
     }

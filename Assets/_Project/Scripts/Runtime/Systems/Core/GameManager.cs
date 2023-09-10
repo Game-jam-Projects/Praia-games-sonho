@@ -1,7 +1,8 @@
 using DreamTeam.Runtime.System.Ranking;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+
 
 namespace DreamTeam.Runtime.System.Core
 {
@@ -15,7 +16,7 @@ namespace DreamTeam.Runtime.System.Core
 
         public bool Paused { get; private set; }
 
-       
+
 
         [Header("Ranking")]
         [SerializeField] private int collectableDreams;
@@ -34,6 +35,9 @@ namespace DreamTeam.Runtime.System.Core
         public bool SWAPDREAM;
 
         public float bossDistanceMultiplier = 1;
+
+
+
         private void Start()
         {
             QualitySettings.vSyncCount = 0;
@@ -63,7 +67,7 @@ namespace DreamTeam.Runtime.System.Core
             chrono.Stop();
             Time.timeScale = 0;
 
-            if(CanPause)
+            if (CanPause)
                 OnPauseStatusChange?.Invoke(Paused);
         }
 
@@ -73,7 +77,7 @@ namespace DreamTeam.Runtime.System.Core
             chrono.Start();
             Time.timeScale = 1;
 
-            if(CanPause)
+            if (CanPause)
                 OnPauseStatusChange?.Invoke(Paused);
         }
 
@@ -134,7 +138,7 @@ namespace DreamTeam.Runtime.System.Core
             playerDataRanking.collectibleCount = collectableDreams;
             playerDataRanking.deathCount = deathCount;
             chrono.ResetTimer();
-            
+
         }
 
         public void RankingClear()
@@ -161,7 +165,7 @@ namespace DreamTeam.Runtime.System.Core
         public void SetItem(int value)
         {
             swapDreamItem += value;
-           
+
             if (swapDreamItem < 0)
                 return;
 
@@ -173,14 +177,24 @@ namespace DreamTeam.Runtime.System.Core
             return swapDreamItem;
         }
 
+        public int GetDeathCount()
+        {
+            return deathCount;
+        }
+
+        public int GetDreamAcount()
+        {
+            return collectableDreams;
+        }
+
         public void TriggerTransitionFinish()
         {
             OnTransitionFinished?.Invoke();
-            SetDeathCount();
+           
         }
     }
 
-    
+
 }
 
 [Serializable]

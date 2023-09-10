@@ -13,9 +13,23 @@ public class FlyCristal : MonoBehaviour, ICollectible
 
     public Transform startDirection;
 
+    private bool isStarted;
+
+    void Start()
+    {
+        if(isStarted == false)
+        {
+            isStarted = true;
+            CoreSingleton.Instance.gameManager.OnTransitionFinished += Reset;
+        }
+    }
+
     private void OnEnable()
     {
-        CoreSingleton.Instance.gameManager.OnTransitionFinished += Reset;
+        if(isStarted == true)
+        {
+            CoreSingleton.Instance.gameManager.OnTransitionFinished += Reset;
+        }
     }
 
     private void OnDisable()

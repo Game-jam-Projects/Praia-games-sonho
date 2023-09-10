@@ -5,14 +5,22 @@ using UnityEngine;
 public class PlataformOnOff : MonoBehaviour
 {
 
-    public GameObject A;
-    public GameObject B;
+    public GameObject StartOn;
+    public GameObject StartOff;
 
     public float timer;
     // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
+        StartOn.SetActive(true);
+        StartOff.SetActive(false);
         StartCoroutine(nameof(OnOFFSystem));
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(nameof(OnOFFSystem));
     }
 
     IEnumerator OnOFFSystem()
@@ -20,8 +28,8 @@ public class PlataformOnOff : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(timer);
-            A.SetActive(!A.activeSelf);
-            B.SetActive(!B.activeSelf);
+            StartOn.SetActive(!StartOn.activeSelf);
+            StartOff.SetActive(!StartOff.activeSelf);
         }
     }
 }

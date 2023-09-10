@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using DreamTeam.Runtime.Systems.Core;
 
 namespace DreamTeam.Runtime.Systems.Health
 {
@@ -46,6 +47,7 @@ namespace DreamTeam.Runtime.Systems.Health
             if (IsDie)
                 return;
             IsDie = true;
+            CoreSingleton.Instance.gameManager.SetDeathCount();
             OnDie?.Invoke(this);
 
 
