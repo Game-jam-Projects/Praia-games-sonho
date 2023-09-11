@@ -23,7 +23,11 @@ namespace DreamTeam.Runtime.System.Core
 
         public void NextScene()
         {
-            LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+            if (nextSceneIndex >= SceneManager.sceneCountInBuildSettings)
+                nextSceneIndex = titleScene;
+
+            LoadScene(nextSceneIndex);
         }
 
         public void LoadTitle()
