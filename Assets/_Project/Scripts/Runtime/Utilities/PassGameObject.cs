@@ -40,6 +40,11 @@ namespace DreamTeam.Runtime.Utilities
             cutsceneInputReader.OnSkipCutsceneDown -= Next;
 
             cutsceneInputReader.DisableCutsceneInput();
+
+            foreach (var go in gameObjects)
+            {
+                go.DOKill();
+            }
         }
 
         public void Next()
