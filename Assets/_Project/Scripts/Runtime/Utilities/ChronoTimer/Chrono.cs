@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DreamTeam.Runtime.System.Core
+namespace DreamTeam.Runtime.Utilities.ChronoTimer
 {
     public class Chrono
     {
