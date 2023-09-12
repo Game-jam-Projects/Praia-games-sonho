@@ -1,6 +1,6 @@
-using DreamTeam.Runtime.System.Core;
+using DreamTeam.Runtime.Systems.Core;
 
-namespace DreamTeam.Runtime.System.UI
+namespace DreamTeam.Runtime.Systems.UI
 {
     public class StartGameButton : ButtonBase
     {

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace DreamTeam.Runtime.System.UI
+namespace DreamTeam.Runtime.Systems.UI
 {
     public class ButtonFeedback : ButtonFeedbackBase
     {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace DreamTeam.Runtime.System.FMODAudio
+namespace DreamTeam.Runtime.Systems.FMODAudio
 {
     public class FmodPlayer : MonoBehaviour
     {

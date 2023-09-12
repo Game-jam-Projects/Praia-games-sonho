@@ -1,17 +1,18 @@
-using UnityEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
+using TMPro;
+using UnityEngine;
 
-namespace DreamTeam.Runtime.System.Ranking
+namespace DreamTeam.Runtime.Systems.Ranking
 {
     [Serializable]
     public class PlayerDataRanking
     {
-    public string playerName;
-    public int collectibleCount;
-    public int deathCount;
-    public float time;
+        public string playerName;
+        public int collectibleCount;
+        public int deathCount;
+        public float time;
     }
 
     public class RankingManagerLocal : MonoBehaviour
@@ -19,10 +20,10 @@ namespace DreamTeam.Runtime.System.Ranking
 
         public List<PlayerDataRanking> rankingList;
 
-        public TMPro.TextMeshProUGUI[] rPlayerName;
-        public TMPro.TextMeshProUGUI[] rCollectibleCount;
-        public TMPro.TextMeshProUGUI[] rDeathCount;
-        public TMPro.TextMeshProUGUI[] rTime;
+        public TextMeshProUGUI[] rPlayerName;
+        public TextMeshProUGUI[] rCollectibleCount;
+        public TextMeshProUGUI[] rDeathCount;
+        public TextMeshProUGUI[] rTime;
 
 
         void Start()
@@ -93,7 +94,7 @@ namespace DreamTeam.Runtime.System.Ranking
                 rCollectibleCount[i].text = "0";
                 rDeathCount[i].text = "0";
                 rTime[i].text = "0";
-                if(rankingList.Count > i)
+                if (rankingList.Count > i)
                 {
                     rPlayerName[i].text = rankingList[i].playerName.ToString();
                     rCollectibleCount[i].text = rankingList[i].collectibleCount.ToString();

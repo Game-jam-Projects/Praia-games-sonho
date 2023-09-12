@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DreamTeam.Runtime.System.Core
+namespace DreamTeam.Runtime.Systems.Core
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Component
     {

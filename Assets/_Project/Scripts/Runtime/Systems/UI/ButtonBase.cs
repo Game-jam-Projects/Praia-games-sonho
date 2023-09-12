@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace DreamTeam.Runtime.System.UI
+namespace DreamTeam.Runtime.Systems.UI
 {
     public abstract class ButtonBase : MonoBehaviour
     {

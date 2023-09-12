@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,15 +22,15 @@ namespace DreamTeam.Runtime.Systems.Core
 
         public void PreCollect(CollectableDream item)
         {
-            if(preCollected.Contains(item) == false)
+            if (preCollected.Contains(item) == false)
             {
                 preCollected.Add(item);
             }
         }
 
-       public void ConfirmedCollection()
+        public void ConfirmedCollection()
         {
-            foreach(CollectableDream item in preCollected)
+            foreach (CollectableDream item in preCollected)
             {
                 item.Collected();
                 collected.Add(item);

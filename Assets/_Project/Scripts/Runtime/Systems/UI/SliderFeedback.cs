@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace DreamTeam.Runtime.System.UI
+namespace DreamTeam.Runtime.Systems.UI
 {
     public class SliderFeedback : ButtonFeedbackBase
     {

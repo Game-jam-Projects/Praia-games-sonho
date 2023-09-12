@@ -1,10 +1,10 @@
-using DreamTeam.Runtime.System.Ranking;
+using DreamTeam.Runtime.Systems.Ranking;
+using DreamTeam.Runtime.Utilities.ChronoTimer;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace DreamTeam.Runtime.System.Core
+namespace DreamTeam.Runtime.Systems.Core
 {
     public class GameManager : Singleton<GameManager>
     {
@@ -13,10 +13,7 @@ namespace DreamTeam.Runtime.System.Core
         public event Action OnGameWin;
         public event Action OnTransitionFinished;
         public event Action<int> OnUpdateSwapItemAmount;
-
         public bool Paused { get; private set; }
-
-
 
         [Header("Ranking")]
         [SerializeField] private int collectableDreams;
@@ -50,10 +47,12 @@ namespace DreamTeam.Runtime.System.Core
 
         private void Update()
         {
+#if UNITY_EDITOR
             if (Input.GetKey(KeyCode.B))
             {
                 GameWin();
             }
+#endif
         }
 
         /// <summary>
@@ -190,7 +189,7 @@ namespace DreamTeam.Runtime.System.Core
         public void TriggerTransitionFinish()
         {
             OnTransitionFinished?.Invoke();
-           
+
         }
     }
 

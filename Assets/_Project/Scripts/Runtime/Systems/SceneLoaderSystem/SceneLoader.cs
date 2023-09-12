@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace DreamTeam.Runtime.System.Core
+namespace DreamTeam.Runtime.Systems.Core
 {
     public class SceneLoader : Singleton<SceneLoader>
     {

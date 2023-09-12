@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace DreamTeam.Runtime.System.UI
+namespace DreamTeam.Runtime.Systems.UI
 {
     public abstract class ButtonFeedbackBase : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler
     {

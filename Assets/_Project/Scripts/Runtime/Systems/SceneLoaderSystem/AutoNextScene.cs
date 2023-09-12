@@ -1,8 +1,8 @@
-using DreamTeam.Runtime.System.Core;
+using DreamTeam.Runtime.Systems.Core;
 using PainfulSmile.Runtime.Utilities.AutoTimer.Core;
 using UnityEngine;
 
-namespace DreamTeam.Runtime.System.SceneLoaderSystem
+namespace DreamTeam.Runtime.Systems.SceneLoaderSystem
 {
     public class AutoNextScene : MonoBehaviour
     {
