@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 public class HighScores : MonoBehaviour
@@ -16,6 +17,11 @@ public class HighScores : MonoBehaviour
     {
         instance = this; //Sets Static Instance
         myDisplay = GetComponent<DisplayHighscores>();
+
+        float a = 92.45f;
+        float b = 100.13f;
+        UploadScore("Pedrin", 42, 27, a);
+        UploadScore("pedrilho", 35, 30, b);
     }
     
     public static void UploadScore(string username, int collectableItem, int deathCount, float time)  //CALLED when Uploading new Score to WEBSITE
@@ -25,7 +31,9 @@ public class HighScores : MonoBehaviour
 
     IEnumerator DatabaseUpload(string userame, int collectableItem, int deathCount, float time) //Called when sending new score to Website
     {
-        WWW www = new WWW(webURL + privateCode + "/add/" + WWW.EscapeURL(userame) + "/" + collectableItem + "/" + deathCount + "/" + time);
+        string timeString = time.ToString();
+        print("TIIIME : " + timeString);
+        WWW www = new WWW(webURL + privateCode + "/add/" + WWW.EscapeURL(userame) + "/" + collectableItem + "/" + deathCount + "/" + timeString);
         yield return www;
 
         if (string.IsNullOrEmpty(www.error))
@@ -43,7 +51,7 @@ public class HighScores : MonoBehaviour
     IEnumerator DatabaseDownload()
     {
         //WWW www = new WWW(webURL + publicCode + "/pipe/"); //Gets the whole list
-        WWW www = new WWW(webURL + publicCode + "/pipe/0/10"); //Gets top 10
+        WWW www = new WWW(webURL + publicCode + "/pipe"); //Gets top 10
         yield return www;
 
         if (string.IsNullOrEmpty(www.error))
@@ -56,6 +64,7 @@ public class HighScores : MonoBehaviour
 
     void OrganizeInfo(string rawData) //Divides Scoreboard info by new lines
     {
+        print(rawData);
         string[] entries = rawData.Split(new char[] {'\n'}, System.StringSplitOptions.RemoveEmptyEntries);
         scoreList = new PlayerScore[entries.Length];
         for (int i = 0; i < entries.Length; i ++) //For each entry in the string array
@@ -64,7 +73,15 @@ public class HighScores : MonoBehaviour
             string username = entryInfo[0];
             int collectableItem = int.Parse(entryInfo[1]);
             int deathCount = int.Parse(entryInfo[2]);
-            float time = float.Parse(entryInfo[3]);
+            string stringTeste = "42,60";
+            float time = float.Parse(stringTeste);
+            string timeString = entryInfo[3].Trim();
+            CultureInfo culture = new CultureInfo("fr-FR");
+            //timeString = timeString.Replace(',', '.');
+            print($"teste: {stringTeste} / time: {timeString}");
+            print($"CONVERT TESTE: {float.Parse(stringTeste,culture)}");
+            print($"TIME: {float.Parse(timeString,culture)}");
+
             scoreList[i] = new PlayerScore(username,collectableItem, deathCount, time);
             print(scoreList[i].username + ": " + scoreList[i].collectableItem);
         }
