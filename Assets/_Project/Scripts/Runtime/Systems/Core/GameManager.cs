@@ -103,6 +103,8 @@ namespace DreamTeam.Runtime.Systems.Core
         {
             OnGameWin?.Invoke();
             FinishSaveStatusGame();
+
+            SceneLoader.Instance.NextScene();
         }
 
         public void SetDeathCount()
@@ -136,7 +138,7 @@ namespace DreamTeam.Runtime.Systems.Core
             playerDataRanking.time = chrono.GetFinalTime();
             playerDataRanking.collectibleCount = collectableDreams;
             playerDataRanking.deathCount = deathCount;
-            chrono.ResetTimer();
+            //chrono.ResetTimer();
 
         }
 
@@ -147,6 +149,7 @@ namespace DreamTeam.Runtime.Systems.Core
 
             collectableDreams = 0;
             deathCount = 0;
+            PlayerPrefs.DeleteKey("RankingDataGlobal");
         }
 
         #endregion

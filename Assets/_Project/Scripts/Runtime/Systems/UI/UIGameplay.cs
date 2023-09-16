@@ -92,7 +92,7 @@ namespace DreamTeam.Runtime.Systems.UI
             DisableAllMenus();
 
             firstButtonGameWin.Select();
-            gamewinPanel.SetActive(true);
+            //gamewinPanel.SetActive(true);
         }
 
         private void DisableAllMenus()

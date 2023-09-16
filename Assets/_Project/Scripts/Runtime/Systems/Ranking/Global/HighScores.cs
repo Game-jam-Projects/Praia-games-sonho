@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DreamTeam.Runtime.Systems.Ranking
 {
-    public class HighScoreHandler : Singleton<HighScoreHandler>
+    public class HighScores : Singleton<HighScores>
     {
         const string privateCode = "ea8ZIlk150OUkRRYg68vNgpdQpWtycyk6ohYCQPuTBRw";  //Key to Upload New Info
         const string publicCode = "64f6391a8f40bb0ee070f37d";   //Key to download
@@ -14,7 +14,7 @@ namespace DreamTeam.Runtime.Systems.Ranking
         public UIPlayerScore[] scoreList;
         DisplayHighscores myDisplay;
 
-        static HighScoreHandler instance; //Required for STATIC usability
+        static HighScores instance; //Required for STATIC usability
         protected override void Awake()
         {
             base.Awake();
@@ -32,7 +32,7 @@ namespace DreamTeam.Runtime.Systems.Ranking
 
         private IEnumerator DatabaseUpload(string userame, int collectableItem, int deathCount, float time)
         {
-            WWW www = new WWW(webURL + privateCode + "/add/" + WWW.EscapeURL(userame) + "/" + collectableItem + "/" + deathCount + "/" + time.ToString());
+            WWW www = new WWW(webURL + privateCode + "/add/" + WWW.EscapeURL(userame) + "/" + collectableItem + "/" + deathCount + "/" + time);
             yield return www;
 
             if (string.IsNullOrEmpty(www.error))
@@ -71,10 +71,10 @@ namespace DreamTeam.Runtime.Systems.Ranking
                 string[] entryInfo = entries[i].Split(new char[] { '|' });
                 string username = entryInfo[0];
 
-                int collectableItem = int.Parse(entryInfo[1]);
-                int deathCount = int.Parse(entryInfo[2]);
-
                 float time = float.Parse(entryInfo[3]);
+                int deathCount = int.Parse(entryInfo[2]);
+                int collectableItem = int.Parse(entryInfo[1]);
+
 
                 string convertedTime = DreamUtilites.ConvertToHoursMinutesSeconds(time);
 
@@ -101,5 +101,7 @@ namespace DreamTeam.Runtime.Systems.Ranking
             deathCount = _deathCount;
             time = _time;
         }
+
+
     }
 }

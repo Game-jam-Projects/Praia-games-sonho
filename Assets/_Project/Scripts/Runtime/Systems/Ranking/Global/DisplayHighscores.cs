@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using DreamTeam.Runtime.Utilities;
+using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -11,7 +13,7 @@ namespace DreamTeam.Runtime.Systems.Ranking
         public TextMeshProUGUI[] rDeath;
         public TextMeshProUGUI[] rTime;
 
-        HighScoreHandler myScores;
+        HighScores myScores;
 
         void Start() //Fetches the Data at the beginning
         {
@@ -20,11 +22,12 @@ namespace DreamTeam.Runtime.Systems.Ranking
                 rNames[i].text = i + 1 + ". Fetching...";
             }
 
-            myScores = GetComponent<HighScoreHandler>();
-            StartCoroutine("RefreshHighscores");
+            myScores = GetComponent<HighScores>();
+            SetRanking();
         }
         public void SetScoresToMenu(UIPlayerScore[] highscoreList) //Assigns proper name and score for each text value
         {
+            highscoreList = OrganizeRanking(highscoreList);
             for (int i = 0; i < rNames.Length; i++)
             {
                 rNames[i].text = "-----";
@@ -41,12 +44,38 @@ namespace DreamTeam.Runtime.Systems.Ranking
                 }
             }
         }
+
+        private UIPlayerScore[] OrganizeRanking(UIPlayerScore[] highScoreList)
+        {
+           return highScoreList
+            .OrderBy(player => player.time) // Classificar pelo tempo (menor tempo primeiro).
+            .ThenBy(player => player.deathCount) // Em caso de empate, classificar pela contagem de mortes (menor mortes primeiro).
+            .ThenBy(player => player.collectableItem) // Em caso de empate, classificar pela quantidade de itens coletados (mais itens primeiro).
+            .ThenBy(player => player.username) // Em caso de empate, classificar alfabeticamente pelo nome de usuário.
+            .ToArray();
+        }
+
+        private void SetRanking()
+        {
+            if (PlayerPrefs.HasKey("RankingDataGlobal"))
+            {
+                PlayerDataRanking playerDataRanking = DreamUtilites.LoadRanking("RankingDataGlobal");
+                myScores.UploadScore(playerDataRanking.playerName, playerDataRanking.collectibleCount, playerDataRanking.deathCount, playerDataRanking.time);
+                //PlayerPrefs.DeleteKey("RankingDataGlobal");
+                StartCoroutine("RefreshHighscores");
+            }
+            else
+            {
+                StartCoroutine("RefreshHighscores");
+            }
+        }
+
         IEnumerator RefreshHighscores() //Refreshes the scores every 30 seconds
         {
             while (true)
             {
+                yield return new WaitForSeconds(10);
                 myScores.DownloadScores();
-                yield return new WaitForSeconds(30);
             }
         }
     }

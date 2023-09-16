@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace DreamTeam.Runtime.Utilities.ChronoTimer
 {
+    [System.Serializable]
     public class Chrono
     {
         private float startTime;

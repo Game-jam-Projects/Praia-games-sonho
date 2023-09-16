@@ -1,3 +1,4 @@
+using DreamTeam.Runtime.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,29 +61,12 @@ namespace DreamTeam.Runtime.Systems.Ranking
             }
 
             // Salvar o ranking atualizado
-            SaveRanking();
-        }
-
-        void SaveRanking()
-        {
-            // Converter a lista em JSON e salvar no PlayerPrefs
-            string rankingData = JsonUtility.ToJson(rankingList);
-            PlayerPrefs.SetString("RankingData", rankingData);
-            PlayerPrefs.Save();
+            DreamUtilites.SaveRanking(rankingList, "RankingDataLocal");
         }
 
         void LoadRanking()
         {
-            // Carregar o ranking salvo do PlayerPrefs
-            if (PlayerPrefs.HasKey("RankingData"))
-            {
-                string rankingData = PlayerPrefs.GetString("RankingData");
-                rankingList = JsonUtility.FromJson<List<PlayerDataRanking>>(rankingData);
-            }
-            else
-            {
-                rankingList = new List<PlayerDataRanking>();
-            }
+            rankingList = DreamUtilites.LoadRankingList("RankingDataLocal");
             LoadingUI();
         }
 

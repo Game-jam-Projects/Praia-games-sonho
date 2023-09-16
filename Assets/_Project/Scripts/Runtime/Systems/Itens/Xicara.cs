@@ -8,7 +8,7 @@ public class Xicara : MonoBehaviour
         if (collision.TryGetComponent(out PlayerController controller))
         {
             controller.GetInput().DisableInput();
-            SceneLoader.Instance.NextScene();
+            GameManager.Instance.GameWin();
         }
     }
 }
