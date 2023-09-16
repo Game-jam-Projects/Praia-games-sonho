@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DreamTeam.Runtime.System.FMODAudio
+namespace DreamTeam.Runtime.Systems.FMODAudio
 {
     [Serializable]
     public class GroundType

@@ -1,4 +1,4 @@
-using DreamTeam.Runtime.System.UI;
+using DreamTeam.Runtime.Systems.UI;
 using UnityEngine;
 
 public class QuitGameButton : ButtonBase

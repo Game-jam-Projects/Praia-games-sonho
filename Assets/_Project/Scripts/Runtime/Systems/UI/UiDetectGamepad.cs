@@ -2,7 +2,7 @@ using PainfulSmile.Runtime.Utilities.AutoTimer.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace DreamTeam.Runtime.System.UI
+namespace DreamTeam.Runtime.Systems.UI
 {
     public class UiDetectGamepad : MonoBehaviour
     {

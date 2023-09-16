@@ -1,7 +1,7 @@
-using DreamTeam.Runtime.System.Core;
+using DreamTeam.Runtime.Systems.Core;
 using UnityEngine;
 
-namespace DreamTeam.Runtime.System.PauseSystem
+namespace DreamTeam.Runtime.Systems.PauseSystem
 {
     public class Pause : MonoBehaviour
     {

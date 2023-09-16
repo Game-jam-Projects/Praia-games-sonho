@@ -1,11 +1,11 @@
-using DreamTeam.Runtime.System.Core;
+using DreamTeam.Runtime.Systems.Core;
 using DreamTeam.Runtime.Systems.Core;
 using DreamTeam.Runtime.Systems.Health;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace DreamTeam.Runtime.System.UI
+namespace DreamTeam.Runtime.Systems.UI
 {
     public class UIGameplay : MonoBehaviour
     {
@@ -92,7 +92,7 @@ namespace DreamTeam.Runtime.System.UI
             DisableAllMenus();
 
             firstButtonGameWin.Select();
-            gamewinPanel.SetActive(true);
+            //gamewinPanel.SetActive(true);
         }
 
         private void DisableAllMenus()

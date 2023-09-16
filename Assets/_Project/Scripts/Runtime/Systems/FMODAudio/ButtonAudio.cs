@@ -1,8 +1,8 @@
-using DreamTeam.Runtime.System.UI;
+using DreamTeam.Runtime.Systems.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace DreamTeam.Runtime.System.FMODAudio
+namespace DreamTeam.Runtime.Systems.FMODAudio
 {
     public class ButtonAudio : ButtonBase, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
     {

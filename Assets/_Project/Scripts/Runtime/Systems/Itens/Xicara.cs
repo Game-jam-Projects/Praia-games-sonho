@@ -1,4 +1,4 @@
-using DreamTeam.Runtime.System.Core;
+using DreamTeam.Runtime.Systems.Core;
 using UnityEngine;
 
 public class Xicara : MonoBehaviour
@@ -8,7 +8,7 @@ public class Xicara : MonoBehaviour
         if (collision.TryGetComponent(out PlayerController controller))
         {
             controller.GetInput().DisableInput();
-            SceneLoader.Instance.NextScene();
+            GameManager.Instance.GameWin();
         }
     }
 }

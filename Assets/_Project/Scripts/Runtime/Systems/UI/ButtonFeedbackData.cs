@@ -1,7 +1,7 @@
 ﻿using DreamTeam.Runtime.Systems.Core;
 using UnityEngine;
 
-namespace DreamTeam.Runtime.System.UI
+namespace DreamTeam.Runtime.Systems.UI
 {
     [CreateAssetMenu(fileName = "New Button Feedback", menuName = DreamKeys.ScriptablePath + "Button Feedback")]
     public class ButtonFeedbackData : ScriptableObject
