@@ -61,7 +61,7 @@ namespace DreamTeam.Runtime.Systems.Ranking
             {
                 PlayerDataRanking playerDataRanking = DreamUtilites.LoadRanking("RankingDataGlobal");
                 myScores.UploadScore(playerDataRanking.playerName, playerDataRanking.collectibleCount, playerDataRanking.deathCount, playerDataRanking.time);
-                //PlayerPrefs.DeleteKey("RankingDataGlobal");
+                PlayerPrefs.DeleteKey("RankingDataGlobal");
                 StartCoroutine("RefreshHighscores");
             }
             else

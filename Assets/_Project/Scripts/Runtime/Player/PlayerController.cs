@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
     private HealthSystem healthSystem;
     private bool isTriggeredDeadAnimation;
 
+    UnityEngine.SpriteRenderer sRenderer; 
 
     #region UNITY
 
@@ -92,6 +93,7 @@ public class PlayerController : MonoBehaviour
     
     void Start()
     {
+        
         CoreSingleton.Instance.gameStateManager.ChagedStageType += EChangeStageType;
         CoreSingleton.Instance.playerController = this;
 
@@ -106,6 +108,10 @@ public class PlayerController : MonoBehaviour
         healthSystem.OnRevive += Revive;
 
         SelectedPlayer();
+
+        
+
+
         //GameManager.Instance.chrono.Start();
     }
     
@@ -285,7 +291,7 @@ public class PlayerController : MonoBehaviour
         {
             if (isGripping == false) { return; }
 
-            if (movementInput.y > 0)
+            if (movementInput.y > 0 && isGripping == true)
             {
                 isGripping = false;
                 _playerRB.AddForce(Vector2.up * 15, ForceMode2D.Impulse);

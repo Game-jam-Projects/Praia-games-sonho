@@ -24,13 +24,13 @@ namespace DreamTeam.Runtime.Systems.Core
 
             sonhos.text = "Sonhos coletados, " + CoreSingleton.Instance.collectiblesManager.collected.Count.ToString() + " de " + CoreSingleton.Instance.collectiblesManager.totalCollectableDream.ToString();
             mortes.text = "Quantidade de mortes: " + CoreSingleton.Instance.gameManager.GetDeathCount().ToString();
-            tempo.text = "Tempo Jogado: " + ConvertToHoursMinutesSeconds(Mathf.RoundToInt(CoreSingleton.Instance.gameManager.chrono.GetElapsedTime()));
+            tempo.text = "Tempo Jogado: " + ConvertToHoursMinutesSeconds(Mathf.RoundToInt(CoreSingleton.Instance.gameManager.chrono.GetFinalTime()));
 
             btnFinish.interactable = false;
 
             playerDataRanking.collectibleCount = CoreSingleton.Instance.collectiblesManager.collected.Count;
             playerDataRanking.deathCount = CoreSingleton.Instance.gameManager.GetDeathCount();
-            playerDataRanking.time = CoreSingleton.Instance.gameManager.chrono.GetElapsedTime();
+            playerDataRanking.time = CoreSingleton.Instance.gameManager.chrono.GetFinalTime();
 
             inputName.onValueChanged.AddListener(RegisterName);
             btnFinish.onClick.AddListener(NextScene);

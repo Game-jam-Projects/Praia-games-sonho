@@ -28,6 +28,7 @@ namespace DreamTeam.Runtime.Systems.CheckpointSystem
         private void OnDestroy()
         {
             healthSystem.OnDie -= RespawnPlayerByDeath;
+            TransitionManager.Instance().onTransitionCutPointReached -= () => ResetPlayer(Vector3.zero);
         }
 
         private void RespawnPlayerByDeath(IDamageable damageable)
@@ -38,17 +39,21 @@ namespace DreamTeam.Runtime.Systems.CheckpointSystem
 
             GameManager.Instance.CanPause = false;
 
-            TransitionManager.Instance().Transition(transition, playerAnimationTime);            
-            TransitionManager.Instance().onTransitionCutPointReached += () =>
-            {
-                transform.position = spawnPosition;
-                GameManager.Instance.CanPause = true;
-                GameManager.Instance.TriggerTransitionFinish();
-                CoreSingleton.Instance.camerasManager.Respawn();
-                healthSystem.ResetLife();
-                
-                animator.updateMode = AnimatorUpdateMode.Normal;
-            };
+            TransitionManager.Instance().Transition(transition, playerAnimationTime);
+            TransitionManager.Instance().onTransitionCutPointReached += () => ResetPlayer(spawnPosition);
+            
+        }
+
+        private void ResetPlayer(Vector3 spawnPosition)
+        {
+            if (transform == null) { return; }
+            transform.position = spawnPosition;
+            GameManager.Instance.CanPause = true;
+            GameManager.Instance.TriggerTransitionFinish();
+            CoreSingleton.Instance.camerasManager.Respawn();
+            healthSystem.ResetLife();
+
+            animator.updateMode = AnimatorUpdateMode.Normal;
         }
 
         [ContextMenu("Respawn")]

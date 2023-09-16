@@ -42,7 +42,7 @@ namespace DreamTeam.Runtime.Systems.Core
             Screen.SetResolution(1920, 1080, true);
             playerDataRanking = new PlayerDataRanking();
             chrono = new Chrono();
-            chrono.Start();
+            //chrono.Start();
         }
 
         private void Update()
@@ -50,7 +50,7 @@ namespace DreamTeam.Runtime.Systems.Core
 #if UNITY_EDITOR
             if (Input.GetKey(KeyCode.B))
             {
-                GameWin();
+                //GameWin();
             }
 #endif
         }
